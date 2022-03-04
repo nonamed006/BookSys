@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="book">
+	<!-- 페이징 데이터 총 개수 구하기 
+	<select id = "getCount" parameterType ="map" resultType ="int">
+	<![CDATA[
+			select  count(*)
+			from   receipt as rec
+			inner  join patient as pat on rec.patient_no = pat.no
+			inner  join diagnosis as dia on rec.diagnosis_no = dia.no
+			where  date_format(date, '%Y-%m-%d') = date_format(#{dia_date}, '%Y-%m-%d')
+            and    name like #{name}
+			and    status = #{status} 
+	]]>
+	</select>
+	
+	<update id="update" parameterType="int">
+		<![CDATA[
+			UPDATE receipt
+			SET    status = 2
+			WHERE  no = #{no}
+		]]>
+	</update>
+	
+	<insert id="insert" parameterType ="map">
+	<![CDATA[
+		insert into receipt values(null, #{patient_no}, 1, 4000, #{dia_no}, #{doctor_no})
+	]]>
+	</insert>
+	-->
+</mapper>
