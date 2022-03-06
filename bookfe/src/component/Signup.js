@@ -44,12 +44,11 @@ const Signup = () => {
 			}
 			// res에 결과가 들어옴
 			// 수정사항 // success받아도 알림창 안띄워줌 ============================================
-		}).then((res) => res.json())
+		}).then((res) => res.text())
 			.then((res) => {
 				console.log(res);
 				if (res == 'success') {
 					alert("ok");
-					debugger;
 					console.log("ok");
 				} else {
 					alert("fail");

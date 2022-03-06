@@ -4,12 +4,23 @@
 	
 	<insert id="insert" parameterType ="user">
 		<![CDATA[
-			insert into user values(null, #{id}, #{pwd}, #{name}, #{addr}, 'U', null)
+			insert into user values(null, #{id}, #{pwd}, #{name}, #{addr}, 'U')
 		]]>
 	</insert>
-	<select id="findByID" parameterType = "user" resultType = "user">
+	<select id="findByIdAndPwd" parameterType = "map" resultType = "user">
 		<![CDATA[
 			select * from user where id = #{id} and pwd = #{pwd};
 		]]>
+	</select>
+	<select id="countById" parameterType = "String" resultType = "int">
+		<![CDATA[
+			select count(*) from user where id = #{id};
+		]]>
+	</select>
+	<!-- no로 user 찾기 -->
+	<select id="findById" parameterType="int" resultType="user">
+	<![CDATA[
+		select * from user where no = #{no}
+	]]>
 	</select>
 </mapper>

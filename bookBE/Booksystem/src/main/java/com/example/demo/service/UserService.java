@@ -17,8 +17,5 @@ public class UserService {
 	public void insert(User user) {
 		userRepository.insert(user);
 	}
-	// 유저 - 로그인
-	public User findById(String id) {
-		return userRepository.findById(id);
-	}
+	
 	}

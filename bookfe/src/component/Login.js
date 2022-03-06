@@ -1,11 +1,11 @@
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Main from './Main';
+import { Link } from 'react-router-dom';
 
 
 const DivContainer = styled.div`
-    margin : 0px 500px 0px 500px;
+    /margin : 0px 500px 0px 500px;
 `
 
 const DivBox = styled.div`
@@ -17,28 +17,42 @@ const Login = () => {
 
 	const [id, setId] = useState();
 	const [pwd, setPwd] = useState();
-	const [status, setStatus] = useState('1');
 
-	var getuser = () => {
-		fetch(`http://localhost:8080/login/${id}/${pwd}`, {
-			method: "get",
-			// res에 결과가 들어옴
-		}).then((res) => res.json())
-			.then((res) => {
-				if (res) {
-					console.log(res);
-					alert(res.id + "님 환영합니다.");
-				} else {
-					// 수정사항 알림창 안뜸 ====================================
-					alert("아이디/비밀번호를 확인해주세요");
-				}
-			});
-	};
 
 	// 버튼 클릭시 로그인
 	const handelClick = () => {
-		getuser();
-		setStatus('2');
+		let person = {
+			id: id,
+			pwd: pwd,
+		}
+		fetch("http://localhost:8080/login", {
+			method: "POST",
+			body: JSON.stringify(person),
+			headers: {
+				'Content-Type': "application/json; charset=utf-8"
+			}
+		}).then(res => {
+			for (let header of res.headers.entries()) {
+				if (header[0] === "authorization") {
+					let data = header[1];
+					//data = data.substring(7);
+					localStorage.setItem("Authorization", data);
+					//setToken();
+				}
+			}
+			return res.text();
+		}).then(
+			res => {
+				if (res.substring(0, 7) != 'success') alert(res);
+				else {
+					// 로그인 성공하면 이동
+					//history.push('/');
+
+					var name = res.substring(8)
+					alert(name);
+				}
+			});
+
 		console.log("클릭됨");
 	}
 
@@ -52,45 +66,37 @@ const Login = () => {
 	const onChangePwd = (e) => {
 		setPwd(e.target.value);
 	}
-	if (status == '1') {
-		return (
-			<DivContainer>
-				<DivBox>
-					<h2>login</h2> <br />
-					<Row>
-						<Col xl='7'>
-					<Form.Floating className="mb-3">
-						<Form.Control
-							id="id"
-							type="text"
-							placeholder="Id"
-							onChange={onChangeId}
-						/>
-						<label htmlFor="floatingInputCustom">ID</label>
-					</Form.Floating>
-					</Col>
-					</Row>
-					<Row>
-						<Col xl='7'>
-					<Form.Floating>
-						<Form.Control
-							id="pwd"
-							type="password"
-							placeholder="Password"
-							onChange={onChangePwd}
-						/>
-						<label htmlFor="floatingPasswordCustom">Password</label>
-					</Form.Floating>
-					</Col>
-					</Row>
-					<br/>
-					<Button variant="secondary" onClick={handelClick}>login</Button>
-				</DivBox>
-			</DivContainer>
-		);
-	} else if (status == '2') {
-		<Main />
-	}
+
+	return (
+		<Row>
+			<Col xl="4"></Col>
+			<Col xl='4'>
+				<br/>
+				<h2>login</h2> <br />
+				<Form.Floating className="mb-3">
+					<Form.Control
+						id="id"
+						type="text"
+						placeholder="Id"
+						onChange={onChangeId}
+					/>
+					<label htmlFor="floatingInputCustom">ID</label>
+				</Form.Floating>
+				<Form.Floating>
+					<Form.Control
+						id="pwd"
+						type="password"
+						placeholder="Password"
+						onChange={onChangePwd}
+					/>
+					<label htmlFor="floatingPasswordCustom">Password</label>
+				</Form.Floating>
+				<Link to="/"><Button variant="secondary" onClick={handelClick}>login</Button></Link>
+
+			</Col>
+
+		</Row>
+	);
 
 };
 

@@ -25,11 +25,11 @@ public class UserController {
 		return "success";
 	}
 	
-	// 로그인
-	@GetMapping("/login/{id}/{pwd}")
-	public User login(@PathVariable String id, @PathVariable String pwd) {
-		System.out.println("로그인 들어옴");
-		userService.findById(id);
-		return userService.findById(id);
-	}
+//	// 로그인
+//	@GetMapping("/login/{id}/{pwd}")
+//	public User login(@PathVariable String id, @PathVariable String pwd) {
+//		System.out.println("로그인 들어옴");
+//		userService.findById(id);
+//		return userService.findById(id);
+//	}
 }

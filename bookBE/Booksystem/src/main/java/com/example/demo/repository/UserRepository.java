@@ -1,5 +1,8 @@
 package com.example.demo.repository;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -19,7 +22,19 @@ public class UserRepository {
 	}
 	
 	// 유저 - 로그인
-	public User findById(String id) {
-		return sqlSession.selectOne("user.findByID", id);
+	public int countById(String id) {
+		return sqlSession.selectOne("user.countById", id);
 	}
+	
+	public User findByIdAndPwd(String id, String pwd) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("id", id);
+		map.put("pwd", pwd);
+		return sqlSession.selectOne("user.findByIdAndPwd", map);
+	}
+	
+	public User findById(int personId) {
+		return sqlSession.selectOne("user.findById", personId);
+	}
+	
 }
