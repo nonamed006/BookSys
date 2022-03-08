@@ -6,6 +6,11 @@ import Login from './component/Login';
 import Header from './component/Header';
 import Main from './component/Main';
 import { Container } from 'react-bootstrap';
+import Mypage from './component/Mypage';
+import AdminPage from './component/AdminPage';
+import AdminBookadd from './component/AdminBookadd';
+import AdminBookdel from './component/AdminBookdel';
+
 
 
 function App() {
@@ -16,6 +21,10 @@ function App() {
         <Route path="/" element={<Main />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/mypage" element={<Mypage />} />
+        <Route path="/adminpage" element={<AdminPage />} />
+        <Route path="/adminbookadd" element={<AdminBookadd />} />
+        <Route path="/adminbookdel" element={<AdminBookdel />} />
       </Routes>
     </Container>
   </>

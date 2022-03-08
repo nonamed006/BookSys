@@ -4,9 +4,13 @@
 	<typeAliases>
 		 <typeAlias type="com.example.demo.vo.User" alias="user" />
 		 <typeAlias type="com.example.demo.vo.Book" alias="book" />
+		 <typeAlias type="com.example.demo.vo.Rent" alias="rent" />
+		 
+		 <typeAlias type="com.example.demo.dto.RentDto" alias="rentDto" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="mybatis/mappers/book.xml" /> 
 		<mapper resource="mybatis/mappers/user.xml" /> 
+		<mapper resource="mybatis/mappers/rent.xml" /> 
 	</mappers>
 </configuration>

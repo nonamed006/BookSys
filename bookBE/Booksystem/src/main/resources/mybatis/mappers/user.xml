@@ -23,4 +23,16 @@
 		select * from user where no = #{no}
 	]]>
 	</select>
+	<!-- 전체회원 조회 -->
+	<select id="findAll" resultType="user">
+	<![CDATA[
+		select * from user
+	]]>
+	</select>
+	<!-- 관리자가 회원 삭제 -->
+	<delete id="delete" parameterType ="int">
+		<![CDATA[
+			delete from user where no = #{no} 
+			]]>
+	</delete>
 </mapper>

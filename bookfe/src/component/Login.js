@@ -37,6 +37,7 @@ const Login = () => {
 					let data = header[1];
 					//data = data.substring(7);
 					localStorage.setItem("Authorization", data);
+					console.log(res);
 					//setToken();
 				}
 			}
@@ -47,7 +48,6 @@ const Login = () => {
 				else {
 					// 로그인 성공하면 이동
 					//history.push('/');
-
 					var name = res.substring(8)
 					alert(name);
 				}
@@ -71,7 +71,7 @@ const Login = () => {
 		<Row>
 			<Col xl="4"></Col>
 			<Col xl='4'>
-				<br/>
+				<br />
 				<h2>login</h2> <br />
 				<Form.Floating className="mb-3">
 					<Form.Control
@@ -91,6 +91,7 @@ const Login = () => {
 					/>
 					<label htmlFor="floatingPasswordCustom">Password</label>
 				</Form.Floating>
+				<br/>
 				<Link to="/"><Button variant="secondary" onClick={handelClick}>login</Button></Link>
 
 			</Col>

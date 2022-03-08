@@ -64,10 +64,10 @@ public void doFilter(ServletRequest request, ServletResponse response, FilterCha
 			HttpSession session = req.getSession();
 			//User personEntity = (User)(userRepository.findById(personId).orElseThrow(()-> new IllegalArgumentException("는 존재하지 않습니다.")));
 			User personEntity = userRepository.findById(personId);
-			// token으로 User를 찾아서 session에 담아둠으로써 이후 Controller 등에서 session에 있는 principal을 가져오면 로그인 한 유저가 누군지 알 수 있다 
+			// token으로 User를 찾아서 session에 담아둠으로써 이후 Controller 등에서 session에 있는 userinfo을 가져오면 로그인 한 유저가 누군지 알 수 있다 
 			System.out.println("#####" + personEntity);
 			
-			session.setAttribute("principal", personEntity);
+			session.setAttribute("userinfo", personEntity);
 		}catch(Exception e){
 			PrintWriter out = resp.getWriter();
 			out.print("[JwtAuthorizationFilter.java] verify fail");

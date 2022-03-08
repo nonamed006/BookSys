@@ -10,5 +10,4 @@ public class User {
 	private String name;
 	private String addr;
 	private String role;
-	private int book_no;
 }

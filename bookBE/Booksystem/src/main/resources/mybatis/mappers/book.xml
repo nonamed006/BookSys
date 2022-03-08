@@ -14,4 +14,11 @@
 			select * from book where title like #{title};
 		]]>
 	</select>
+	<!-- 책 대여시 use에 카운트 +1 -->
+	<update id="update" parameterType="int">
+	<![CDATA[
+			update book set usebook = (usebook + 1) where no = #{no}
+		]]>
+	</update>
+	
 </mapper>

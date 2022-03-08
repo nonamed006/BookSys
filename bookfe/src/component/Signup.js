@@ -92,69 +92,56 @@ const Signup = () => {
 
 
 	return (
-		<DivContainer>
-			<DivBox>
+		<Row>
+			<Col xl="4"></Col>
+			<Col xl="4">
+				<br />
 				<h2>Signup</h2> <br />
-				{/*회원가입폼*/}
-				<Row>
-						<Col xl='8'>
-					<Form.Floating className="mb-3">
-						<Form.Control
-							id="id"
-							type="text"
-							placeholder="Id"
-							onChange={onChangeID}
-						/>
-						<label htmlFor="floatingInputCustom">ID</label>
-					</Form.Floating>
-					</Col>
-					</Row>
+				{/* ID */}
+				<Form.Floating className="mb-3">
+					<Form.Control
+						id="id"
+						type="text"
+						placeholder="Id"
+						onChange={onChangeID}
+					/>
+					<label htmlFor="floatingInputCustom">ID</label>
+				</Form.Floating>
+			
+			{/* PWD */}
+			<Form.Floating className="mb-3">
+				<Form.Control
+					id="pwd"
+					type="password"
+					placeholder="Password"
+					onChange={onChangePWD}
+				/>
+				<label htmlFor="floatingPasswordCustom">Password</label>
+			</Form.Floating>
+			{/* Name */}
+			<Form.Floating className="mb-3">
+				<Form.Control
+					id="name"
+					type="text"
+					placeholder="Name"
+					onChange={onChangeName}
+				/>
+				<label htmlFor="floatingInputCustom">Name</label>
+			</Form.Floating>
+			{/* Addr */}
+			<Form.Floating className="mb-3">
+				<Form.Control
+					id="addr"
+					type="text"
+					placeholder="Address"
+					onChange={onChangeAddr}
+				/>
+				<label htmlFor="floatingInputCustom">Address</label>
+			</Form.Floating>
+			<Button variant="secondary" onClick={handelClick}>Signup</Button>
+			</Col>
+		</Row>
 
-					<Row>
-						<Col xl='8'>
-					<Form.Floating className="mb-3">
-						<Form.Control
-							id="pwd"
-							type="password"
-							placeholder="Password"
-							onChange={onChangePWD}
-						/>
-						<label htmlFor="floatingPasswordCustom">Password</label>
-					</Form.Floating>
-					</Col>
-					</Row>
-
-					<Row>
-						<Col xl='8'>
-					<Form.Floating className="mb-3">
-						<Form.Control
-							id="name"
-							type="text"
-							placeholder="Name"
-							onChange={onChangeName}
-						/>
-						<label htmlFor="floatingInputCustom">Name</label>
-					</Form.Floating>
-					</Col>
-					</Row>
-
-					<Row>
-						<Col xl='8'>
-					<Form.Floating className="mb-3">
-						<Form.Control
-							id="addr"
-							type="text"
-							placeholder="Address"
-							onChange={onChangeAddr}
-						/>
-						<label htmlFor="floatingInputCustom">Address</label>
-					</Form.Floating>
-					</Col>
-					</Row>
-				<Button variant="secondary" onClick={handelClick}>Signup</Button>
-			</DivBox>
-
-		</DivContainer>
 	);
 };
 

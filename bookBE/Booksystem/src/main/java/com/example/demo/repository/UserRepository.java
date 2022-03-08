@@ -1,11 +1,13 @@
 package com.example.demo.repository;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.example.demo.dto.RentDto;
 import com.example.demo.vo.User;
 
 import lombok.RequiredArgsConstructor;
@@ -33,8 +35,24 @@ public class UserRepository {
 		return sqlSession.selectOne("user.findByIdAndPwd", map);
 	}
 	
+	// no로 유저 찾기
 	public User findById(int personId) {
 		return sqlSession.selectOne("user.findById", personId);
+	}
+	
+	// mypage에 사용자가 대여한 책 목록 조회
+	public List<RentDto> findByUserNo(int user_no){
+		return sqlSession.selectList("rent.findByUserNo", user_no);
+	}
+	
+	// 전체 유저 목록 조회
+	public List<User> findAll(){
+		return sqlSession.selectList("user.findAll");
+	}
+	
+	// 회원 삭제
+	public boolean delete(int no) {
+		return sqlSession.delete("user.delete", no) == 1;
 	}
 	
 }
