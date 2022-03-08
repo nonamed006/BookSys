@@ -41,7 +41,11 @@ public class BookService {
 	}
 	
 	// 대여도서 반납
-		public boolean delete(int no) {
-			return bookRepository.delete(no);
-		}
+	public boolean delete(int no) {
+		return bookRepository.delete(no);
+	}
+	// 관리자가 도서 삭제
+	public boolean deletebook(int no) {
+		return bookRepository.deletebook(no);
+	}
 }

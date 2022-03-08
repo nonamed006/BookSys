@@ -46,8 +46,8 @@ public class UserRepository {
 	}
 	
 	// 전체 유저 목록 조회
-	public List<User> findAll(){
-		return sqlSession.selectList("user.findAll");
+	public List<User> findAll(String name){
+		return sqlSession.selectList("user.findAll", name);
 	}
 	
 	// 회원 삭제

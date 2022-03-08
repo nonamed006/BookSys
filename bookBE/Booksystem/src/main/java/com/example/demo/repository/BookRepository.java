@@ -44,4 +44,9 @@ public class BookRepository {
 		public boolean delete(int no) {
 			return sqlSession.delete("rent.delete", no) == 1;
 		}
+	
+	// 관리자가 도서 삭제
+		public boolean deletebook(int no) {
+			return sqlSession.delete("book.deletebook", no) == 1;
+		}
 }

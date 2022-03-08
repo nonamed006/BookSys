@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const DivContainer = styled.div`
@@ -138,7 +139,7 @@ const Signup = () => {
 				/>
 				<label htmlFor="floatingInputCustom">Address</label>
 			</Form.Floating>
-			<Button variant="secondary" onClick={handelClick}>Signup</Button>
+			<Link to = "/"><Button variant="secondary" onClick={handelClick}>Signup</Button></Link>
 			</Col>
 		</Row>
 

@@ -20,5 +20,11 @@
 			update book set usebook = (usebook + 1) where no = #{no}
 		]]>
 	</update>
+	<!-- 관리자가 도서 삭제 -->
+	<delete id="deletebook" parameterType ="int">
+		<![CDATA[
+			delete from book where no = #{no} 
+			]]>
+	</delete>
 	
 </mapper>

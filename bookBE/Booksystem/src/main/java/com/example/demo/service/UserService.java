@@ -32,8 +32,8 @@ public class UserService {
 		}
 		
 	// 전체 유저 목록 조회
-	public List<User> findAll(){
-		return userRepository.findAll();
+	public List<User> findAll(String name){
+		return userRepository.findAll(name);
 	}
 	
 	// 회원 삭제

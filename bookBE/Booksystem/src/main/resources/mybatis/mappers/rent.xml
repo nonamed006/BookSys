@@ -29,4 +29,5 @@
 				 delete from rent where book_no = #{book_no} 
 			]]>
 	</delete>
+	<!-- no로 책 검색 -->
 </mapper>

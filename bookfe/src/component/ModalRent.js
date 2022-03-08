@@ -29,11 +29,11 @@ const ModalRent = (props) => {
       .then((res) => {
 				setShow(false);
         if(res=="success"){
-          alert("ok");
+          alert("대여되었습니다.");
         } else if(res=="failCnt"){
           alert("3권이상 대여할 수 없습니다.");
         } else{
-          alert("fail");
+          alert("로그인해 주세요");
         }
         console.log(res);
       });

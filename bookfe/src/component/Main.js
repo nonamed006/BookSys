@@ -83,7 +83,7 @@ const Main = () => {
           <Col>
           <InputGroup>
             <FormControl
-              placeholder="책이름으로 검색"
+              placeholder="책 이름으로 검색"
               aria-label="findByName"
               aria-describedby="basic-addon2"
               onChange={onChange}
@@ -102,7 +102,7 @@ const Main = () => {
               <Card style={{ width: '10rem' }} >
                 <img src="./img/.jpg" />
                 <Card.Body>
-                  <Card.Title>{res.title}</Card.Title>
+                  <Card.Title >{res.title}</Card.Title>
                   <Card.Text>
                     {res.writer}
                   </Card.Text>

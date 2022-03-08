@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Col, Row, Table } from 'react-bootstrap';
+import { Button, Col, FormControl, InputGroup, Row, Table } from 'react-bootstrap';
 import ModalDeleteBook from './ModalDeleteBook';
 
 const AdminBookdel = () => {
@@ -67,7 +67,27 @@ const AdminBookdel = () => {
 					<Button variant="outline-secondary" href="/adminbookadd">도서추가</Button>
 					<Button variant="secondary" href="/adminbookdel">도서삭제</Button>
 				</Col>
-				<br />
+				</Row>
+				<br/>
+				<Row>
+          <Col xl ='3'></Col>
+          <Col>
+          <InputGroup>
+            <FormControl
+              placeholder="책 이름으로 검색"
+              aria-label="findByName"
+              aria-describedby="basic-addon2"
+              onChange={onChange}
+              onKeyUp={enterkey}
+            />
+            <Button variant="secondary" id="button-addon2" onClick={handelClick}>
+              Search
+            </Button>
+          </InputGroup>
+          </Col>
+          <Col xl ='3'></Col>
+        </Row>
+				<br/>
 				<Row>
 					<Col xl='1'></Col>
 					<Col>
@@ -91,7 +111,7 @@ const AdminBookdel = () => {
 						</Table>
 					</Col>
 				</Row>
-			</Row>
+			
 		</div>
 	);
 };

@@ -23,10 +23,10 @@
 		select * from user where no = #{no}
 	]]>
 	</select>
-	<!-- 전체회원 조회 -->
-	<select id="findAll" resultType="user">
+	<!-- 전체회원 조회 + 검색 -->
+	<select id="findAll" parameterType="String" resultType="user">
 	<![CDATA[
-		select * from user
+		select * from user where name like #{name}
 	]]>
 	</select>
 	<!-- 관리자가 회원 삭제 -->

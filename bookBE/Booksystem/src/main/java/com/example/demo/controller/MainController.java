@@ -91,4 +91,14 @@ public class MainController {
 			}
 		}
 		
+	// 관리자가 도서 삭제
+		@GetMapping("/adminpage/deletebook/{no}")
+		public String deleteBook(@PathVariable int no){
+			if(bookService.deletebook(no)) {
+				return "success";
+			} else {
+				return "fail";
+			}
+		}
+		
 }

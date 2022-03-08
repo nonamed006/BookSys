@@ -44,9 +44,13 @@ public class UserController {
 	}
 	
 	// 전체 유저 조회
-	@GetMapping("/selectuser")
-	public List<User> findAll(){
-		List<User> user = userService.findAll();
+	@GetMapping("/selectuser/{name}")
+	public List<User> findAll(@PathVariable String name){
+		
+		if(name.equals("notSearch")) name = "";
+		
+		name = "%" + name + "%";
+		List<User> user = userService.findAll(name);
 		return user;
 	}
 	

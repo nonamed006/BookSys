@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Container, FormControl, InputGroup, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 
-const Header = () => {
+const Header = (props) => {
 
-  const [user, setUser] = useState({});
+  const user = props.user;
+  const setUser = props.setUser;
+  
   const [reload, setReload] = useState(false);
+
 
   // 수정사항 -- 로그인 / 로그아웃 하고 헤더 리로드가 안됨 ================================
   useEffect(()=>{

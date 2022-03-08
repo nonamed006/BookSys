@@ -13,7 +13,10 @@ const DivBox = styled.div`
     /background-color: #1971c2;
 `
 
-const Login = () => {
+const Login = (props) => {
+
+	const user = props.user;
+	const setUser = props.setUser;
 
 	const [id, setId] = useState();
 	const [pwd, setPwd] = useState();
@@ -38,6 +41,18 @@ const Login = () => {
 					//data = data.substring(7);
 					localStorage.setItem("Authorization", data);
 					console.log(res);
+
+					fetch("http://localhost:8080/user/head", {
+						method: "get",
+						headers: {
+							'Content-Type': "application/json; charset=utf-8",
+							'Authorization': localStorage.getItem("Authorization")
+						}
+					}).then((res) => res.json())
+						.then((res) => {
+							setUser(res);
+							console.log(res);
+						});
 					//setToken();
 				}
 			}
@@ -67,6 +82,13 @@ const Login = () => {
 		setPwd(e.target.value);
 	}
 
+	// 엔터키 이벤트
+	function enterkey() {
+		if (window.event.keyCode == 13) {
+			handelClick();
+		}
+	}
+
 	return (
 		<Row>
 			<Col xl="4"></Col>
@@ -79,6 +101,7 @@ const Login = () => {
 						type="text"
 						placeholder="Id"
 						onChange={onChangeId}
+						onKeyUp={enterkey}
 					/>
 					<label htmlFor="floatingInputCustom">ID</label>
 				</Form.Floating>
@@ -88,10 +111,11 @@ const Login = () => {
 						type="password"
 						placeholder="Password"
 						onChange={onChangePwd}
+						onKeyUp={enterkey}
 					/>
 					<label htmlFor="floatingPasswordCustom">Password</label>
 				</Form.Floating>
-				<br/>
+				<br />
 				<Link to="/"><Button variant="secondary" onClick={handelClick}>login</Button></Link>
 
 			</Col>

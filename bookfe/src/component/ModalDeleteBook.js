@@ -12,14 +12,15 @@ const ModalDeleteBook = (props) => {
 		title: props.title
 	});
 
-	// 회원삭제
+	// 도서 삭제
 	var deleteUser = () => {
-    fetch(`http://localhost:8080/adminpage/deleteuser/${book.no}`, {
+    fetch(`http://localhost:8080/adminpage/deletebook/${book.no}`, {
       method: "get",
       // res에 결과가 들어옴
     }).then((res) => res.text())
       .then((res) => {
         setShow(false);
+		console.log(book.no);
         if (res == "success") {
           alert("삭제되었습니다.");
         } else {
@@ -43,7 +44,7 @@ const ModalDeleteBook = (props) => {
 					<Button variant="secondary" onClick={handleClose}>
 						취소
 					</Button>
-					<Button variant="primary" >
+					<Button variant="primary" onClick={deleteUser}>
 						삭제
 					</Button>
 				</Modal.Footer>
