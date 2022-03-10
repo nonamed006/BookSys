@@ -84,8 +84,8 @@ public void doFilter(ServletRequest request, ServletResponse response, FilterCha
 							JWT.create()
 							.withSubject("토큰제목")
 							// 토큰의 유효시간 설정(1000*60*60*24*365)
-							// 1시간으로 설정
-							.withExpiresAt(new Date(System.currentTimeMillis()+1000*60*60))
+							// 2시간으로 설정
+							.withExpiresAt(new Date(System.currentTimeMillis()+1000*60*60*2))
 							//.withExpiresAt(new Date(System.currentTimeMillis()+1000*5))
 							.withClaim("no", personEntity.getNo())
 							.sign(Algorithm.HMAC512(JwtProps.secret));

@@ -12,14 +12,17 @@ const AdminPage = () => {
 
 	// 전체 회원 목록 조회
   var getUser = () => {
-    fetch(`http://localhost:8080/selectuser/${search == '' ? 'notSearch' : search}`, {
+    fetch(`http://localhost:8080/user/selectuser/${search == '' ? 'notSearch' : search}`, {
       method: "get",
+	  headers: {
+		'Content-Type': "application/json; charset=utf-8",
+		'Authorization': localStorage.getItem("Authorization")
+	}
       // res에 결과가 들어옴
     }).then((res) => res.json())
       .then((res) => {
         setUserlist(res);
         console.log(res);
-
       });
   };
 
@@ -58,7 +61,7 @@ const AdminPage = () => {
 				<Col xl='1'></Col>
 				<Col >
 					<Button variant="secondary" href="/adminpage">회원관리</Button>
-					<Button variant="outline-secondary" href="/adminbookadd">도서추가</Button>
+					<Button variant="outline-secondary" href="/adminbookadd">도서등록</Button>
 					<Button variant="outline-secondary" href="/adminbookdel">도서삭제</Button>
 					</Col>
 				</Row>

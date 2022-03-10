@@ -65,6 +65,7 @@ const Login = (props) => {
 					//history.push('/');
 					var name = res.substring(8)
 					alert(name);
+					window.location.replace("/");
 				}
 			});
 
@@ -74,7 +75,6 @@ const Login = (props) => {
 	// input 값 받기 - id
 	const onChangeId = (e) => {
 		setId(e.target.value);
-		console.log(e.target.value);
 	}
 
 	// input 값 받기 - pwd
@@ -116,7 +116,7 @@ const Login = (props) => {
 					<label htmlFor="floatingPasswordCustom">Password</label>
 				</Form.Floating>
 				<br />
-				<Link to="/"><Button variant="secondary" onClick={handelClick}>login</Button></Link>
+				<Button variant="secondary" onClick={handelClick}>login</Button>
 
 			</Col>
 

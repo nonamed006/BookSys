@@ -44,7 +44,7 @@ public class UserController {
 	}
 	
 	// 전체 유저 조회
-	@GetMapping("/selectuser/{name}")
+	@GetMapping("/user/selectuser/{name}")
 	public List<User> findAll(@PathVariable String name){
 		
 		if(name.equals("notSearch")) name = "";

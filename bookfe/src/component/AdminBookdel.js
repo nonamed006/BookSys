@@ -64,7 +64,7 @@ const AdminBookdel = () => {
 				<Col xl='1'></Col>
 				<Col >
 					<Button variant="outline-secondary" href="/adminpage">회원관리</Button>
-					<Button variant="outline-secondary" href="/adminbookadd">도서추가</Button>
+					<Button variant="outline-secondary" href="/adminbookadd">도서등록</Button>
 					<Button variant="secondary" href="/adminbookdel">도서삭제</Button>
 				</Col>
 				</Row>
@@ -104,7 +104,9 @@ const AdminBookdel = () => {
 										<td>{res.title}</td>
 										<td>{res.writer}</td>
 										<td>{checkUse(res.usebook) == 'y' ? <span>대여가능</span> : <span>대여중</span>}</td>
-										<td><ModalDeleteBook no={res.no} title={res.title}></ModalDeleteBook></td>
+										<td>{checkUse(res.usebook) == 'y' ? <ModalDeleteBook no={res.no} title={res.title} ></ModalDeleteBook>:
+                      <Button variant="outline-secondary" disabled="disabled">도서 삭제</Button>
+                    }</td>
 									</tr>
 								})}
 							</tbody>

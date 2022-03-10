@@ -35,7 +35,7 @@ const Signup = () => {
 	const [addr, setAddr] = useState();
 
 	// 유저 가입하는거 json.body에 넣어보낼 body만들어야 함 O
-	// 가입성공하고 response에 success도 있는데 왜 ok안띄우니...
+	// 가입성공하고 response에 success도 있는데 왜 ok안띄우니... O
 	var getUserinfo = () => {
 		fetch(`http://localhost:8080/signup`, {
 			method: "post",
@@ -50,6 +50,7 @@ const Signup = () => {
 				console.log(res);
 				if (res == 'success') {
 					alert("ok");
+					window.location.replace("/");
 					console.log("ok");
 				} else {
 					alert("fail");

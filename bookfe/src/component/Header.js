@@ -27,7 +27,7 @@ const Header = (props) => {
 
   var handleLogout = () =>{
     localStorage.removeItem("Authorization");
-    setReload(!reload);
+    window.location.replace("/");
   }
 
     return (<Navbar bg="dark" variant="dark">

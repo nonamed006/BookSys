@@ -14,6 +14,12 @@
 			select * from book where title like #{title};
 		]]>
 	</select>
+	<!-- 책 no로 책 리스트 불러오기-->
+	<select id="findByNo" parameterType = "int" resultType="book">
+		<![CDATA[
+			select * from book where no = #{no};
+		]]>
+	</select>
 	<!-- 책 대여시 use에 카운트 +1 -->
 	<update id="update" parameterType="int">
 	<![CDATA[
@@ -26,5 +32,11 @@
 			delete from book where no = #{no} 
 			]]>
 	</delete>
+	<!-- 관리자가 도서 등록 -->
+	<insert id="insert" parameterType ="book">
+		<![CDATA[
+			insert into book values(null, #{title}, #{writer}, #{price}, now(), 0, #{img})
+		]]>
+	</insert>
 	
 </mapper>

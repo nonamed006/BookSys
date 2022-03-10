@@ -22,9 +22,14 @@ public class BookService {
 	}
 	
 	// 책 제목으로 책 목록 불러오기
-		public List<Book> findByTitle(String title){
-			return bookRepository.findByTitle(title);
-		}
+	public List<Book> findByTitle(String title){
+		return bookRepository.findByTitle(title);
+	}
+	
+	// no로 책 조회
+	public Book findByNo(int no) {
+		return bookRepository.findByNo(no);
+	}
 		
 	// 책 대여하기
 	public boolean insert(Rent rent) {
@@ -47,5 +52,9 @@ public class BookService {
 	// 관리자가 도서 삭제
 	public boolean deletebook(int no) {
 		return bookRepository.deletebook(no);
+	}
+	// 관리자가 도서 등록
+	public boolean insertbook(Book book) {
+		return bookRepository.insertbook(book);
 	}
 }

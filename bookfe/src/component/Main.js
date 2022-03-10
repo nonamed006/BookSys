@@ -22,8 +22,6 @@ const Main = () => {
 
   const [booklist, setBooklist] = useState([]);
   const [search, setSearch] = useState("");
-  const [useyn, setUseyn] = useState();
-  const [bookno, setBookno] = useState();
   //
   const [reload, setReload] = useState(false);
 
@@ -44,6 +42,7 @@ const Main = () => {
   useEffect(() => {
     getBook();
   }, [reload]);
+
 
   // 검색창 값 받기
   var onChange = (e) => {
@@ -100,9 +99,10 @@ const Main = () => {
           {booklist.map(function (res) {
             return <Divstyle2>
               <Card style={{ width: '10rem' }} >
-                <img src="./img/.jpg" />
+                {/* img 태그 경로 모르겠다.. */}
+                <img src="../img/"{...res.img} />
                 <Card.Body>
-                  <Card.Title >{res.title}</Card.Title>
+                  <Card.Title>{res.title}</Card.Title>
                   <Card.Text>
                     {res.writer}
                   </Card.Text>

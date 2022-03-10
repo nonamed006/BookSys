@@ -1,12 +1,20 @@
 package com.example.demo.controller;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.service.BookService;
 import com.example.demo.service.UserService;
@@ -37,6 +45,11 @@ public class MainController {
 	public List<Book> findBookList2() {
 		List<Book> book = bookService.getBookList();
 		return book;
+	}
+	
+	@GetMapping("")
+	public Book findByNo(@PathVariable int no) {
+		return bookService.findByNo(no);
 	}
 	
 	// 책 제목으로 책 리스트 불러옴 + 검색
@@ -101,4 +114,65 @@ public class MainController {
 			}
 		}
 		
+		// 관리자가 도서 등록
+		@PostMapping("/adminbook/add")
+		public String addBook(HttpServletRequest request, @RequestParam(value = "title") String title, 
+							  @RequestParam(value = "writer") String writer,
+							  @RequestParam(value = "price") int price,
+							  @RequestParam(value = "file") MultipartFile file) throws Exception {
+			
+			
+			String contentType = file.getContentType();
+            String originalFileExtension;
+            
+            System.out.println(file.getContentType());
+                // 확장자 명이 없으면 이 파일은 잘 못 된 것이다
+            if (ObjectUtils.isEmpty(contentType)){
+                return "break";
+            }
+            else{
+                if(contentType.contains("image/jpeg")){
+                    originalFileExtension = ".jpg";
+                    System.out.println(originalFileExtension);
+                }
+                else if(contentType.contains("image/png")){
+                    originalFileExtension = ".png";
+                }
+                else if(contentType.contains("image/gif")){
+                    originalFileExtension = ".gif";
+                }
+                else if(contentType.contains("image/jpg")){
+                    originalFileExtension = ".jpg";
+                }
+                // 다른 파일 명이면 아무 일 하지 않는다
+                else{
+                	 return "break";
+                }
+                
+             // 사진 저장시 같은 이름의 사진 들어올수 있으니까 날짜, 시간으로 파일 이름 저장
+    			Date nowDate = new Date();
+    			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd HHmmss");
+    			// Date=>String 으로 형변환
+    			String tempDate = simpleDateFormat.format(nowDate);
+
+    			// book 객체에 file 정보 set해주기
+    			Book book = new Book();
+    			book.setTitle(title);
+    			book.setWriter(writer);
+    			book.setPrice(price);
+    			book.setImg(tempDate + originalFileExtension);
+			
+    		// 디비에 insert 되면 사진을 폴더에 받기
+			if(bookService.insertbook(book)) {
+				File new_fileName = new File(tempDate + originalFileExtension);
+    			file.transferTo(new_fileName);
+    			
+    			return "success";
+			}
+		return "fail";	
+		}
+		
+		}
 }
+
+
