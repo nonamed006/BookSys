@@ -15,9 +15,8 @@ const ModalRent = (props) => {
 
 		const [reload, setReload] = useState(props.reload);
 	
-	// 수정사항 -- 대여 후 페이지 리로드 안됨 ==============================================
 	// 책 대여하기
-  var rentBook = () => {
+  const rentBook = () => {
     fetch(`http://localhost:8080/user/main/${book.no}`, {
       method: "get",
 			headers: {
@@ -41,7 +40,7 @@ const ModalRent = (props) => {
 
     return (
         <div>
-            <Button variant="secondary" onClick={handleShow}>
+            <Button  variant="secondary" onClick={handleShow}>
             대여하기
         </Button>
 

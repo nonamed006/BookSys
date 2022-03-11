@@ -4,7 +4,7 @@ import ModalDeleteBook from './ModalDeleteBook';
 
 const AdminBookdel = () => {
 
-  const tableTitle = ['no', '제목', '글쓴이', '대여상태', '삭제'];
+  const tableTitle = ['no', '제목', '글쓴이', '대여상태', '삭제', '정보수정'];
 
   const [booklist, setBooklist] = useState([]);
   const [search, setSearch] = useState("");
@@ -12,7 +12,7 @@ const AdminBookdel = () => {
   const [rentlist, setRentlist] = useState({});
 
   // 책 목록 불러오기
-  var getBook = () => {
+  const getBook = () => {
     fetch(`http://localhost:8080/main/${search == '' ? 'notSearch' : search}`, {
       method: "get",
       // res에 결과가 들어옴
@@ -28,12 +28,12 @@ const AdminBookdel = () => {
 
 
   // 검색창 값 받기
-  var onChange = (e) => {
+  const onChange = (e) => {
     setSearch(e.target.value);
   }
 
   // 검색 버튼 입력 시 reload
-  var handelClick = (e) => {
+  const handelClick = (e) => {
     setReload(!reload);
   }
 
@@ -69,7 +69,7 @@ const AdminBookdel = () => {
         <Col >
           <Button variant="outline-secondary" href="/adminpage">회원관리</Button>
           <Button variant="outline-secondary" href="/adminbookadd">도서등록</Button>
-          <Button variant="secondary" href="/adminbookdel">도서삭제</Button>
+          <Button variant="secondary" href="/adminbookdel">도서삭제/수정</Button>
         </Col>
       </Row>
       <br />
@@ -110,6 +110,9 @@ const AdminBookdel = () => {
                   <td>{checkUse(res.usebook) == 'y' ? <span>대여가능</span> : <span onClick={open_pop}>대여중</span>
                   }</td>
                   <td>{checkUse(res.usebook) == 'y' ? <ModalDeleteBook no={res.no} title={res.title} img={res.img}></ModalDeleteBook> :
+                    <Button variant="outline-secondary" disabled="disabled">도서 삭제</Button>
+                  }</td>
+                  <td>{checkUse(res.usebook) == 'y' ?  <Button variant="outline-secondary" href={`/adminbookupdate/${res.no}`}>도서 수정</Button> :
                     <Button variant="outline-secondary" disabled="disabled">도서 삭제</Button>
                   }</td>
                 </tr>

@@ -14,7 +14,7 @@
 			select * from book where title like #{title};
 		]]>
 	</select>
-	<!-- 책 no로 책 리스트 불러오기-->
+	<!-- 책 no로 책 하나 불러오기-->
 	<select id="findByNo" parameterType = "int" resultType="book">
 		<![CDATA[
 			select * from book where no = #{no};

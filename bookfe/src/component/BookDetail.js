@@ -23,7 +23,7 @@ const BookDetail = () => {
 	const [book, setBook] = useState({});
 
 	// 책 목록 불러오기
-	var getBook = () => {
+	const getBook = () => {
 		fetch(`http://localhost:8080/bookdetail/${no}`, {
 			method: "get",
 			// res에 결과가 들어옴
@@ -39,7 +39,7 @@ const BookDetail = () => {
 	}, []);
 
 	// 대여 가능 여부 체크 / 홀수 => 대여가능, 짝수 => 대여중
-	var checkUse = (state) => {
+	const checkUse = (state) => {
 		if (state % 2 == 0) {
 			return "y";
 		} else {

@@ -14,8 +14,8 @@ const Header = (props) => {
     fetch("http://localhost:8080/user/head", {
       method: "get",
       headers: {
-        'Content-Type': "application/json; charset=utf-8",
-        'Authorization': localStorage.getItem("Authorization")
+        'Content-Type': 'application/json; charset=utf-8',
+        'Authorization': localStorage.getItem('Authorization')
       }
     }).then((res) => res.json())
       .then((res) => {
@@ -52,7 +52,7 @@ const Header = (props) => {
           } 
           {user.no == null ?<Nav.Link href="/signup">회원가입</Nav.Link> : null }
         </Nav>
-        <div class="col-xs-2">
+        <div className="col-xs-2">
           {/* <InputGroup >
             <FormControl
               placeholder="책이름으로 검색"

@@ -14,7 +14,7 @@ const ModalDeleteBook = (props) => {
 	});
 
 	// 도서 삭제
-	var deleteUser = () => {
+	const deleteUser = () => {
     fetch(`http://localhost:8080/adminpage/deletebook/${book.no}/${book.img}`, {
       method: "get",
       // res에 결과가 들어옴

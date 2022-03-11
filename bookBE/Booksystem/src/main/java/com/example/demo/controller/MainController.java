@@ -141,6 +141,7 @@ public class MainController {
 		@PostMapping("/adminbook/add")
 		public String addBook(HttpServletRequest request, @RequestParam(value = "title") String title, 
 							  @RequestParam(value = "writer") String writer,
+							  @RequestParam(value = "contents") String contents,
 							  @RequestParam(value = "price") int price,
 							  @RequestParam(value = "file") MultipartFile file) throws Exception {
 			
@@ -183,6 +184,7 @@ public class MainController {
     			book.setTitle(title);
     			book.setWriter(writer);
     			book.setPrice(price);
+    			book.setContents(contents);
     			book.setImg(tempDate + originalFileExtension);
 			
     		// 디비에 insert 되면 사진을 폴더에 받기
@@ -194,7 +196,15 @@ public class MainController {
 			}
 		return "fail";	
 		}
-		
+		}
+		// 도서 정보 수정
+		// no로 도서 리스트 조회
+		@PostMapping("/adminbook/update")
+		public Book updateBook(@PathVariable int no) {
+			
+			
+			
+			return bookService.findByNo(no);
 		}
 		
 }

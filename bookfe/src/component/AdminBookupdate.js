@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Col, FloatingLabel, Form, Row } from 'react-bootstrap';
+import { useParams } from 'react-router';
 import styled from 'styled-components';
 
 const BoxStyle = styled.div`
@@ -8,13 +9,17 @@ const BoxStyle = styled.div`
 	border: 1px solid lightgrey;
 `;
 
-const AdminBookadd = () => {
+const AdminBookupdate = () => {
+
+	let { no } = useParams();
+
 
 	const [book, setBook] = useState({
 		title: "",
 		writer: "",
 		contents: "",
-		price: ""
+		price: "",
+		img: ""
 	});
 
 	const [imgBase64, setImgBase64] = useState([]); // 파일 base64
@@ -24,6 +29,24 @@ const AdminBookadd = () => {
 	const onChange = (e) => {
 		setBook({ ...book, [e.target.id]: e.target.value });
 	};
+
+    // 책 목록 불러오기
+	const getBook = () => {
+		fetch(`http://localhost:8080/bookdetail/${no}`, {
+			method: "get",
+			// res에 결과가 들어옴
+		}).then((res) => res.json())
+			.then((res) => {
+				setBook(res);
+				console.log(res);
+			});
+	};
+
+	useEffect(() => {
+		getBook();
+	}, []);
+
+
 
 	// file 값 받기
 	const handleChangeFile = (e) => {
@@ -96,8 +119,8 @@ const AdminBookadd = () => {
 				<Col xl='1'></Col>
 				<Col >
 					<Button variant="outline-secondary" href="/adminpage">회원관리</Button>
-					<Button variant="secondary" href="/adminbookadd">도서등록</Button>
-					<Button variant="outline-secondary" href="/adminbookdel">도서삭제/수정</Button>
+					<Button variant="outline-secondary" href="/adminbookadd">도서등록</Button>
+					<Button variant="secondary" href="/adminbookdel">도서삭제/수정</Button>
 				</Col>
 			</Row>
 			<br />
@@ -125,6 +148,7 @@ const AdminBookadd = () => {
 							type="text"
 							placeholder="title"
 							onChange={onChange}
+							value={book.title || ''}
 						/>
 						<label htmlFor="floatingInputCustom">제목</label>
 					</Form.Floating>
@@ -136,6 +160,7 @@ const AdminBookadd = () => {
 							type="text"
 							placeholder="writer"
 							onChange={onChange}
+							value={book.writer || ''}
 						/>
 						<label htmlFor="floatingPasswordCustom">글쓴이</label>
 					</Form.Floating>
@@ -146,6 +171,7 @@ const AdminBookadd = () => {
 							type="text"
 							placeholder="price"
 							onChange={onChange}
+							value={book.price || ''}
 						/>
 						<label htmlFor="floatingInputCustom">가격</label>
 					</Form.Floating>
@@ -156,11 +182,12 @@ const AdminBookadd = () => {
 							placeholder="contetns"
 							onChange={onChange}
 							style={{ height: '80px' }}
+							value={book.contents || ''}
 						/>
 					</FloatingLabel>
 					<Form.Group controlId="formFileMultiple" className="mb-3">
 						<Form.Label><b>도서 이미지를 등록하세요(최대10MB)</b></Form.Label>
-						<Form.Control type="file" onChange={handleChangeFile} multiple />
+						<Form.Control type="file" onChange={handleChangeFile} multiple/>
 					</Form.Group>
 					<Button variant="secondary" onClick={WriteBoard}>도서 등록</Button>
 				</Col>
@@ -170,4 +197,4 @@ const AdminBookadd = () => {
 	);
 };
 
-export default AdminBookadd;
+export default AdminBookupdate;

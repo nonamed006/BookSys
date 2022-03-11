@@ -28,7 +28,7 @@ const Main = () => {
 
 
   // 책 목록 불러오기
-  var getBook = () => {
+  const getBook = () => {
     fetch(`http://localhost:8080/main/${search == '' ? 'notSearch' : search}`, {
       method: "get",
       // res에 결과가 들어옴
@@ -46,12 +46,12 @@ const Main = () => {
 
 
   // 검색창 값 받기
-  var onChange = (e) => {
+  const onChange = (e) => {
     setSearch(e.target.value);
   }
 
   // 검색 버튼 입력 시 reload
-  var handelClick = (e) => {
+  const handelClick = (e) => {
     setReload(!reload);
   }
 
@@ -104,13 +104,13 @@ const Main = () => {
               <Card style={{ width: '10rem',float:'left', margin:'0px 10px 10px 0px'}} >
                 <img src={img} height='180px'/>
                 <Card.Body>
-                <Link to={`/bookdetail/${res.no}`} style={{ textDecoration: 'none' }}><Card.Title>{res.title}</Card.Title></Link>
+                <Link to={`/bookdetail/${res.no}`} style={{ textDecoration: 'none' }}><Card.Title style={{ fontSize:'15px'}}>{res.title}</Card.Title></Link>
                   <Card.Text>
                     {res.writer}
                   </Card.Text>
                   {checkUse(res.usebook) == 'y' ?
                     <ModalRent booktitle={res.title} no={res.no} reload={reload}></ModalRent> :
-                    <Button variant="secondary" disabled="disabled">대여불가능</Button>}
+                    <Button variant="secondary" disabled="disabled" >대여불가능</Button>}
                 </Card.Body>
               </Card>
               </>

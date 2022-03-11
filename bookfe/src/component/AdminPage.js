@@ -62,7 +62,7 @@ const AdminPage = () => {
 				<Col >
 					<Button variant="secondary" href="/adminpage">회원관리</Button>
 					<Button variant="outline-secondary" href="/adminbookadd">도서등록</Button>
-					<Button variant="outline-secondary" href="/adminbookdel">도서삭제</Button>
+					<Button variant="outline-secondary" href="/adminbookdel">도서삭제/수정</Button>
 					</Col>
 				</Row>
 				<br/>
