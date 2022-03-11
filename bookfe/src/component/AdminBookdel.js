@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Col, FormControl, InputGroup, Row, Table } from 'react-bootstrap';
+import { Button, Col, FormControl, InputGroup, OverlayTrigger, Row, Table, Tooltip } from 'react-bootstrap';
 import ModalDeleteBook from './ModalDeleteBook';
 
 const AdminBookdel = () => {
 
-	const tableTitle = ['no', '제목', '글쓴이', '대여상태', '삭제'];
+  const tableTitle = ['no', '제목', '글쓴이', '대여상태', '삭제'];
 
-	const [booklist, setBooklist] = useState([]);
+  const [booklist, setBooklist] = useState([]);
   const [search, setSearch] = useState("");
-	const [reload, setReload] = useState(false);
+  const [reload, setReload] = useState(false);
+  const [rentlist, setRentlist] = useState({});
 
-	// 책 목록 불러오기
+  // 책 목록 불러오기
   var getBook = () => {
     fetch(`http://localhost:8080/main/${search == '' ? 'notSearch' : search}`, {
       method: "get",
@@ -18,17 +19,15 @@ const AdminBookdel = () => {
     }).then((res) => res.json())
       .then((res) => {
         setBooklist(res);
-        console.log(res);
-
-      });
+      })
   };
 
-	useEffect(() => {
+  useEffect(() => {
     getBook();
   }, [reload]);
 
 
-	// 검색창 값 받기
+  // 검색창 값 받기
   var onChange = (e) => {
     setSearch(e.target.value);
   }
@@ -43,35 +42,40 @@ const AdminBookdel = () => {
     if (window.event.keyCode == 13) {
       getBook();
       setReload(!reload);
-      }
+    }
   }
 
-	// 대여 상태 체크 // 홀수 => 대여가능, 짝수 => 대여중
-	var checkUse = (state) =>{
-    if(state % 2 == 0){
+  // 대여 상태 체크 // 홀수 => 대여가능, 짝수 => 대여중
+  var checkUse = (state) => {
+    if (state % 2 == 0) {
       return "y";
-    } else{
+    } else {
       return "n";
     }
   }
 
-	var idx = 0;
+  // 대여중인 회원 확인 팝업
+  var open_pop = () => {
+    window.open('/rentuser/' + booklist.no, '대여중인 회원', 'width=700px,height=800px');
+  }
 
-	return (
-		<div>
-			<br />
-			<Row>
-				<Col xl='1'></Col>
-				<Col >
-					<Button variant="outline-secondary" href="/adminpage">회원관리</Button>
-					<Button variant="outline-secondary" href="/adminbookadd">도서등록</Button>
-					<Button variant="secondary" href="/adminbookdel">도서삭제</Button>
-				</Col>
-				</Row>
-				<br/>
-				<Row>
-          <Col xl ='3'></Col>
-          <Col>
+  var idx = 0;
+
+  return (
+    <div>
+      <br />
+      <Row>
+        <Col xl='1'></Col>
+        <Col >
+          <Button variant="outline-secondary" href="/adminpage">회원관리</Button>
+          <Button variant="outline-secondary" href="/adminbookadd">도서등록</Button>
+          <Button variant="secondary" href="/adminbookdel">도서삭제</Button>
+        </Col>
+      </Row>
+      <br />
+      <Row>
+        <Col xl='3'></Col>
+        <Col>
           <InputGroup>
             <FormControl
               placeholder="책 이름으로 검색"
@@ -84,38 +88,39 @@ const AdminBookdel = () => {
               Search
             </Button>
           </InputGroup>
-          </Col>
-          <Col xl ='3'></Col>
-        </Row>
-				<br/>
-				<Row>
-					<Col xl='1'></Col>
-					<Col>
-						<Table striped bordered hover>
-							<thead>
-								<tr>
-									{tableTitle.map(tableName => <th scope="col">{tableName}</th>)}
-								</tr>
-							</thead>
-							<tbody>
-								{booklist.map(function (res) {
-									return <tr>
-										<td>{++idx}</td>
-										<td>{res.title}</td>
-										<td>{res.writer}</td>
-										<td>{checkUse(res.usebook) == 'y' ? <span>대여가능</span> : <span>대여중</span>}</td>
-										<td>{checkUse(res.usebook) == 'y' ? <ModalDeleteBook no={res.no} title={res.title} ></ModalDeleteBook>:
-                      <Button variant="outline-secondary" disabled="disabled">도서 삭제</Button>
-                    }</td>
-									</tr>
-								})}
-							</tbody>
-						</Table>
-					</Col>
-				</Row>
-			
-		</div>
-	);
+        </Col>
+        <Col xl='3'></Col>
+      </Row>
+      <br />
+      <Row>
+        <Col xl='1'></Col>
+        <Col>
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                {tableTitle.map(tableName => <th scope="col">{tableName}</th>)}
+              </tr>
+            </thead>
+            <tbody>
+              {booklist.map(function (res) {
+                return <tr>
+                  <td>{++idx}</td>
+                  <td>{res.title}</td>
+                  <td>{res.writer}</td>
+                  <td>{checkUse(res.usebook) == 'y' ? <span>대여가능</span> : <span onClick={open_pop}>대여중</span>
+                  }</td>
+                  <td>{checkUse(res.usebook) == 'y' ? <ModalDeleteBook no={res.no} title={res.title} img={res.img}></ModalDeleteBook> :
+                    <Button variant="outline-secondary" disabled="disabled">도서 삭제</Button>
+                  }</td>
+                </tr>
+              })}
+            </tbody>
+          </Table>
+        </Col>
+      </Row>
+
+    </div>
+  );
 };
 
 export default AdminBookdel;

@@ -9,12 +9,13 @@ const ModalDeleteBook = (props) => {
 
 	const [book, setBook] = useState({
 		no: props.no,
-		title: props.title
+		title: props.title,
+		img: props.img
 	});
 
 	// 도서 삭제
 	var deleteUser = () => {
-    fetch(`http://localhost:8080/adminpage/deletebook/${book.no}`, {
+    fetch(`http://localhost:8080/adminpage/deletebook/${book.no}/${book.img}`, {
       method: "get",
       // res에 결과가 들어옴
     }).then((res) => res.text())

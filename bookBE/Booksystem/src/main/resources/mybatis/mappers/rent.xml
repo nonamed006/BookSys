@@ -13,7 +13,7 @@
 		select count(*) from rent where user_no = #{user_no}
 	]]>
 	</select>
-	<!-- 사용자가 대여중인 책 조회 // 반납 날짜 빠른순 정렬-->
+	<!-- 사용자가 대여중인 책 user_no로 조회 // 반납 날짜 빠른순 정렬-->
 	<select id="findByUserNo" parameterType ="int" resultType="rentDto">
 		<![CDATA[
 			select * from book as a
@@ -29,5 +29,13 @@
 				 delete from rent where book_no = #{book_no} 
 			]]>
 	</delete>
-	<!-- no로 책 검색 -->
+	<!-- 사용자가 대여중인 책 조회 book_no로 조회 // 반납 날짜 빠른순 정렬-->
+	<select id="findByBookNo" parameterType ="int" resultType="rentDto">
+		<![CDATA[
+			select * from book as a
+			inner join rent as b
+			on a.no = b.book_no
+			where b.book_no = #{book_no}
+		]]>
+	</select>
 </mapper>

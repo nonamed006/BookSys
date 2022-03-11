@@ -35,7 +35,7 @@
 	<!-- 관리자가 도서 등록 -->
 	<insert id="insert" parameterType ="book">
 		<![CDATA[
-			insert into book values(null, #{title}, #{writer}, #{price}, now(), 0, #{img})
+			insert into book values(null, #{title}, #{writer}, #{contents}, #{price}, now(), 0, #{img})
 		]]>
 	</insert>
 	

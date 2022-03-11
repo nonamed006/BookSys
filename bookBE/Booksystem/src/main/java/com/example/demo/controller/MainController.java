@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.demo.dto.RentDto;
 import com.example.demo.service.BookService;
 import com.example.demo.service.UserService;
 import com.example.demo.vo.Book;
@@ -47,9 +48,16 @@ public class MainController {
 		return book;
 	}
 	
-	@GetMapping("")
+	// no로 도서 리스트 조회
+	@GetMapping("/bookdetail/{no}")
 	public Book findByNo(@PathVariable int no) {
 		return bookService.findByNo(no);
+	}
+	
+	// book_no로 대여중인 회원 조회
+	@GetMapping("/")
+	public RentDto finByBookNo(@PathVariable int no) {
+		return bookService.findByBookNo(no);
 	}
 	
 	// 책 제목으로 책 리스트 불러옴 + 검색
@@ -105,13 +113,28 @@ public class MainController {
 		}
 		
 	// 관리자가 도서 삭제
-		@GetMapping("/adminpage/deletebook/{no}")
-		public String deleteBook(@PathVariable int no){
-			if(bookService.deletebook(no)) {
-				return "success";
-			} else {
-				return "fail";
-			}
+		@GetMapping("/adminpage/deletebook/{no}/{img}")
+		public String deleteBook(@PathVariable int no, @PathVariable String img){
+			
+			File file = new File("C:\\Users\\PC\\workspace\\SpringBoot\\BookSys\\bookfe\\public\\img\\" + img);
+			
+			if( file.exists() ){ 
+				// 파일이 존재할 떄
+				if(file.delete()){
+					// 파일 삭제 성공 후 DB에 데이터 삭제
+					if(bookService.deletebook(no)) {
+					return "success";
+				} else {
+					return "fail";
+				}
+					} else{ 
+						// 존재하지만 삭제 실패했을 때
+							return "fail"; 
+						} 
+				} else{
+					//파일이 존재하지 않을 때
+					return "notExist"; 
+					}
 		}
 		
 		// 관리자가 도서 등록
@@ -126,7 +149,7 @@ public class MainController {
             String originalFileExtension;
             
             System.out.println(file.getContentType());
-                // 확장자 명이 없으면 이 파일은 잘 못 된 것이다
+                // 확장자 명이 없으면 이 파일은 잘못된 것이다
             if (ObjectUtils.isEmpty(contentType)){
                 return "break";
             }
@@ -173,6 +196,7 @@ public class MainController {
 		}
 		
 		}
+		
 }
 
 

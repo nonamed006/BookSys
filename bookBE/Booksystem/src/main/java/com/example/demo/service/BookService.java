@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.dto.RentDto;
 import com.example.demo.repository.BookRepository;
 import com.example.demo.vo.Book;
 import com.example.demo.vo.Rent;
@@ -29,6 +30,11 @@ public class BookService {
 	// no로 책 조회
 	public Book findByNo(int no) {
 		return bookRepository.findByNo(no);
+	}
+	
+	// 책 제목으로 책 목록 불러오기 + 검색
+	public RentDto findByBookNo(int book_no) {
+		return bookRepository.findByBookNo(book_no);
 	}
 		
 	// 책 대여하기

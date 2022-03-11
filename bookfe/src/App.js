@@ -12,6 +12,8 @@ import AdminBookadd from './component/AdminBookadd';
 import AdminBookdel from './component/AdminBookdel';
 import BookDetail from './component/BookDetail';
 import { useState } from 'react';
+import BookBuy from './component/BookBuy';
+
 
 
 
@@ -29,7 +31,10 @@ function App() {
         <Route path="/adminpage" element={<AdminPage />} />
         <Route path="/adminbookadd" element={<AdminBookadd />} />
         <Route path="/adminbookdel" element={<AdminBookdel />} />
-        <Route path="/bookdetail" element={<BookDetail />} />
+        <Route path="/bookdetail/:no" element={<BookDetail />} />
+        <Route path="/buybook/:no" element={<BookBuy />} />
+
+        
       </Routes>
     </Container>
   </>

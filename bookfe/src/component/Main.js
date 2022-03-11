@@ -1,6 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { Badge, Button, Card, CardGroup, Col, Container, FormControl, InputGroup, ModalTitle, Nav, Navbar, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import styled from "styled-components";
 import ModalRent from './ModalRent';
 
@@ -96,13 +97,14 @@ const Main = () => {
           <Col xl ='3'></Col>
 
         </Row>
+        <br/>
           {booklist.map(function (res) {
-            return <Divstyle2>
-              <Card style={{ width: '10rem' }} >
-                {/* img 태그 경로 모르겠다.. */}
-                <img src="../img/"{...res.img} />
+            const img = '/img/' + res.img;
+            return <>
+              <Card style={{ width: '10rem',float:'left', margin:'0px 10px 10px 0px'}} >
+                <img src={img} height='180px'/>
                 <Card.Body>
-                  <Card.Title>{res.title}</Card.Title>
+                <Link to={`/bookdetail/${res.no}`} style={{ textDecoration: 'none' }}><Card.Title>{res.title}</Card.Title></Link>
                   <Card.Text>
                     {res.writer}
                   </Card.Text>
@@ -111,10 +113,9 @@ const Main = () => {
                     <Button variant="secondary" disabled="disabled">대여불가능</Button>}
                 </Card.Body>
               </Card>
-            </Divstyle2>
+              </>
           })}
         </div>
-
     </div>
   );
 };
