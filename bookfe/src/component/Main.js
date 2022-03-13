@@ -104,8 +104,8 @@ const Main = () => {
               <Card style={{ width: '10rem',float:'left', margin:'0px 10px 10px 0px'}} >
                 <img src={img} height='180px'/>
                 <Card.Body>
-                <Link to={`/bookdetail/${res.no}`} style={{ textDecoration: 'none' }}><Card.Title style={{ fontSize:'15px'}}>{res.title}</Card.Title></Link>
-                  <Card.Text>
+                <Link to={`/bookdetail/${res.no}`} style={{ textDecoration: 'none' }}><Card.Title style={{ fontSize:'13px'}}>{res.title}</Card.Title></Link>
+                  <Card.Text style={{ fontSize:'13px'}}>
                     {res.writer}
                   </Card.Text>
                   {checkUse(res.usebook) == 'y' ?

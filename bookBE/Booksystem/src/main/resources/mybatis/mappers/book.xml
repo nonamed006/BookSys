@@ -38,5 +38,15 @@
 			insert into book values(null, #{title}, #{writer}, #{contents}, #{price}, now(), 0, #{img})
 		]]>
 	</insert>
-	
+	<!-- 책 정보 수정 -->
+	<update id="updateBook" parameterType="book">
+	<![CDATA[
+			update book set title=#{title},
+							writer=#{writer},
+							contents=#{contents},
+							price=#{price},
+							img=#{img}
+							where no = #{no}
+		]]>
+	</update>
 </mapper>

@@ -8,6 +8,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,7 +34,7 @@ public class MainController {
 	private final UserService userService;
 	private final HttpSession session;
 	
-	// 헤더에 사용자 정보 담기
+	// 헤더에 사용자 정보 담기 -----------------------------------------------
 	@GetMapping("/user/head")
 	public User findById(Integer personId) {
 		User userinfo = (User)session.getAttribute("userinfo");
@@ -41,26 +42,26 @@ public class MainController {
 		return userService.findById(personId);
 	}
 	
-	// 책 리스트 불러옴
+	// 책 리스트 불러옴 -----------------------------------------------
 	@GetMapping("/main")
 	public List<Book> findBookList2() {
 		List<Book> book = bookService.getBookList();
 		return book;
 	}
 	
-	// no로 도서 리스트 조회
+	// no로 도서 리스트 조회 -----------------------------------------------
 	@GetMapping("/bookdetail/{no}")
 	public Book findByNo(@PathVariable int no) {
 		return bookService.findByNo(no);
 	}
 	
-	// book_no로 대여중인 회원 조회
+	// book_no로 대여중인 회원 조회 -----------------------------------------------
 	@GetMapping("/")
 	public RentDto finByBookNo(@PathVariable int no) {
 		return bookService.findByBookNo(no);
 	}
 	
-	// 책 제목으로 책 리스트 불러옴 + 검색
+	// 책 제목으로 책 리스트 불러옴 + 검색 -----------------------------------------------
 		@GetMapping("/main/{title}")
 		public List<Book> findBookList(@PathVariable String title) {
 			
@@ -70,7 +71,7 @@ public class MainController {
 			List<Book> book = bookService.findByTitle(title);
 			return book;
 		}
-	 // 책 대여
+	 // 책 대여 -----------------------------------------------
 		@GetMapping("/user/main/{bookno}")
 		public String rentBook(@PathVariable int bookno) {
 			
@@ -99,7 +100,7 @@ public class MainController {
 			
 		}
 		
-	// 책 반납
+	// 책 반납 -----------------------------------------------
 		@GetMapping("/mypage/delete/{no}")
 		public String returnBook(@PathVariable int no) {
 			
@@ -112,7 +113,7 @@ public class MainController {
 			}
 		}
 		
-	// 관리자가 도서 삭제
+	// 관리자가 도서 삭제 -----------------------------------------------
 		@GetMapping("/adminpage/deletebook/{no}/{img}")
 		public String deleteBook(@PathVariable int no, @PathVariable String img){
 			
@@ -137,7 +138,7 @@ public class MainController {
 					}
 		}
 		
-		// 관리자가 도서 등록
+		// 관리자가 도서 등록 -----------------------------------------------
 		@PostMapping("/adminbook/add")
 		public String addBook(HttpServletRequest request, @RequestParam(value = "title") String title, 
 							  @RequestParam(value = "writer") String writer,
@@ -197,14 +198,79 @@ public class MainController {
 		return "fail";	
 		}
 		}
-		// 도서 정보 수정
+		// 도서 정보 수정 -----------------------------------------------
 		// no로 도서 리스트 조회
+		@Transactional(rollbackFor = Exception.class)
 		@PostMapping("/adminbook/update")
-		public Book updateBook(@PathVariable int no) {
+		public String updateBook(HttpServletRequest request, @RequestParam(value = "title") String title,
+				  @RequestParam(value = "no") int no,
+				  @RequestParam(value = "writer") String writer,
+				  @RequestParam(value = "contents") String contents,
+				  @RequestParam(value = "price") int price,
+				  @RequestParam(value = "img") String img,
+				  @RequestParam(value = "file", required=false) MultipartFile file) throws Exception {
 			
+			// book 객체에 file 정보 set해주기
+			Book book = new Book();
 			
+			book.setNo(no);
+			book.setTitle(title);
+			book.setWriter(writer);
+			book.setPrice(price);
+			book.setContents(contents);
 			
-			return bookService.findByNo(no);
+			// 기존 도서 이미지 말고 새 이미지 등록시
+			if(!(file == null)) {
+			String contentType = file.getContentType();
+            String originalFileExtension;
+            
+            System.out.println("Null 아닐때");
+                // 확장자 명이 없으면 이 파일은 잘못된 것이다
+            if (ObjectUtils.isEmpty(contentType)){
+                return "break";
+            }
+            else{
+                if(contentType.contains("image/jpeg")){
+                    originalFileExtension = ".jpg";
+                    System.out.println(originalFileExtension);
+                }
+                else if(contentType.contains("image/png")){
+                    originalFileExtension = ".png";
+                }
+                else if(contentType.contains("image/gif")){
+                    originalFileExtension = ".gif";
+                }
+                else if(contentType.contains("image/jpg")){
+                    originalFileExtension = ".jpg";
+                }
+                // 다른 파일 명이면 아무 일 하지 않는다
+                else{
+                	 return "break";
+                }
+            }
+            
+            // 사진 저장시 같은 이름의 사진 들어올수 있으니까 날짜, 시간으로 파일 이름 저장
+   			Date nowDate = new Date();
+   			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd HHmmss");
+   			// Date=>String 으로 형변환
+   			String tempDate = simpleDateFormat.format(nowDate);
+   			
+   			book.setImg(tempDate + originalFileExtension);
+   			
+				File new_fileName = new File(tempDate + originalFileExtension);
+    			file.transferTo(new_fileName);
+    			
+    			bookService.updatebook(book);
+
+		return "success";	
+		} else{
+			// 이미지 외에 다른거만 수정할 때
+			System.out.println("기존 이미지 일때");
+			book.setImg(img);
+			bookService.updatebook(book);
+			System.out.println(book);
+			return "success";
+		}
 		}
 		
 }

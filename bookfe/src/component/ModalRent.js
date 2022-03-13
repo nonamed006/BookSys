@@ -40,7 +40,7 @@ const ModalRent = (props) => {
 
     return (
         <div>
-            <Button  variant="secondary" onClick={handleShow}>
+            <Button size='sm' variant="secondary" onClick={handleShow}>
             대여하기
         </Button>
 

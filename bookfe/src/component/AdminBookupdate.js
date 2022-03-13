@@ -28,6 +28,7 @@ const AdminBookupdate = () => {
 	// input value값 받기 이벤트 
 	const onChange = (e) => {
 		setBook({ ...book, [e.target.id]: e.target.value });
+		console.log(e.target.value);
 	};
 
     // 책 목록 불러오기
@@ -82,14 +83,20 @@ const AdminBookupdate = () => {
 	// 파일 업로드 버튼 클릭시 동작
 	const WriteBoard = () => {
 		const fd = new FormData();
-		Object.values(imgFile).forEach((file) => fd.append("file", file));
+		if(imgFile == null){
+			fd.append("file", null);
+		} else{
+			Object.values(imgFile).forEach((file) => fd.append("file", file));
+		}
 
+		fd.append("no", no);
 		fd.append("title", book.title);
 		fd.append("writer", book.writer);
 		fd.append("contents", book.contents);
 		fd.append("price", book.price);
+		fd.append("img", book.img);
 
-		fetch(`http://localhost:8080/adminbook/add`, {
+		fetch(`http://localhost:8080/adminbook/update`, {
 			method: "post",
 			body: fd,
 			headers: {
@@ -100,8 +107,8 @@ const AdminBookupdate = () => {
 				console.log(imgFile);
 				console.log(res);
 				if (res == 'success') {
-					alert("등록되었습니다.");
-					window.location.replace("/adminbookadd");
+					alert("수정 되었습니다.");
+					window.location.replace("/adminbookdel");
 					console.log("ok");
 				} else if(res == 'break'){
 					alert('확장자명이 잘못되었습니다. jpg, png파일을 등록해 주세요');
@@ -111,7 +118,7 @@ const AdminBookupdate = () => {
 				}
 			});
 	}
-
+	const img = '/img/' + book.img;
 	return (
 		<div>
 			<br />
@@ -127,18 +134,15 @@ const AdminBookupdate = () => {
 			<br />
 			<Row>
 				<Col xl="2"></Col>
+				
 				{/* 사진 업로드 미리보기 */}
-				<Col xl="2"> {imgBase64.map((item) => {
-					return (
-						<img
+				<Col xl="2">
+				<img
 							className="d-block w-100"
-							src={item}
+							src={img}
 							alt="First slide"
 							style={{ width:'220px', height: '260px' }}
-						/>
-						)
-					})}</Col> 
-
+						/></Col>
 				<Col xl="4">
 					{/* 입력 Form */}
 					{/* title */}
@@ -178,11 +182,11 @@ const AdminBookupdate = () => {
 					{/* contents */}
 					<FloatingLabel controlId="floatingTextarea2" label="도서 설명">
 						<Form.Control
+							id="contents"
 							as="textarea"
 							placeholder="contetns"
 							onChange={onChange}
 							style={{ height: '80px' }}
-							value={book.contents || ''}
 						/>
 					</FloatingLabel>
 					<Form.Group controlId="formFileMultiple" className="mb-3">

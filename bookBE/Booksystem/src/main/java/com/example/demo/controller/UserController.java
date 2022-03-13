@@ -23,7 +23,7 @@ public class UserController {
 	private final UserService userService;
 	private final HttpSession session;
 	
-	// 회원가입 - 성공시 success 반환
+	// 회원가입 - 성공시 success 반환 -----------------------------------------------
 	@PostMapping("/signup")
 	public String insertUser(@RequestBody User user) {
 		System.out.println(user);
@@ -31,7 +31,7 @@ public class UserController {
 		return "success";
 	}
 	
-	// mypage 대여 도서 목록 조회
+	// mypage 대여 도서 목록 조회 -----------------------------------------------
 	@GetMapping("user/rentlist")
 	public List<RentDto> rentList(Integer user_no){
 		
@@ -43,7 +43,7 @@ public class UserController {
 		return rentList;
 	}
 	
-	// 전체 유저 조회
+	// 전체 유저 조회 -----------------------------------------------
 	@GetMapping("/user/selectuser/{name}")
 	public List<User> findAll(@PathVariable String name){
 		
@@ -54,7 +54,7 @@ public class UserController {
 		return user;
 	}
 	
-	// 회원 삭제
+	// 회원 삭제 -----------------------------------------------
 	@GetMapping("/adminpage/deleteuser/{no}")
 	public String returnBook(@PathVariable int no) {
 		

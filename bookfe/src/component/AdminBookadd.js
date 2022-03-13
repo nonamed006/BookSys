@@ -152,6 +152,7 @@ const AdminBookadd = () => {
 					{/* contents */}
 					<FloatingLabel controlId="floatingTextarea2" label="도서 설명">
 						<Form.Control
+							id="contents"
 							as="textarea"
 							placeholder="contetns"
 							onChange={onChange}

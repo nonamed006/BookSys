@@ -63,4 +63,8 @@ public class BookService {
 	public boolean insertbook(Book book) {
 		return bookRepository.insertbook(book);
 	}
+	// 관리자가 도서 수정
+	public boolean updatebook(Book book) {
+		return bookRepository.updatebook(book);
+	}
 }

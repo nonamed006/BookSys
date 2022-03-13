@@ -67,4 +67,8 @@ public class BookRepository {
 	public boolean insertbook(Book book) {
 		return sqlSession.insert("book.insert", book) == 1;
 	}
+	// 관리자가 도서 수정
+		public boolean updatebook(Book book) {
+			return sqlSession.insert("book.updateBook", book) == 1;
+		}
 }
