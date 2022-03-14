@@ -1,17 +1,5 @@
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import React, { useState } from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-
-
-const DivContainer = styled.div`
-    /margin : 0px 500px 0px 500px;
-`
-
-const DivBox = styled.div`
-    margin:250px 100px 300px 150px;
-    /background-color: #1971c2;
-`
 
 const Login = (props) => {
 

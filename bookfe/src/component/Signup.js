@@ -1,23 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-
-const DivContainer = styled.div`
-    margin : 0px 500px 0px 500px;
-`
-
-const DivBox = styled.div`
-    margin:250px 100px 300px 250px;
-`
-
-const SpanStyle1 = styled.span`
-	/border: 1px solid black;
-	margin: 10px;
-	width: 200px;
-`
-
-
 
 const Signup = () => {
 
@@ -27,12 +9,6 @@ const Signup = () => {
 		name: "",
 		addr: ""
 	});
-
-	//input 값 받기위한 state
-	const [id, setId] = useState();
-	const [pwd, setPwd] = useState();
-	const [name, setName] = useState();
-	const [addr, setAddr] = useState();
 
 	// 유저 가입하는거 json.body에 넣어보낼 body만들어야 함 O
 	// 가입성공하고 response에 success도 있는데 왜 ok안띄우니... O
@@ -59,32 +35,11 @@ const Signup = () => {
 			});
 	};
 
-	// 이따가 여기 정리
-
-	// input value값 받기 이벤트 - id
-	const onChangeID = (e) => {
-		setUser({ ...user, id: e.target.value });
+	// input value값 받기 이벤트 
+	const onChange = (e) => {
+		setUser({ ...user, [e.target.id]: e.target.value });
 		console.log(e.target.value);
-	}
-
-	// input value값 받기 이벤트 - pwd
-	const onChangePWD = (e) => {
-		setUser({ ...user, pwd: e.target.value });
-		console.log(e.target.value);
-	}
-
-	// input value값 받기 이벤트 - name
-	const onChangeName = (e) => {
-		setUser({ ...user, name: e.target.value });
-		console.log(e.target.value);
-	}
-
-	// input value값 받기 이벤트 - addr
-	const onChangeAddr = (e) => {
-		setUser({ ...user, addr: e.target.value });
-		console.log(e.target.value);
-	}
-
+	};
 
 	// 가입 버튼 클릭시
 	const handelClick = () => {
@@ -105,7 +60,7 @@ const Signup = () => {
 						id="id"
 						type="text"
 						placeholder="Id"
-						onChange={onChangeID}
+						onChange={onChange}
 					/>
 					<label htmlFor="floatingInputCustom">ID</label>
 				</Form.Floating>
@@ -116,7 +71,7 @@ const Signup = () => {
 					id="pwd"
 					type="password"
 					placeholder="Password"
-					onChange={onChangePWD}
+					onChange={onChange}
 				/>
 				<label htmlFor="floatingPasswordCustom">Password</label>
 			</Form.Floating>
@@ -126,7 +81,7 @@ const Signup = () => {
 					id="name"
 					type="text"
 					placeholder="Name"
-					onChange={onChangeName}
+					onChange={onChange}
 				/>
 				<label htmlFor="floatingInputCustom">Name</label>
 			</Form.Floating>
@@ -136,7 +91,7 @@ const Signup = () => {
 					id="addr"
 					type="text"
 					placeholder="Address"
-					onChange={onChangeAddr}
+					onChange={onChange}
 				/>
 				<label htmlFor="floatingInputCustom">Address</label>
 			</Form.Floating>

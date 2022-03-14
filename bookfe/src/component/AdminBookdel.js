@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Col, FormControl, InputGroup, OverlayTrigger, Row, Table, Tooltip } from 'react-bootstrap';
+import { Button, Col, FormControl, InputGroup, Row, Table} from 'react-bootstrap';
 import ModalDeleteBook from './ModalDeleteBook';
 
 const AdminBookdel = () => {
@@ -9,7 +9,6 @@ const AdminBookdel = () => {
   const [booklist, setBooklist] = useState([]);
   const [search, setSearch] = useState("");
   const [reload, setReload] = useState(false);
-  const [rentlist, setRentlist] = useState({});
 
   // 책 목록 불러오기
   const getBook = () => {

@@ -1,23 +1,8 @@
 
 import React, { useEffect, useState } from 'react';
-import { Badge, Button, Card, CardGroup, Col, Container, FormControl, InputGroup, ModalTitle, Nav, Navbar, Row } from 'react-bootstrap';
+import {  Button, Card,  Col, FormControl, InputGroup, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import styled from "styled-components";
 import ModalRent from './ModalRent';
-
-const DivContainer = styled.div`
-    margin : 0px 500px 0px 500px;
-    border : 1px solid black;
-    height: auto;
-`
-const Divstyle2 = styled.div`
-  /border: 1px solid black;
-  display: inline-block;
-  width: 150px;
-  height: 200px;
-  margin: 10px;
-  padding : 10px;
-`
 
 const Main = () => {
 

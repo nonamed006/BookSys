@@ -1,23 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-
-const DivContainer = styled.div`
-    margin : 0px 500px 0px 500px;
-`
-
-const DivBox = styled.div`
-    margin:250px 100px 300px 250px;
-`
-
-const SpanStyle1 = styled.span`
-	/border: 1px solid black;
-	margin: 10px;
-	width: 200px;
-`
-
-
 
 const UserUpdate = () => {
 
@@ -131,7 +113,7 @@ const UserUpdate = () => {
 					/>
 					<label htmlFor="floatingInputCustom">Address</label>
 				</Form.Floating>
-				<Link to="/"><Button variant="secondary" onClick={handelClick}>수정하기</Button></Link>
+				<Button variant="secondary" onClick={handelClick}>수정하기</Button>
 			</Col>
 		</Row>
 

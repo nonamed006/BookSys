@@ -1,18 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Col, FloatingLabel, Form, Row } from 'react-bootstrap';
 import { useParams } from 'react-router';
-import styled from 'styled-components';
-
-const BoxStyle = styled.div`
-	width: 230px;
-	height: 280px;
-	border: 1px solid lightgrey;
-`;
 
 const AdminBookupdate = () => {
 
 	let { no } = useParams();
-
 
 	const [book, setBook] = useState({
 		title: "",
@@ -46,7 +38,6 @@ const AdminBookupdate = () => {
 	useEffect(() => {
 		getBook();
 	}, []);
-
 
 
 	// file 값 받기

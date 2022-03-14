@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Container, FormControl, InputGroup, Table } from 'react-bootstrap';
+import { Button, Container, Table } from 'react-bootstrap';
 
 const Cart = () => {
 

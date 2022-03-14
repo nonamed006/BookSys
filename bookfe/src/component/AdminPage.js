@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Col, FormControl, InputGroup, Nav, Row, Tab, Table } from 'react-bootstrap';
+import { Button, Col, FormControl, InputGroup, Row, Table } from 'react-bootstrap';
 import ModalDelete from './ModalDelete';
 
 const AdminPage = () => {

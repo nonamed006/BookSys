@@ -1,12 +1,5 @@
 import React, { useState } from 'react';
 import { Button, Col, FloatingLabel, Form, Row } from 'react-bootstrap';
-import styled from 'styled-components';
-
-const BoxStyle = styled.div`
-	width: 230px;
-	height: 280px;
-	border: 1px solid lightgrey;
-`;
 
 const AdminBookadd = () => {
 
