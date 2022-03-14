@@ -29,10 +29,11 @@ const ModalRent = (props) => {
 				setShow(false);
         if(res=="success"){
           alert("대여되었습니다.");
+          window.location.replace("/");
         } else if(res=="failCnt"){
           alert("3권이상 대여할 수 없습니다.");
         } else{
-          alert("로그인해 주세요");
+          alert("로그인해주세요");
         }
         console.log(res);
       });
@@ -46,7 +47,7 @@ const ModalRent = (props) => {
 
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>{book.title} 대여하시겠습니까?</Modal.Title>
+                    <Modal.Title style={{ fontSize:'18px'}}>{book.title} 대여하시겠습니까?</Modal.Title>
                 </Modal.Header>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>

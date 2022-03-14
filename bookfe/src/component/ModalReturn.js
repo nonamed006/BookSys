@@ -25,9 +25,10 @@ const ModalReturn = (props) => {
       .then((res) => {
         setShow(false);
         if (res == "success") {
-          alert("ok");
+          alert("반납되었습니다.");
+          window.location.replace("/mypage");
         } else {
-          alert("fail");
+          alert("반납실패하였습니다.");
         }
         console.log(res);
       });
@@ -41,7 +42,7 @@ const ModalReturn = (props) => {
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>{book.title} 반납하시겠습니까?</Modal.Title>
+          <Modal.Title style={{ fontSize:'18px'}}>{book.title} 반납하시겠습니까?</Modal.Title>
         </Modal.Header>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

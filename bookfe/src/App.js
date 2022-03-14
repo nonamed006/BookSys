@@ -14,6 +14,8 @@ import BookDetail from './component/BookDetail';
 import { useState } from 'react';
 import BookBuy from './component/BookBuy';
 import AdminBookupdate from './component/AdminBookupdate';
+import Cart from './component/Cart';
+import UserUpdate from './component/UserUpdate';
 
 
 
@@ -35,7 +37,8 @@ function App() {
         <Route path="/adminbookupdate/:no" element={<AdminBookupdate />} />
         <Route path="/bookdetail/:no" element={<BookDetail />} />
         <Route path="/buybook/:no" element={<BookBuy />} />
-
+        <Route path="/updateuser" element={<UserUpdate />} />
+        
         
       </Routes>
     </Container>

@@ -64,7 +64,7 @@ const Login = (props) => {
 					// 로그인 성공하면 이동
 					//history.push('/');
 					var name = res.substring(8)
-					alert(name);
+					alert(name + "님 환영합니다.");
 					window.location.replace("/");
 				}
 			});

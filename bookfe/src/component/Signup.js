@@ -49,11 +49,11 @@ const Signup = () => {
 			.then((res) => {
 				console.log(res);
 				if (res == 'success') {
-					alert("ok");
+					alert("회원가입 되었습니다.");
 					window.location.replace("/");
 					console.log("ok");
 				} else {
-					alert("fail");
+					alert("회원가입 실패하였습니다.");
 					console.log("fail");
 				}
 			});
@@ -140,7 +140,7 @@ const Signup = () => {
 				/>
 				<label htmlFor="floatingInputCustom">Address</label>
 			</Form.Floating>
-			<Link to = "/"><Button variant="secondary" onClick={handelClick}>Signup</Button></Link>
+			<Button variant="secondary" onClick={handelClick}>Signup</Button>
 			</Col>
 		</Row>
 

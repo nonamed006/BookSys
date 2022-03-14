@@ -113,7 +113,7 @@ const AdminBookdel = () => {
                     <Button variant="outline-secondary" disabled="disabled">도서 삭제</Button>
                   }</td>
                   <td>{checkUse(res.usebook) == 'y' ?  <Button variant="outline-secondary" href={`/adminbookupdate/${res.no}`}>도서 수정</Button> :
-                    <Button variant="outline-secondary" disabled="disabled">도서 삭제</Button>
+                    <Button variant="outline-secondary" disabled="disabled">도서 수정</Button>
                   }</td>
                 </tr>
               })}

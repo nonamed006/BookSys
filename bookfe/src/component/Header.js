@@ -6,10 +6,9 @@ const Header = (props) => {
   const user = props.user;
   const setUser = props.setUser;
   
-  const [reload, setReload] = useState(false);
 
 
-  // 수정사항 -- 로그인 / 로그아웃 하고 헤더 리로드가 안됨 ================================
+  // 사용자 정보 불러오기 ================================
   useEffect(()=>{
     fetch("http://localhost:8080/user/head", {
       method: "get",
@@ -23,7 +22,7 @@ const Header = (props) => {
         console.log(res);
       });
 
-  },[reload])
+  },[])
 
   var handleLogout = () =>{
     localStorage.removeItem("Authorization");
@@ -40,6 +39,8 @@ const Header = (props) => {
             user.role == "U" ?
             <NavDropdown title={user.name} id="basic-nav-dropdown">
             <NavDropdown.Item href="/mypage">MyPage</NavDropdown.Item>
+            <NavDropdown.Item href="/updateuser">profile</NavDropdown.Item>
+            {/* <NavDropdown.Item href="/cart">Cart</NavDropdown.Item> */}
             <NavDropdown.Divider />
             <NavDropdown.Item onClick={handleLogout}>LogOut</NavDropdown.Item> 
           </NavDropdown> :

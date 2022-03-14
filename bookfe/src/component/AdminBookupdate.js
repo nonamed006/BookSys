@@ -136,13 +136,26 @@ const AdminBookupdate = () => {
 				<Col xl="2"></Col>
 				
 				{/* 사진 업로드 미리보기 */}
-				<Col xl="2">
-				<img
+				<Col xl="2">{imgFile == null ? 
+					<img
 							className="d-block w-100"
 							src={img}
 							alt="First slide"
 							style={{ width:'220px', height: '260px' }}
-						/></Col>
+						/>
+				:
+				imgBase64.map((item) => {
+					return (
+						<img
+							className="d-block w-100"
+							src={item}
+							alt="First slide"
+							style={{ width:'220px', height: '260px' }}
+						/>
+						)
+					})
+				}
+						</Col>
 				<Col xl="4">
 					{/* 입력 Form */}
 					{/* title */}
@@ -186,6 +199,7 @@ const AdminBookupdate = () => {
 							as="textarea"
 							placeholder="contetns"
 							onChange={onChange}
+							value={book.contents || ''}
 							style={{ height: '80px' }}
 						/>
 					</FloatingLabel>

@@ -35,6 +35,10 @@ public class UserRepository {
 		return sqlSession.selectOne("user.findByIdAndPwd", map);
 	}
 	
+	// 유저- 회원 정보 수정
+	public boolean udpate(User user) {
+		return sqlSession.update("user.update", user) == 1;
+	}
 	// no로 유저 찾기
 	public User findById(int personId) {
 		return sqlSession.selectOne("user.findById", personId);

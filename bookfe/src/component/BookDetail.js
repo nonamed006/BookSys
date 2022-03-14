@@ -7,7 +7,7 @@ import styled from 'styled-components';
 const BoxStyle = styled.div`
 	width: 230px;
 	height: 300px;
-	border: 1px solid lightgrey;
+	/border: 1px solid lightgrey;
 	text-align: center;
 `;
 
@@ -30,6 +30,26 @@ const BookDetail = () => {
 		}).then((res) => res.json())
 			.then((res) => {
 				setBook(res);
+				console.log(res);
+			});
+	};
+
+	// 장바구니에 추가
+	const addCart = () => {
+		fetch(`http://localhost:8080/user/addcart/${no}`, {
+			method: "get",
+			headers: {
+				'Content-Type': "application/json;charset=utf-8",
+				'Authorization': localStorage.getItem("Authorization")
+			}
+			// res에 결과가 들어옴
+		}).then((res) => res.text())
+			.then((res) => {
+				if(res == 'success'){
+					alert('장바구니에 추가 되었습니다.')
+				}else{
+					alert('실패하였습니다.')
+				}
 				console.log(res);
 			});
 	};
@@ -67,7 +87,7 @@ const BookDetail = () => {
 						<ListGroup variant="flush" >
 							<ListGroup.Item><b>제목: </b>{book.title}</ListGroup.Item><br />
 							<ListGroup.Item><b>글쓴이: </b>{book.writer}</ListGroup.Item><br />
-							<ListGroup.Item><b>가격: </b>{book.price}</ListGroup.Item><br />
+							<ListGroup.Item><b>가격: </b>{book.price} 원</ListGroup.Item><br />
 							<ListGroup.Item><b>설명: </b>{book.contents}</ListGroup.Item>
 						</ListGroup>
 					</DivStyle>
@@ -76,10 +96,11 @@ const BookDetail = () => {
 						<Col xl= '4'>
 						{checkUse(book.usebook) == 'y' ?
 						<ModalRent booktitle={book.title} no={book.no}></ModalRent> :
-						<Button variant="secondary" disabled="disabled">대여불가능</Button>}
+						<Button size = 'sm' variant="secondary" disabled="disabled">대여불가능</Button>}
 						</Col>
 						<Col xl= '4'>
 						{/* <Button variant="secondary" href={`/buybook/${no}`}>구매하기</Button> */}
+						{/* <Button size ='sm' variant="secondary" onClick={addCart}>장바구니 담기</Button> */}
 						</Col>
 						</Row>
 				</Col>

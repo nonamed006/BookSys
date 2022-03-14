@@ -101,16 +101,16 @@ const Main = () => {
           {booklist.map(function (res) {
             const img = '/img/' + res.img;
             return <>
-              <Card style={{ width: '10rem',float:'left', margin:'0px 10px 10px 0px'}} >
+              <Card style={{ width: '10rem',float:'left', height: '350px',margin:'0px 10px 10px 0px'}} >
                 <img src={img} height='180px'/>
                 <Card.Body>
-                <Link to={`/bookdetail/${res.no}`} style={{ textDecoration: 'none' }}><Card.Title style={{ fontSize:'13px'}}>{res.title}</Card.Title></Link>
+                <Link to={`/bookdetail/${res.no}`} style={{ textDecoration: 'none' }}><Card.Title style={{ fontSize:'14px', height:'50px'}}>{res.title}</Card.Title></Link>
                   <Card.Text style={{ fontSize:'13px'}}>
                     {res.writer}
                   </Card.Text>
                   {checkUse(res.usebook) == 'y' ?
                     <ModalRent booktitle={res.title} no={res.no} reload={reload}></ModalRent> :
-                    <Button variant="secondary" disabled="disabled" >대여불가능</Button>}
+                    <Button size = 'sm' variant="secondary" disabled="disabled" >대여불가능</Button>}
                 </Card.Body>
               </Card>
               </>

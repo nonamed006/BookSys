@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.RentDto;
+import com.example.demo.service.CartService;
 import com.example.demo.service.UserService;
+import com.example.demo.vo.Cart;
 import com.example.demo.vo.User;
 
 import lombok.RequiredArgsConstructor;
@@ -21,6 +23,7 @@ import lombok.RequiredArgsConstructor;
 public class UserController {
 	
 	private final UserService userService;
+	private final CartService cartService;
 	private final HttpSession session;
 	
 	// 회원가입 - 성공시 success 반환 -----------------------------------------------
@@ -41,6 +44,23 @@ public class UserController {
 		List<RentDto> rentList = userService.findByUserNo(user_no);
 		
 		return rentList;
+	}
+	// 유저 - 회원 정보 수정 -----------------------------------------------
+	@GetMapping("/user/updateuser/{pwd}/{addr}")
+	public String update(@PathVariable String pwd, @PathVariable String addr){
+		
+		User userinfo = (User)session.getAttribute("userinfo");
+		User user = new User();
+		
+		user.setNo(userinfo.getNo());
+		user.setPwd(pwd);
+		user.setAddr(addr);
+		
+		if(userService.udpate(user)) {
+			return "success";
+		} else {
+			return "fail";
+		}
 	}
 	
 	// 전체 유저 조회 -----------------------------------------------
@@ -64,4 +84,34 @@ public class UserController {
 			return "fail";
 		}
 	}
+	
+	// 장바구니 추가 ----------------
+	@GetMapping("user/addcart/{book_no}")
+	public String insert(@PathVariable int book_no) {
+		
+		Cart cart = new Cart();
+		
+		User userinfo = (User)session.getAttribute("userinfo");
+		cart.setBook_no(book_no);
+		cart.setUser_no(userinfo.getNo());
+		
+		if(cartService.insert(cart)) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
+	
+	// userno로 장바구니 조회 ----------------
+		@GetMapping("user/cart")
+		public List<Cart> cartList() {
+			
+			User userinfo = (User)session.getAttribute("userinfo");
+			
+			System.out.println(userinfo.getNo());
+			List<Cart> cart = cartService.findByNo(userinfo.getNo());
+			
+			return cart;
+
+		}
 }

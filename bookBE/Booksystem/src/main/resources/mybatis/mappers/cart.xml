@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cart">
+<!-- 장바구니에 추가하기 -->
+	<insert id="insert" parameterType ="cart">
+		<![CDATA[
+			insert into cart values(null, #{user_no}, #{book_no})
+		]]>
+	</insert>
+	<!-- 장바구니 조회하기 -->
+	<select id="findByNo" parameterType = "int" resultType="cartDto">
+		<![CDATA[
+			select a.no as book_no, a.title, a.price, a.img, c.no as user_no, c.name, c.addr, count(b.no) as cnt
+			from book as a
+			inner join cart as b
+			on a.no = b.book_no
+			inner join user as c
+			on c.no = b.user_no
+			where user_no = #{user_no}
+		]]>
+	</select>
+</mapper>

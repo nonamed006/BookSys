@@ -27,9 +27,13 @@ public class UserService {
 	}
 	
 	// mypage에 사용자가 대여한 책 목록 조회
-		public List<RentDto> findByUserNo(int user_no){
-			return userRepository.findByUserNo(user_no);
-		}
+	public List<RentDto> findByUserNo(int user_no){
+		return userRepository.findByUserNo(user_no);
+	}
+	// 유저- 회원 정보 수정
+	public boolean udpate(User user) {
+		return userRepository.udpate(user);
+	}
 		
 	// 전체 유저 목록 조회
 	public List<User> findAll(String name){
