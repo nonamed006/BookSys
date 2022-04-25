@@ -19,7 +19,6 @@ const Header = (props) => {
     }).then((res) => res.json())
       .then((res) => {
         setUser(res);
-        console.log(res);
       });
 
   },[])

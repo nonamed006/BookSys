@@ -56,7 +56,6 @@ const UserUpdate = () => {
 	// 수정 버튼 클릭시
 	const handelClick = () => {
 		updateUser();
-		console.log("클릭됨");
 	}
 
 

@@ -22,7 +22,6 @@ const AdminBookadd = () => {
 	const handleChangeFile = (e) => {
 		console.log(e.target.files)
 		setImgFile(e.target.files);
-		//fd.append("file", e.target.files)
 		setImgBase64([]);
 		for (var i = 0; i < e.target.files.length; i++) {
 			if (e.target.files[i]) {
@@ -34,14 +33,10 @@ const AdminBookadd = () => {
 					const base64 = reader.result;
 					console.log(base64)
 					if (base64) {
-						//  images.push(base64.toString())
 						var base64Sub = base64.toString()
 
 						setImgBase64(imgBase64 => [...imgBase64, base64Sub]);
-						//setBook({...book, bookimgfile: e.target.files});
-						//  setImgBase64(newObj);
-						// 파일 base64 상태 업데이트
-						//  console.log(images)
+
 					}
 				}
 			}
@@ -72,12 +67,10 @@ const AdminBookadd = () => {
 				if (res == 'success') {
 					alert("등록되었습니다.");
 					window.location.replace("/adminbookadd");
-					console.log("ok");
 				} else if(res == 'break'){
 					alert('확장자명이 잘못되었습니다. jpg, png파일을 등록해 주세요');
 				} else {
 					alert("fail");
-					console.log("fail");
 				}
 			});
 	}

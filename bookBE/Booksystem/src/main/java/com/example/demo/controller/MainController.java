@@ -113,6 +113,13 @@ public class MainController {
 			}
 		}
 		
+		// 책 리스트 대여순으로 불러옴 -----------------------------------------------
+		@GetMapping("/main/rank")
+		public List<Book> findBookRank() {
+			List<Book> book = bookService.getBookRank();
+			return book;
+		}
+		
 	// 관리자가 도서 삭제 -----------------------------------------------
 		@GetMapping("/adminpage/deletebook/{no}/{img}")
 		public String deleteBook(@PathVariable int no, @PathVariable String img){

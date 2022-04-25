@@ -49,4 +49,12 @@
 							where no = #{no}
 		]]>
 	</update>
+	<!-- 책 리스트 대여순으로 불러오기 -->
+	<select id="findRank" resultType="book">
+		<![CDATA[
+			select * from book
+			order by usebook desc
+			limit 5
+		]]>
+	</select>
 </mapper>

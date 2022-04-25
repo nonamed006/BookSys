@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import {  Button, Card,  Col, FormControl, InputGroup, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import BookRank from './BookRank';
 import ModalRent from './ModalRent';
 
 const Main = () => {
@@ -20,8 +21,6 @@ const Main = () => {
     }).then((res) => res.json())
       .then((res) => {
         setBooklist(res);
-        console.log(res);
-
       });
   };
 
@@ -59,7 +58,6 @@ const Main = () => {
   
   return (
     <div>
-      
         {/* 책 목록*/}
         <div>
           <br/>
@@ -83,9 +81,16 @@ const Main = () => {
 
         </Row>
         <br/>
-          {booklist.map(function (res) {
+        <Row>
+          <Col xl='2'></Col>
+          <Col>
+          <BookRank />
+          </Col>
+        </Row>
+        <br/>
+          {booklist.map(function (res, index) {
             const img = '/img/' + res.img;
-            return <>
+            return <div key={index}>
               <Card style={{ width: '10rem',float:'left', height: '350px',margin:'0px 10px 10px 0px'}} >
                 <img src={img} height='180px'/>
                 <Card.Body>
@@ -98,7 +103,7 @@ const Main = () => {
                     <Button size = 'sm' variant="secondary" disabled="disabled" >대여불가능</Button>}
                 </Card.Body>
               </Card>
-              </>
+              </div>
           })}
         </div>
     </div>

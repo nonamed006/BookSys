@@ -30,7 +30,6 @@ const BookDetail = () => {
 		}).then((res) => res.json())
 			.then((res) => {
 				setBook(res);
-				console.log(res);
 			});
 	};
 
@@ -99,8 +98,6 @@ const BookDetail = () => {
 						<Button size = 'sm' variant="secondary" disabled="disabled">대여불가능</Button>}
 						</Col>
 						<Col xl= '4'>
-						{/* <Button variant="secondary" href={`/buybook/${no}`}>구매하기</Button> */}
-						{/* <Button size ='sm' variant="secondary" onClick={addCart}>장바구니 담기</Button> */}
 						</Col>
 						</Row>
 				</Col>

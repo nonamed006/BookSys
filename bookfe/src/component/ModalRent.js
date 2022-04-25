@@ -13,7 +13,6 @@ const ModalRent = (props) => {
 			title: props.booktitle,
 		})
 
-		const [reload, setReload] = useState(props.reload);
 	
 	// 책 대여하기
   const rentBook = () => {
@@ -35,7 +34,6 @@ const ModalRent = (props) => {
         } else{
           alert("로그인해주세요");
         }
-        console.log(res);
       });
   }
 

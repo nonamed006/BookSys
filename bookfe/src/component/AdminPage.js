@@ -22,7 +22,6 @@ const AdminPage = () => {
     }).then((res) => res.json())
       .then((res) => {
         setUserlist(res);
-        console.log(res);
       });
   };
 
@@ -96,8 +95,8 @@ const AdminPage = () => {
 							</tr>
 						</thead>
 						<tbody>
-							{userlist.map(function(res){
-							return<tr>
+							{userlist.map(function(res, index){
+							return<tr key={index}>
 								<td>{++idx}</td>
 								<td>{res.id}</td>
 								<td>{res.name}</td>

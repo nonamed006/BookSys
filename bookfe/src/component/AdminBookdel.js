@@ -101,8 +101,8 @@ const AdminBookdel = () => {
               </tr>
             </thead>
             <tbody>
-              {booklist.map(function (res) {
-                return <tr>
+              {booklist.map(function (res, index) {
+                return <tr key={index}> 
                   <td>{++idx}</td>
                   <td>{res.title}</td>
                   <td>{res.writer}</td>

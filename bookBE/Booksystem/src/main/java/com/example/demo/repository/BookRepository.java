@@ -55,6 +55,11 @@ public class BookRepository {
 	public boolean delete(int no) {
 		return sqlSession.delete("rent.delete", no) == 1;
 	}
+	
+	//책 목록 대여순으로 불러오기 
+		public List<Book> findRank() {
+			return sqlSession.selectList("book.findRank");
+		}
 		
 	/* ============= 관리자 ===============*/
 		

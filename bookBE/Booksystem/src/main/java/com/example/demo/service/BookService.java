@@ -55,6 +55,12 @@ public class BookService {
 	public boolean delete(int no) {
 		return bookRepository.delete(no);
 	}
+	
+	// 책 목록 불러오기
+		public List<Book> getBookRank(){
+			return bookRepository.findRank();
+		}
+	// ====================== 관리자 ==================================
 	// 관리자가 도서 삭제
 	public boolean deletebook(int no) {
 		return bookRepository.deletebook(no);
