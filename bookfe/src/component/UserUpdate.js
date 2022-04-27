@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
+import DaumPost from './DaumPost';
 
 const UserUpdate = () => {
 
@@ -10,39 +11,39 @@ const UserUpdate = () => {
 		addr: ""
 	});
 
-	 // 사용자 정보 불러오기 ================================
-	 useEffect(()=>{
-    fetch("http://localhost:8080/user/head", {
-      method: "get",
-      headers: {
-        'Content-Type': 'application/json; charset=utf-8',
-        'Authorization': localStorage.getItem('Authorization')
-      }
-    }).then((res) => res.json())
-      .then((res) => {
-        setUser(res);
-        console.log(res);
-      });
+	// 사용자 정보 불러오기 ================================
+	useEffect(() => {
+		fetch("http://localhost:8080/user/head", {
+			method: "get",
+			headers: {
+				'Content-Type': 'application/json; charset=utf-8',
+				'Authorization': localStorage.getItem('Authorization')
+			}
+		}).then((res) => res.json())
+			.then((res) => {
+				setUser(res);
+				console.log(res);
+			});
 
-  },[])
+	}, [])
 
 	// 수정 보내기
 	const updateUser = () => {
 		fetch(`http://localhost:8080/user/updateuser/${user.pwd}/${user.addr}`, {
-      method: "get",
-      headers: {
-        'Content-Type': 'application/json; charset=utf-8',
-        'Authorization': localStorage.getItem('Authorization')
-      }
-    }).then((res) => res.text())
-      .then((res) => {
-        if(res == 'success'){
+			method: "get",
+			headers: {
+				'Content-Type': 'application/json; charset=utf-8',
+				'Authorization': localStorage.getItem('Authorization')
+			}
+		}).then((res) => res.text())
+			.then((res) => {
+				if (res == 'success') {
 					alert('수정되었습니다.');
 					window.location.replace("/");
-				}else{
+				} else {
 					alert('실패하였습니다.');
 				}
-      });
+			});
 
 	}
 
@@ -56,6 +57,13 @@ const UserUpdate = () => {
 	// 수정 버튼 클릭시
 	const handelClick = () => {
 		updateUser();
+	}
+
+	// 카카오 주소 API 추가
+	const getPost = (post) => {
+		setUser({...user, addr: ""});
+		setUser({ ...user, addr: post });
+		console.log("ok");
 	}
 
 
@@ -111,6 +119,7 @@ const UserUpdate = () => {
 						value={user.addr}
 					/>
 					<label htmlFor="floatingInputCustom">Address</label>
+					<DaumPost getPost={getPost}/>
 				</Form.Floating>
 				<Button variant="secondary" onClick={handelClick}>수정하기</Button>
 			</Col>

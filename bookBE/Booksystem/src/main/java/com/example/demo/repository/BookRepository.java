@@ -61,6 +61,11 @@ public class BookRepository {
 			return sqlSession.selectList("book.findRank");
 		}
 		
+	// 카테고리로 책 목록 불러오기  
+		public List<Book> findBookByCat(String category) {
+			return sqlSession.selectList("book.findBookByCat", category);
+		}
+		
 	/* ============= 관리자 ===============*/
 		
 	// 관리자가 도서 삭제

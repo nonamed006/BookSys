@@ -11,7 +11,8 @@
 	<!-- 책 제목으로 책 리스트 불러오기 + 검색포함 -->
 	<select id="findByTitle" parameterType = "String" resultType="book">
 		<![CDATA[
-			select * from book where title like #{title};
+			select * from book where title like #{title}
+			order by reg_date desc;
 		]]>
 	</select>
 	<!-- 책 no로 책 하나 불러오기-->
@@ -35,7 +36,7 @@
 	<!-- 관리자가 도서 등록 -->
 	<insert id="insert" parameterType ="book">
 		<![CDATA[
-			insert into book values(null, #{title}, #{writer}, #{contents}, #{price}, now(), 0, #{img})
+			insert into book values(null, #{title}, #{writer}, #{contents}, #{price}, now(), 0, #{img}, #{publisher}, null, null)
 		]]>
 	</insert>
 	<!-- 책 정보 수정 -->
@@ -57,4 +58,12 @@
 			limit 5
 		]]>
 	</select>
+	<!-- 책 리스트 카테고리로 찾기 -->
+	<select id="findBookByCat" parameterType = "String" resultType="book">
+		<![CDATA[
+			select * from book 
+			where category like #{category}
+		]]>
+	</select>
+	
 </mapper>

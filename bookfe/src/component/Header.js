@@ -5,8 +5,6 @@ const Header = (props) => {
 
   const user = props.user;
   const setUser = props.setUser;
-  
-
 
   // 사용자 정보 불러오기 ================================
   useEffect(()=>{
@@ -30,10 +28,19 @@ const Header = (props) => {
 
     return (<Navbar bg="dark" variant="dark">
       <Container>
-        <Navbar.Brand>BookSys</Navbar.Brand>
+        <Navbar.Brand href="/">BookSys</Navbar.Brand>
         <Nav className="me-auto">
           {/* 도서목록 */}
-          <Nav.Link href="/">도서목록</Nav.Link>
+          <NavDropdown
+          id="nav-dropdown-dark-example"
+          title="도서목록"
+        >
+          <NavDropdown.Item href="/category/notSearch">전체 도서 목록</NavDropdown.Item>
+          <NavDropdown.Divider />
+          <NavDropdown.Item href="/category/IT서적">IT 서적</NavDropdown.Item>
+          <NavDropdown.Item href="/category/소설">소설</NavDropdown.Item>
+          <NavDropdown.Item href="/category/인문학">인문학</NavDropdown.Item>
+          </NavDropdown>
           {user.no == null ? <Nav.Link href="/login"> 로그인</Nav.Link> : 
             user.role == "U" ?
             <NavDropdown title={user.name} id="basic-nav-dropdown">

@@ -71,6 +71,16 @@ public class MainController {
 			List<Book> book = bookService.findByTitle(title);
 			return book;
 		}
+		
+	// 책 제목으로 책 리스트 불러옴 + 검색 -----------------------------------------------
+		@GetMapping("/category/{category}")
+		public List<Book> findBookCategory(@PathVariable String category) {
+			if(category.equals("notSearch")) category = "";
+			
+			category = "%" + category + "%";
+			List<Book> book = bookService.getBookCategory(category);
+			return book;
+		}
 	 // 책 대여 -----------------------------------------------
 		@GetMapping("/user/main/{bookno}")
 		public String rentBook(@PathVariable int bookno) {
@@ -151,6 +161,7 @@ public class MainController {
 							  @RequestParam(value = "writer") String writer,
 							  @RequestParam(value = "contents") String contents,
 							  @RequestParam(value = "price") int price,
+							  @RequestParam(value = "publisher") String publisher,
 							  @RequestParam(value = "file") MultipartFile file) throws Exception {
 			
 			
@@ -193,6 +204,7 @@ public class MainController {
     			book.setWriter(writer);
     			book.setPrice(price);
     			book.setContents(contents);
+    			book.setPublisher(publisher);
     			book.setImg(tempDate + originalFileExtension);
 			
     		// 디비에 insert 되면 사진을 폴더에 받기

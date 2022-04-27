@@ -29,6 +29,7 @@ const BookDetail = () => {
 			// res에 결과가 들어옴
 		}).then((res) => res.json())
 			.then((res) => {
+				console.log(res);
 				setBook(res);
 			});
 	};
@@ -87,6 +88,7 @@ const BookDetail = () => {
 							<ListGroup.Item><b>제목: </b>{book.title}</ListGroup.Item><br />
 							<ListGroup.Item><b>글쓴이: </b>{book.writer}</ListGroup.Item><br />
 							<ListGroup.Item><b>가격: </b>{book.price} 원</ListGroup.Item><br />
+							<ListGroup.Item><b>출판사: </b> {book.publisher || ''}</ListGroup.Item><br />
 							<ListGroup.Item><b>설명: </b>{book.contents}</ListGroup.Item>
 						</ListGroup>
 					</DivStyle>

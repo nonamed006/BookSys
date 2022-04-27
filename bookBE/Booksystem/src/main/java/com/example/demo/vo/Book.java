@@ -12,4 +12,5 @@ public class Book {
 	private String reg_date;
 	private int usebook;
 	private String img;
+	private String publisher;
 }

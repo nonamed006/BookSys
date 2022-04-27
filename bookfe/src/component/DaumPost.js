@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import DaumPostcode from 'react-daum-postcode';
 
-const DaumPost = ({getPost}) => {
+const DaumPost = ({ getPost }) => {
 	const [show, setShow] = useState(false);
-  const handleShow = () => setShow(!show);
+	const handleShow = () => setShow(!show);
+
 
 	const handleComplete = (data) => {
 		let fullAddress = data.address;
@@ -24,9 +25,9 @@ const DaumPost = ({getPost}) => {
 	}
 	return (
 		<>
-		<Button onClick={handleShow} variant="outline-success">주소찾기</Button>
+			<Button onClick={handleShow} variant="outline-success">주소찾기</Button>
 			{show ?
-				<DaumPostcode onComplete={handleComplete} className='post_code' /> :
+				<div><DaumPostcode onComplete={handleComplete} className='post_code' /></div> :
 				null
 			}
 		</>

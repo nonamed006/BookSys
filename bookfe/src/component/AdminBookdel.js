@@ -4,7 +4,7 @@ import ModalDeleteBook from './ModalDeleteBook';
 
 const AdminBookdel = () => {
 
-  const tableTitle = ['no', '제목', '글쓴이', '대여상태', '삭제', '정보수정'];
+  const tableTitle = ['no', '제목', '글쓴이', '출판사', '대여상태', '삭제', '정보수정'];
 
   const [booklist, setBooklist] = useState([]);
   const [search, setSearch] = useState("");
@@ -106,6 +106,7 @@ const AdminBookdel = () => {
                   <td>{++idx}</td>
                   <td>{res.title}</td>
                   <td>{res.writer}</td>
+                  <td>{res.publisher}</td>
                   <td>{checkUse(res.usebook) == 'y' ? <span>대여가능</span> : <span onClick={open_pop}>대여중</span>
                   }</td>
                   <td>{checkUse(res.usebook) == 'y' ? <ModalDeleteBook no={res.no} title={res.title} img={res.img}></ModalDeleteBook> :

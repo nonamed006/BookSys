@@ -13,6 +13,7 @@ import BookDetail from './component/BookDetail';
 import { useState } from 'react';
 import AdminBookupdate from './component/AdminBookupdate';
 import UserUpdate from './component/UserUpdate';
+import BookCategory from './component/category/BookCategory';
 
 
 
@@ -34,6 +35,7 @@ function App() {
         <Route path="/adminbookupdate/:no" element={<AdminBookupdate />} />
         <Route path="/bookdetail/:no" element={<BookDetail />} />
         <Route path="/updateuser" element={<UserUpdate />} />
+        <Route path="/category/:category" element={<BookCategory />} />
       </Routes>
     </Container>
   </>

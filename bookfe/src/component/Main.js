@@ -88,15 +88,17 @@ const Main = () => {
           </Col>
         </Row>
         <br/>
+          <b>📕신간도서</b>
+        
           {booklist.map(function (res, index) {
             const img = '/img/' + res.img;
             return <div key={index}>
               <Card style={{ width: '10rem',float:'left', height: '350px',margin:'0px 10px 10px 0px'}} >
-                <img src={img} height='180px'/>
+              <img src={img} height='180px'/>
                 <Card.Body>
-                <Link to={`/bookdetail/${res.no}`} style={{ textDecoration: 'none' }}><Card.Title style={{ fontSize:'14px', height:'50px'}}>{res.title}</Card.Title></Link>
+                <Link to={`/bookdetail/${res.no}`} style={{ textDecoration: 'none', color:'darkblue' }}><Card.Title style={{ fontSize:'14px', height:'50px', fontWeight:'bolder'}}>{res.title}</Card.Title></Link>
                   <Card.Text style={{ fontSize:'13px'}}>
-                    {res.writer}
+                    {res.writer} | {res.publisher}
                   </Card.Text>
                   {checkUse(res.usebook) == 'y' ?
                     <ModalRent booktitle={res.title} no={res.no} reload={reload}></ModalRent> :
