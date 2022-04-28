@@ -36,7 +36,7 @@
 	<!-- 관리자가 도서 등록 -->
 	<insert id="insert" parameterType ="book">
 		<![CDATA[
-			insert into book values(null, #{title}, #{writer}, #{contents}, #{price}, now(), 0, #{img}, #{publisher}, null, null)
+			insert into book values(null, #{title}, #{writer}, #{contents}, #{price}, now(), 0, #{img}, #{publisher}, #{category}, null)
 		]]>
 	</insert>
 	<!-- 책 정보 수정 -->
@@ -63,7 +63,15 @@
 		<![CDATA[
 			select * from book 
 			where category like #{category}
+			order by reg_date desc;
 		]]>
 	</select>
+		<!-- 출판사로 책 리스트 찾기 -->
+	<select id="findBookByPub" parameterType = "String" resultType="book">
+		<![CDATA[
+			select * from book 
+			where publisher = #{publisher}
+		]]>
+	</select>		
 	
 </mapper>

@@ -60,6 +60,11 @@ public class MainController {
 	public RentDto finByBookNo(@PathVariable int no) {
 		return bookService.findByBookNo(no);
 	}
+	// 출판사로 도서 리스트 조회 -----------------------------------------------
+	@GetMapping("/publisher/{publisher}")
+	public List<Book> findBookByPub(@PathVariable String publisher) {
+		return bookService.findBookByPub(publisher);
+	}
 	
 	// 책 제목으로 책 리스트 불러옴 + 검색 -----------------------------------------------
 		@GetMapping("/main/{title}")
@@ -72,7 +77,7 @@ public class MainController {
 			return book;
 		}
 		
-	// 책 제목으로 책 리스트 불러옴 + 검색 -----------------------------------------------
+	// 책 카테고리로 책 리스트 불러옴 + 검색 -----------------------------------------------
 		@GetMapping("/category/{category}")
 		public List<Book> findBookCategory(@PathVariable String category) {
 			if(category.equals("notSearch")) category = "";
@@ -134,7 +139,7 @@ public class MainController {
 		@GetMapping("/adminpage/deletebook/{no}/{img}")
 		public String deleteBook(@PathVariable int no, @PathVariable String img){
 			
-			File file = new File("C:\\Users\\PC\\workspace\\SpringBoot\\BookSys\\bookfe\\public\\img\\" + img);
+			File file = new File("C:\\Users\\PC\\workspace\\01. 이전 프로젝트\\01. 도서관리시스템\\BookSys\\bookfe\\public\\img\\" + img);
 			
 			if( file.exists() ){ 
 				// 파일이 존재할 떄
@@ -162,6 +167,7 @@ public class MainController {
 							  @RequestParam(value = "contents") String contents,
 							  @RequestParam(value = "price") int price,
 							  @RequestParam(value = "publisher") String publisher,
+							  @RequestParam(value = "category") String category,
 							  @RequestParam(value = "file") MultipartFile file) throws Exception {
 			
 			
@@ -206,7 +212,14 @@ public class MainController {
     			book.setContents(contents);
     			book.setPublisher(publisher);
     			book.setImg(tempDate + originalFileExtension);
-			
+    			
+    			if(category.equals("카테고리 선택")) {
+    				System.out.println("카테고리 선택 X");
+    				return "selectCat";
+    			} else {
+    				System.out.println("카테고리 선택 O");
+    				book.setCategory(category);
+    			}
     		// 디비에 insert 되면 사진을 폴더에 받기
 			if(bookService.insertbook(book)) {
 				File new_fileName = new File(tempDate + originalFileExtension);

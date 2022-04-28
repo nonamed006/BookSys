@@ -8,6 +8,7 @@ public class User {
 	private String id;
 	private String pwd;
 	private String name;
+	private String team;
 	private String addr;
 	private String role;
 }

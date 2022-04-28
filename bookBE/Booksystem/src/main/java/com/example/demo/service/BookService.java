@@ -65,6 +65,10 @@ public class BookService {
 		public List<Book> getBookCategory(String category){
 			return bookRepository.findBookByCat(category);
 		}
+	// 카테고리로 책 목록 조회
+		public List<Book> findBookByPub(String publisher){
+			return bookRepository.findBookByPub(publisher);
+		}
 	// ====================== 관리자 ==================================
 	// 관리자가 도서 삭제
 	public boolean deletebook(int no) {

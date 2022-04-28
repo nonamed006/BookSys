@@ -1,19 +1,22 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import Signup from './component/Signup';
-import Login from './component/Login';
-import Header from './component/Header';
-import Main from './component/Main';
 import { Container } from 'react-bootstrap';
-import Mypage from './component/Mypage';
-import AdminPage from './component/AdminPage';
-import AdminBookadd from './component/AdminBookadd';
-import AdminBookdel from './component/AdminBookdel';
-import BookDetail from './component/BookDetail';
 import { useState } from 'react';
-import AdminBookupdate from './component/AdminBookupdate';
-import UserUpdate from './component/UserUpdate';
+import Main from './component/Main';
+import Signup from './component/user/Signup';
+import PublisherList from './component/category/PublisherList';
 import BookCategory from './component/category/BookCategory';
+import Mypage from './component/user/Mypage';
+import AdminPage from './component/admin/AdminPage';
+import AdminBookadd from './component/admin/AdminBookadd';
+import AdminBookdel from './component/admin/AdminBookdel';
+import AdminBookupdate from './component/admin/AdminBookupdate';
+import UserUpdate from './component/UserUpdate';
+import BookDetail from './component/BookDetail';
+import Login from './component/user/Login';
+import Header from './component/Header';
+import SearchList from './component/SearchList';
+
 
 
 
@@ -36,6 +39,8 @@ function App() {
         <Route path="/bookdetail/:no" element={<BookDetail />} />
         <Route path="/updateuser" element={<UserUpdate />} />
         <Route path="/category/:category" element={<BookCategory />} />
+        <Route path="/publisher/:publisher" element={<PublisherList />} />
+        <Route path="/seachlist/:title" element={<SearchList />} />
       </Routes>
     </Container>
   </>

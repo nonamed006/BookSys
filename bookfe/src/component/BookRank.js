@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import ModalRent from './ModalRent';
+import ModalRent from './modal/ModalRent';
 
 const BookRank = () => {
 

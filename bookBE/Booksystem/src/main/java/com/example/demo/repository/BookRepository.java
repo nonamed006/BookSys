@@ -65,6 +65,10 @@ public class BookRepository {
 		public List<Book> findBookByCat(String category) {
 			return sqlSession.selectList("book.findBookByCat", category);
 		}
+	// 출판사로 책 목록 불러오기  
+		public List<Book> findBookByPub(String publisher) {
+			return sqlSession.selectList("book.findBookByPub", publisher);
+		}
 		
 	/* ============= 관리자 ===============*/
 		

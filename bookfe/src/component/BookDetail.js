@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Col, ListGroup, Row } from 'react-bootstrap';
 import { useParams } from 'react-router';
-import ModalRent from './ModalRent';
 import styled from 'styled-components';
+import ModalRent from './modal/ModalRent';
 
 const BoxStyle = styled.div`
 	width: 230px;

@@ -13,4 +13,5 @@ public class Book {
 	private int usebook;
 	private String img;
 	private String publisher;
+	private String category;
 }

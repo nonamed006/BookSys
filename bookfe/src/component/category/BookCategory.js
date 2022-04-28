@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Col, Container, Row, Table } from 'react-bootstrap';
+import { Button, Col, Container, FormControl, InputGroup, Row, Table } from 'react-bootstrap';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
-import ModalRent from '../ModalRent';
+import ModalRent from '../modal/ModalRent';
 
 const BookCategory = () => {
 
 	let { category } = useParams();
 	const [book, setBook] = useState([]);
 	const [reload, setReload] = useState(false);
-	console.log("여기 들어옴");
+	const [search, setSearch] = useState("");
 
 	// 책 목록 조회
 	const getBookCategory = () => {
@@ -18,15 +18,25 @@ const BookCategory = () => {
 			// res에 결과가 들어옴
 		}).then((res) => res.json())
 			.then((res) => {
-				console.log(res);
 				setBook(res);
-
 			});
 	};
 
 	useEffect(() => {
 		getBookCategory();
 	}, [reload]);
+
+	// 검색창 값 받기
+  const onChange = (e) => {
+    setSearch(e.target.value);
+  }
+
+  // 엔터키 이벤트
+  function enterkey() {
+    if (window.event.keyCode == 13) {
+      window.location.href = `/seachlist/${search}`;
+      }
+  }
 
 	// 대여 가능 여부 체크 / 홀수 => 대여가능, 짝수 => 대여중
 	var checkUse = (state) => {
@@ -45,9 +55,22 @@ const BookCategory = () => {
 				<Row>
 					<Col xl='2'>
 					</Col>
-					<Col>
-						<h3>| {category == 'notSearch' ? '전체 도서 목록' : category}</h3>
+					<Col xl ='5'>
+						<h4>| {category == 'notSearch' ? '전체 도서 목록' : category}</h4>
 					</Col>
+					<Col><InputGroup>
+            <FormControl
+              placeholder="책 제목으로 검색"
+              aria-label="findByName"
+              aria-describedby="basic-addon2"
+              onChange={onChange}
+              onKeyUp={enterkey}
+            />
+            <Button variant="secondary" id="button-addon2" href={`/seachlist/${search}`}>
+              Search
+            </Button>
+          </InputGroup></Col>
+					<Col xl ='1'></Col>
 				</Row>
 				<br />
 				<Row>
@@ -69,7 +92,7 @@ const BookCategory = () => {
 										<td><span>
 											<Link to={`/bookdetail/${res.no}`} style={{ textDecoration: 'none', color: 'darkblue', fontWeight: 'bolder' }}>{res.title}</Link>
 										</span>
-											<br /><p>{res.writer}(지은이) | {res.publisher}</p></td>
+											<br /><p>{res.writer}(지은이) | <Link to={`/publisher/${res.publisher}`} style={{ textDecoration: 'none', color: 'black', fontWeight: 'bolder' }}>{res.publisher}</Link></p></td>
 										<td></td>
 										<td>
 											{checkUse(res.usebook) == 'y' ?
