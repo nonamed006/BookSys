@@ -47,3 +47,20 @@ spring:
       max-file-size: 10MB 
       max-request-size: 10MB
       location: C:\Users\PC\workspace\01. 이전 프로젝트\01. 도서관리시스템\BookSys\bookfe\public\img
+
+      
+---
+
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: jjdmst@gmail.com
+    password: tnqtfscetckliqma
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true
+            #required: true
+          auth: true

@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 
 const Login = (props) => {
 
-	const user = props.user;
 	const setUser = props.setUser;
 
 	const [id, setId] = useState();

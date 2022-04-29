@@ -11,9 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.RentDto;
-import com.example.demo.service.CartService;
+import com.example.demo.dto.RentUserDto;
 import com.example.demo.service.UserService;
-import com.example.demo.vo.Cart;
 import com.example.demo.vo.User;
 
 import lombok.RequiredArgsConstructor;
@@ -23,7 +22,6 @@ import lombok.RequiredArgsConstructor;
 public class UserController {
 	
 	private final UserService userService;
-	private final CartService cartService;
 	private final HttpSession session;
 	
 	// 회원가입 - 성공시 success 반환 -----------------------------------------------
@@ -42,9 +40,22 @@ public class UserController {
 		user_no = userinfo.getNo();
 		
 		List<RentDto> rentList = userService.findByUserNo(user_no);
-		
 		return rentList;
 	}
+	
+	// book_no로 대여자 조회
+	@GetMapping("/rentbook/{book_no}")
+	public RentUserDto rentUser(@PathVariable int book_no) {
+		
+		RentUserDto rendto = new RentUserDto();
+		System.out.println(rendto);
+		if(userService.findByRentUser(book_no) == null) {
+			return rendto;
+		}else {
+			return userService.findByRentUser(book_no);
+		}
+	}
+	
 	// 유저 - 회원 정보 수정 -----------------------------------------------
 	@GetMapping("/user/updateuser/{pwd}/{addr}")
 	public String update(@PathVariable String pwd, @PathVariable String addr){
@@ -85,33 +96,5 @@ public class UserController {
 		}
 	}
 	
-	// 장바구니 추가 ----------------
-	@GetMapping("user/addcart/{book_no}")
-	public String insert(@PathVariable int book_no) {
-		
-		Cart cart = new Cart();
-		
-		User userinfo = (User)session.getAttribute("userinfo");
-		cart.setBook_no(book_no);
-		cart.setUser_no(userinfo.getNo());
-		
-		if(cartService.insert(cart)) {
-			return "success";
-		}else {
-			return "fail";
-		}
-	}
 	
-	// userno로 장바구니 조회 ----------------
-		@GetMapping("user/cart")
-		public List<Cart> cartList() {
-			
-			User userinfo = (User)session.getAttribute("userinfo");
-			
-			System.out.println(userinfo.getNo());
-			List<Cart> cart = cartService.findByNo(userinfo.getNo());
-			
-			return cart;
-
-		}
 }

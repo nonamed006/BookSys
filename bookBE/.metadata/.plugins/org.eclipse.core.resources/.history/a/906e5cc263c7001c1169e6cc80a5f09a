@@ -1,0 +1,19 @@
+package com.example.demo.repository;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Repository;
+
+import com.example.demo.vo.Reply;
+
+import lombok.RequiredArgsConstructor;
+
+@Repository
+@RequiredArgsConstructor
+public class ReplyRepository {
+	
+	private final SqlSession sqlSession;
+	
+	public boolean insert(Reply reply) {
+		return sqlSession.insert("reply.insert", reply) == 1;
+	}
+}

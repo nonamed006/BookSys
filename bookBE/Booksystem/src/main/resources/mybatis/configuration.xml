@@ -6,14 +6,19 @@
 		 <typeAlias type="com.example.demo.vo.Book" alias="book" />
 		 <typeAlias type="com.example.demo.vo.Rent" alias="rent" />
 		 <typeAlias type="com.example.demo.vo.Cart" alias="cart" />
+		 <typeAlias type="com.example.demo.vo.Reply" alias="reply" />
 		 
 		 <typeAlias type="com.example.demo.dto.RentDto" alias="rentDto" />
 		 <typeAlias type="com.example.demo.dto.CartDto" alias="cartDto" />
+		 <typeAlias type="com.example.demo.dto.RentUserDto" alias="rentUserDto" />
+		 <typeAlias type="com.example.demo.dto.RentMailDto" alias="rentMailDto" />
+		 <typeAlias type="com.example.demo.dto.ReplyDto" alias="replyDto" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="mybatis/mappers/book.xml" /> 
 		<mapper resource="mybatis/mappers/user.xml" /> 
 		<mapper resource="mybatis/mappers/rent.xml" /> 
 		<mapper resource="mybatis/mappers/cart.xml" /> 
+		<mapper resource="mybatis/mappers/reply.xml" /> 
 	</mappers>
 </configuration>

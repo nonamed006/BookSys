@@ -8,9 +8,14 @@ const Signup = () => {
 		id: "",
 		pwd: "",
 		name: "",
+		team: "",
 		addr: ""
 	});
 
+	// 셀렉트 박스에 추가할 팀 정보 -- 반복문으로 자동 추가
+	const teamList = ['경영기획팀', '메타버스플랫폼팀', '연구개발1팀', '연구개발2팀', '연구개발3팀',
+		'영업사업팀', '응용모바일개발팀', '전략사업팀', '제품기획관리팀', '컨셉아트개발팀', '컨텐츠생산1팀',
+		'컨텐츠생산2팀', '하드웨어생산팀', 'R&D개발팀'];
 
 	var getUserinfo = () => {
 		fetch(`http://localhost:8080/signup`, {
@@ -23,7 +28,6 @@ const Signup = () => {
 			// 수정사항 // success받아도 알림창 안띄워줌 ============================================
 		}).then((res) => res.text())
 			.then((res) => {
-				console.log(res);
 				if (res == 'success') {
 					alert("회원가입 되었습니다.");
 					window.location.replace("/");
@@ -36,7 +40,6 @@ const Signup = () => {
 	// input value값 받기 이벤트 
 	const onChange = (e) => {
 		setUser({ ...user, [e.target.id]: e.target.value });
-		console.log(e.target.value);
 	};
 
 	// 가입 버튼 클릭시
@@ -86,6 +89,11 @@ const Signup = () => {
 					/>
 					<label htmlFor="floatingInputCustom">Name</label>
 				</Form.Floating>
+				{/* Team */}
+				<Form.Select size="lg" className="mb-3" id="team" onChange={onChange} style={{ fontSize: '16px', padding: '14px' }}>
+					<option>소속 부서 선택</option>
+					{teamList.map((teamName, index) => <option key={index}>{teamName}</option>)}
+				</Form.Select>
 				{/* Addr */}
 				<Form.Floating className="mb-3">
 					<Form.Control
@@ -97,7 +105,7 @@ const Signup = () => {
 					/>
 					<label htmlFor="floatingInputCustom">Address</label>
 				</Form.Floating>
-					<DaumPost getPost={getPost} /> <br/><br/>
+				<DaumPost getPost={getPost} /> <br /><br />
 				<Button variant="secondary" onClick={handelClick}>Signup</Button>
 			</Col>
 		</Row>

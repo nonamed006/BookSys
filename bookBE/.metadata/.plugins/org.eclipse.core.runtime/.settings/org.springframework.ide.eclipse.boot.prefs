@@ -2,6 +2,7 @@ eclipse.preferences.version=1
 org.springframework.ide.eclipse.boot.wizard.PopularityTracker.data-jpa=1
 org.springframework.ide.eclipse.boot.wizard.PopularityTracker.devtools=1
 org.springframework.ide.eclipse.boot.wizard.PopularityTracker.lombok=1
+org.springframework.ide.eclipse.boot.wizard.PopularityTracker.mail=1
 org.springframework.ide.eclipse.boot.wizard.PopularityTracker.mariadb=1
 org.springframework.ide.eclipse.boot.wizard.PopularityTracker.web=1
 org.springframework.ide.eclipse.boot.wizard.PreferredSelections.artifactId=Booksystem

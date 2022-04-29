@@ -62,7 +62,7 @@ public class BookRepository {
 		}
 		
 	// 카테고리로 책 목록 불러오기  
-		public List<Book> findBookByCat(String category) {
+		public List<RentDto> findBookByCat(String category) {
 			return sqlSession.selectList("book.findBookByCat", category);
 		}
 	// 출판사로 책 목록 불러오기  

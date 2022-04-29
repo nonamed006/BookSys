@@ -7,7 +7,7 @@ const Header = (props) => {
   const setUser = props.setUser;
 
   // 사용자 정보 불러오기 ================================
-  useEffect(()=>{
+  useEffect(() => {
     fetch("http://localhost:8080/user/head", {
       method: "get",
       headers: {
@@ -19,62 +19,40 @@ const Header = (props) => {
         setUser(res);
       });
 
-  },[])
+  }, [])
 
-  var handleLogout = () =>{
+  // 로그아웃 함수
+  var handleLogout = () => {
     localStorage.removeItem("Authorization");
     window.location.replace("/");
   }
 
-    return (<Navbar bg="dark" variant="dark">
-      <Container>
-        <Navbar.Brand href="/">BookSys</Navbar.Brand>
-        <Nav className="me-auto">
-          {/* 도서목록 */}
-          <NavDropdown
-          id="nav-dropdown-dark-example"
-          title="도서목록"
-        >
-          <NavDropdown.Item href="/category/notSearch">전체 도서 목록</NavDropdown.Item>
-          <NavDropdown.Divider />
-          <NavDropdown.Item href="/category/IT서적">IT 서적</NavDropdown.Item>
-          <NavDropdown.Item href="/category/소설">소설</NavDropdown.Item>
-          <NavDropdown.Item href="/category/인문학">인문학</NavDropdown.Item>
-          </NavDropdown>
-          {user.no == null ? <Nav.Link href="/login"> 로그인</Nav.Link> : 
-            user.role == "U" ?
+  return (<Navbar bg="dark" variant="dark">
+    <Container>
+      <Navbar.Brand href="/">BookSys</Navbar.Brand>
+      <Nav className="me-auto">
+        <Nav.Link href="/booklistall/notSearch">도서 목록</Nav.Link>
+        {user.no == null ? <Nav.Link href="/login"> 로그인</Nav.Link> :
+          user.role == "U" ?
             <NavDropdown title={user.name} id="basic-nav-dropdown">
-            <NavDropdown.Item href="/mypage">MyPage</NavDropdown.Item>
-            <NavDropdown.Item href="/updateuser">profile</NavDropdown.Item>
-            {/* <NavDropdown.Item href="/cart">Cart</NavDropdown.Item> */}
-            <NavDropdown.Divider />
-            <NavDropdown.Item onClick={handleLogout}>LogOut</NavDropdown.Item> 
-          </NavDropdown> :
-          // 관리자가 로그인 했을때 Nav
-          <NavDropdown title="관리자" id="basic-nav-dropdown">
-          <NavDropdown.Item href="/adminpage">AdminPage</NavDropdown.Item>
-          <NavDropdown.Divider />
-          <NavDropdown.Item onClick={handleLogout}>LogOut</NavDropdown.Item> 
-        </NavDropdown>
-          } 
-          {user.no == null ?<Nav.Link href="/signup">회원가입</Nav.Link> : null }
-        </Nav>
-        <div className="col-xs-2">
-          {/* <InputGroup >
-            <FormControl
-              placeholder="책이름으로 검색"
-              aria-label="findByName"
-              aria-describedby="basic-addon2"
-              onChange={onChange}
-            />
-            <Button variant="outline-secondary" id="button-addon2" onClick={handelClick}>
-              Search
-            </Button>
-          </InputGroup> */}
-        </div>
-      </Container>
-    </Navbar>
-    );
+              <NavDropdown.Item href="/mypage">MyPage</NavDropdown.Item>
+              <NavDropdown.Item href="/updateuser">profile</NavDropdown.Item>
+              {/* <NavDropdown.Item href="/cart">Cart</NavDropdown.Item> */}
+              <NavDropdown.Divider />
+              <NavDropdown.Item onClick={handleLogout}>LogOut</NavDropdown.Item>
+            </NavDropdown> :
+            // 관리자가 로그인 했을때 Nav
+            <NavDropdown title="관리자" id="basic-nav-dropdown">
+              <NavDropdown.Item href="/adminpage">AdminPage</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item onClick={handleLogout}>LogOut</NavDropdown.Item>
+            </NavDropdown>
+        }
+        {user.no == null ? <Nav.Link href="/signup">회원가입</Nav.Link> : null}
+      </Nav>
+    </Container>
+  </Navbar>
+  );
 };
 
 export default Header;

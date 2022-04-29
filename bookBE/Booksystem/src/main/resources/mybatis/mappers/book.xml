@@ -59,11 +59,17 @@
 		]]>
 	</select>
 	<!-- 책 리스트 카테고리로 찾기 -->
-	<select id="findBookByCat" parameterType = "String" resultType="book">
+	<select id="findBookByCat" parameterType = "String" resultType="rentDto">
 		<![CDATA[
-			select * from book 
+			select a.no, a.title, a.writer, a.img, a.publisher, a.category, a.reg_date, a.usebook, c.name, c.team
+			from book as a
+			left join rent as b
+			on a.no = b.book_no
+			left join user as c
+			on b.user_no = c.no
 			where category like #{category}
-			order by reg_date desc;
+			order by a.reg_date desc
+
 		]]>
 	</select>
 		<!-- 출판사로 책 리스트 찾기 -->

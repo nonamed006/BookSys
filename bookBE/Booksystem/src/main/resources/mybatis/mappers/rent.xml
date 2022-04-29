@@ -38,4 +38,24 @@
 			where b.book_no = #{book_no}
 		]]>
 	</select>
+	<!-- no로 대여중인 회원 찾기 -->
+	<select id="findByRentUser" parameterType ="int" resultType="rentUserDto">
+		<![CDATA[
+			select a.book_no, a.user_no, b.name, b.team
+			from rent as a
+			inner join user as b
+			on a.user_no = b.no
+			where book_no = ${book_no}
+		]]>
+	</select>
+	<!-- 반납일자 지난 회원에게 메일 발송 -->
+	<select id="sendMail" resultType="rentMailDto">
+		<![CDATA[
+			select a.book_no, a.user_id, b.title, b.writer, a.rent_date  
+			from rent as a
+			inner join book as b
+			on a.book_no = b.no
+			where date(return_date) < date(now())
+		]]>
+	</select>
 </mapper>

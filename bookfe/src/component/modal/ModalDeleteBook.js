@@ -15,21 +15,21 @@ const ModalDeleteBook = (props) => {
 
 	// 도서 삭제
 	const deleteUser = () => {
-    fetch(`http://localhost:8080/adminpage/deletebook/${book.no}/${book.img}`, {
-      method: "get",
-      // res에 결과가 들어옴
-    }).then((res) => res.text())
-      .then((res) => {
-        setShow(false);
-		console.log(book.no);
-        if (res == "success") {
-          alert("삭제되었습니다.");
-		  window.location.replace("/adminbookdel");
-        } else {
-          alert("삭제실패하였습니다.");
-        }
-      });
-  }
+		fetch(`http://localhost:8080/adminpage/deletebook/${book.no}/${book.img}`, {
+			method: "get",
+			// res에 결과가 들어옴
+		}).then((res) => res.text())
+			.then((res) => {
+				setShow(false);
+				console.log(book.no);
+				if (res == "success") {
+					alert("삭제되었습니다.");
+					window.location.replace("/adminbookdel");
+				} else {
+					alert("삭제실패하였습니다.");
+				}
+			});
+	}
 
 
 	return (
@@ -40,7 +40,7 @@ const ModalDeleteBook = (props) => {
 
 			<Modal show={show} onHide={handleClose}>
 				<Modal.Header closeButton>
-					<Modal.Title>{book.title} 삭제하시겠습니까?</Modal.Title>
+					<Modal.Title>도서: '{book.title}'을(를) 삭제하시겠습니까?</Modal.Title>
 				</Modal.Header>
 				<Modal.Footer>
 					<Button variant="secondary" onClick={handleClose}>

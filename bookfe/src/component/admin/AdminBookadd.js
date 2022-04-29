@@ -12,6 +12,8 @@ const AdminBookadd = () => {
 		category: "카테고리 선택"
 	});
 
+	const teamList = ['소설', '인문학', 'IT서적'];
+
 	const [imgBase64, setImgBase64] = useState([]); // 파일 base64
 	const [imgFile, setImgFile] = useState(null);	//파일
 
@@ -67,7 +69,7 @@ const AdminBookadd = () => {
 				if (res == 'success') {
 					alert("등록되었습니다.");
 					window.location.replace("/adminbookadd");
-				} else if(res == 'selectCat'){
+				} else if (res == 'selectCat') {
 					alert('카테고리를 선택해 주세요');
 				} else if (res == 'break') {
 					alert('확장자명이 잘못되었습니다. jpg, png파일을 등록해 주세요');
@@ -78,8 +80,8 @@ const AdminBookadd = () => {
 	}
 
 	// select box 컨트롤 함수
-	const handleChangeSelect = (e) =>{
-		setBook({...book, [e.target.id]: e.target.value});
+	const handleChangeSelect = (e) => {
+		setBook({ ...book, [e.target.id]: e.target.value });
 		console.log(e.target.value);
 	}
 
@@ -95,11 +97,11 @@ const AdminBookadd = () => {
 				</Col>
 			</Row>
 			<br />
-			<br /> 
+			<br />
 			<Row>
 				<Col xl="2"></Col>
 				{/* 사진 업로드 미리보기 */}
-				<Col xl="2"> {imgBase64.map((item, index) => {
+				<Col xl="2"> <div style={{ width: '221px', height: '263px', border: '1px solid darkgray', fontSize: '12px', textAlign: 'center' }}>{imgBase64.map((item, index) => {
 					return (
 						<img key={index}
 							className="d-block w-100"
@@ -108,7 +110,8 @@ const AdminBookadd = () => {
 							style={{ width: '220px', height: '260px' }}
 						/>
 					)
-				})}</Col>
+				})}</div></Col>
+				<Col xl='1'></Col>
 
 				<Col xl="4">
 					{/* 입력 Form */}
@@ -143,11 +146,9 @@ const AdminBookadd = () => {
 						/>
 						<label htmlFor="floatingInputCustom">출판사</label>
 					</Form.Floating>
-					<Form.Select size="lg" className="mb-3" id="category"onChange={handleChangeSelect} style={{fontSize:'16px', padding:'12px'}}>
+					<Form.Select size="lg" className="mb-3" id="category" onChange={handleChangeSelect} style={{ fontSize: '16px', padding: '12px' }}>
 						<option>카테고리 선택</option>
-						<option>소설</option>
-						<option>인문학</option>
-						<option>컴퓨터/IT</option>
+						{teamList.map((teamName, index) => <option key={index}>{teamName}</option>)}
 					</Form.Select>
 					{/* price */}
 					<Form.Floating className="mb-3">

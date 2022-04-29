@@ -13,9 +13,6 @@ const ModalReturn = (props) => {
     title: props.bookTitle
   });
 
-  const [reload, setReload] = useState(props.reload);
-
-  // 수정사항 -- 삭제 후 페이지 리로드 안됨 ==============================================
   // 책 삭제
   var returnBook = () => {
     fetch(`http://localhost:8080/mypage/delete/${book.no}`, {
@@ -30,7 +27,6 @@ const ModalReturn = (props) => {
         } else {
           alert("반납실패하였습니다.");
         }
-        console.log(res);
       });
   }
 
@@ -42,7 +38,7 @@ const ModalReturn = (props) => {
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title style={{ fontSize:'18px'}}>{book.title} 반납하시겠습니까?</Modal.Title>
+          <Modal.Title style={{ fontSize: '18px' }}>{book.title} 반납하시겠습니까?</Modal.Title>
         </Modal.Header>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

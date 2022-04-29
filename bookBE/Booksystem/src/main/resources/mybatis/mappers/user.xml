@@ -4,7 +4,7 @@
 	<!-- 회원 가입 -->
 	<insert id="insert" parameterType ="user">
 		<![CDATA[
-			insert into user values(null, #{id}, #{pwd}, #{name}, #{addr}, 'U')
+			insert into user values(null, #{id}, #{pwd}, #{name}, #{team}, #{addr}, 'U')
 		]]>
 	</insert>
 	<!-- jwt 로그인 -->
@@ -44,4 +44,10 @@
 			delete from user where no = #{no} 
 			]]>
 	</delete>
+	<!-- 회원 가입 -->
+	<insert id="replyCreate" parameterType ="reply">
+		<![CDATA[
+			insert into user values(null, #{coment}, now(), #{book_no}, #{user_no})
+		]]>
+	</insert>
 </mapper>

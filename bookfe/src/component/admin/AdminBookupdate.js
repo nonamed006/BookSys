@@ -23,7 +23,7 @@ const AdminBookupdate = () => {
 		console.log(e.target.value);
 	};
 
-    // 책 목록 불러오기
+	// 책 목록 불러오기
 	const getBook = () => {
 		fetch(`http://localhost:8080/bookdetail/${no}`, {
 			method: "get",
@@ -74,9 +74,9 @@ const AdminBookupdate = () => {
 	// 파일 업로드 버튼 클릭시 동작
 	const WriteBoard = () => {
 		const fd = new FormData();
-		if(imgFile == null){
+		if (imgFile == null) {
 			fd.append("file", null);
-		} else{
+		} else {
 			Object.values(imgFile).forEach((file) => fd.append("file", file));
 		}
 
@@ -101,7 +101,7 @@ const AdminBookupdate = () => {
 					alert("수정 되었습니다.");
 					window.location.replace("/adminbookdel");
 					console.log("ok");
-				} else if(res == 'break'){
+				} else if (res == 'break') {
 					alert('확장자명이 잘못되었습니다. jpg, png파일을 등록해 주세요');
 				} else {
 					alert("fail");
@@ -125,28 +125,28 @@ const AdminBookupdate = () => {
 			<br />
 			<Row>
 				<Col xl="2"></Col>
-				
+
 				{/* 사진 업로드 미리보기 */}
-				<Col xl="2">{imgFile == null ? 
+				<Col xl="2">{imgFile == null ?
 					<img
-							className="d-block w-100"
-							src={img}
-							alt="First slide"
-							style={{ width:'220px', height: '260px' }}
-						/>
-				:
-				imgBase64.map((item, index) => {
-					return (
-						<img key={index}
-							className="d-block w-100"
-							src={item}
-							alt="First slide"
-							style={{ width:'220px', height: '260px' }}
-						/>
+						className="d-block w-100"
+						src={img}
+						alt="First slide"
+						style={{ width: '220px', height: '260px' }}
+					/>
+					:
+					imgBase64.map((item, index) => {
+						return (
+							<img key={index}
+								className="d-block w-100"
+								src={item}
+								alt="First slide"
+								style={{ width: '220px', height: '260px' }}
+							/>
 						)
 					})
 				}
-						</Col>
+				</Col>
 				<Col xl="4">
 					{/* 입력 Form */}
 					{/* title */}
@@ -196,7 +196,7 @@ const AdminBookupdate = () => {
 					</FloatingLabel>
 					<Form.Group controlId="formFileMultiple" className="mb-3">
 						<Form.Label><b>도서 이미지를 등록하세요(최대10MB)</b></Form.Label>
-						<Form.Control type="file" onChange={handleChangeFile} multiple/>
+						<Form.Control type="file" onChange={handleChangeFile} multiple />
 					</Form.Group>
 					<Button variant="secondary" onClick={WriteBoard}>도서 등록</Button>
 				</Col>

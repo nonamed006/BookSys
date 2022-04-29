@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dto.RentDto;
+import com.example.demo.dto.RentUserDto;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.vo.User;
 
@@ -30,6 +31,12 @@ public class UserService {
 	public List<RentDto> findByUserNo(int user_no){
 		return userRepository.findByUserNo(user_no);
 	}
+	
+	// book_no로 대여자 조회
+	public RentUserDto findByRentUser(int book_no) {
+		return userRepository.findByRentUser(book_no);
+	}
+		
 	// 유저- 회원 정보 수정
 	public boolean udpate(User user) {
 		return userRepository.udpate(user);

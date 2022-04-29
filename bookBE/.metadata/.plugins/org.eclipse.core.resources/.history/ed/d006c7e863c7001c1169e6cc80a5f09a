@@ -1,0 +1,19 @@
+package com.example.demo.service;
+
+import org.springframework.stereotype.Service;
+
+import com.example.demo.repository.ReplyRepository;
+import com.example.demo.vo.Reply;
+
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+@Service
+public class ReplyService {
+	
+	private final ReplyRepository replyRepository;
+	
+	public boolean insert(Reply reply) {
+		return replyRepository.insert(reply);
+	}
+}

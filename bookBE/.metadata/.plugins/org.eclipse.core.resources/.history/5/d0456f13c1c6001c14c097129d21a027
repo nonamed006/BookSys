@@ -1,0 +1,27 @@
+package com.example.demo.controller;
+
+import org.springframework.stereotype.Component;
+
+import com.example.demo.repository.UserRepository;
+import com.example.demo.service.MailsendService;
+
+import lombok.RequiredArgsConstructor;
+
+@Component
+@RequiredArgsConstructor
+public class Scheduled {
+	
+	private final UserRepository userRepository;
+	private final MailsendService mailsendService;
+		//0 0 0 * * * => 매일 00시에 실행
+	@org.springframework.scheduling.annotation.Scheduled(cron= "0/30 * * * * *")
+	public void sendSchedule() {
+		System.out.println("스케줄러 들어옴");
+		System.out.println("###");
+		mailsendService.setMail("swim107@samwooim.com");
+		mailsendService.setTitle("도서 반납");
+		mailsendService.setContents("도서반납지났습니다.");
+		mailsendService.sendMail();
+		System.out.println("###");
+	}
+}

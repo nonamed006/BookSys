@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Col, FormControl, InputGroup, Row, Table} from 'react-bootstrap';
+import { Button, Col, FormControl, InputGroup, Row, Table } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import ModalDeleteBook from '../modal/ModalDeleteBook';
 
 
@@ -103,9 +104,9 @@ const AdminBookdel = () => {
             </thead>
             <tbody>
               {booklist.map(function (res, index) {
-                return <tr key={index}> 
+                return <tr key={index}>
                   <td>{++idx}</td>
-                  <td>{res.title}</td>
+                  <td><Link to={`/bookdetail/${res.no}`} style={{ textDecoration: 'none', color: 'black', fontWeight: 'bold', cursor: 'pointer' }}>{res.title}</Link></td>
                   <td>{res.writer}</td>
                   <td>{res.publisher}</td>
                   <td>{checkUse(res.usebook) == 'y' ? <span>대여가능</span> : <span onClick={open_pop}>대여중</span>
@@ -113,7 +114,7 @@ const AdminBookdel = () => {
                   <td>{checkUse(res.usebook) == 'y' ? <ModalDeleteBook no={res.no} title={res.title} img={res.img}></ModalDeleteBook> :
                     <Button variant="outline-secondary" disabled="disabled">도서 삭제</Button>
                   }</td>
-                  <td>{checkUse(res.usebook) == 'y' ?  <Button variant="outline-secondary" href={`/adminbookupdate/${res.no}`}>도서 수정</Button> :
+                  <td>{checkUse(res.usebook) == 'y' ? <Button variant="outline-secondary" href={`/adminbookupdate/${res.no}`}>도서 수정</Button> :
                     <Button variant="outline-secondary" disabled="disabled">도서 수정</Button>
                   }</td>
                 </tr>

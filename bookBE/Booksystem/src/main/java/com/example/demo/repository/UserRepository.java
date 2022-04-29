@@ -8,6 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.dto.RentDto;
+import com.example.demo.dto.RentMailDto;
+import com.example.demo.dto.RentUserDto;
 import com.example.demo.vo.User;
 
 import lombok.RequiredArgsConstructor;
@@ -49,6 +51,16 @@ public class UserRepository {
 		return sqlSession.selectList("rent.findByUserNo", user_no);
 	}
 	
+	// 반납일 지난 회원에게 메일 발송 위한 조회
+		public List<RentMailDto> sendMail(){
+			return sqlSession.selectList("rent.sendMail");
+		}
+	
+	// 책 no로 대여자 조회
+	public RentUserDto findByRentUser(int book_no) {
+		return sqlSession.selectOne("rent.findByRentUser", book_no);
+	}
+		
 	// 전체 유저 목록 조회
 	public List<User> findAll(String name){
 		return sqlSession.selectList("user.findAll", name);

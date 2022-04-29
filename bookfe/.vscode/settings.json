@@ -1,4 +1,5 @@
 {
     "search.useGlobalIgnoreFiles": true,
-    "search.useParentIgnoreFiles": true
+    "search.useParentIgnoreFiles": true,
+    "compile-hero.disable-compile-files-on-did-save-code": true
 }

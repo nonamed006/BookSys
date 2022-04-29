@@ -1,0 +1,27 @@
+package com.example.demo.controller;
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.service.ReplyService;
+import com.example.demo.vo.Reply;
+
+import lombok.RequiredArgsConstructor;
+
+@RestController
+@RequiredArgsConstructor
+public class BookController {
+	
+	private final ReplyService replyService;
+	
+	@PostMapping("/user/reply")
+	public String insert(@RequestBody Reply reply) {
+		
+		Reply reply2 = new Reply();
+		System.out.println(reply);
+		
+		return "";
+	}
+
+}

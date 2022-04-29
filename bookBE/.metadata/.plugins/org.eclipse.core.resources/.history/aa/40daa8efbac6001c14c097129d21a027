@@ -1,0 +1,14 @@
+package com.example.demo.controller;
+
+import org.springframework.stereotype.Component;
+
+import lombok.RequiredArgsConstructor;
+
+@Component
+public class Scheduled {
+	
+	public void sendMail() {
+		System.out.println('checkTime');
+	}
+	
+}

@@ -1,72 +1,46 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Table } from 'react-bootstrap';
+import { Col, Container, ListGroup, Row, Table } from 'react-bootstrap';
 import ModalReturn from '../modal/ModalReturn';
+import MyReplyList from './MyReplyList';
+import RentBookList from './RentBookList';
 
 const Mypage = () => {
 
-	const [booklist, setBooklist] = useState([]);
-	const tableTitle = ['no', '제목', '글쓴이', '대여일자','반납일자', '반납'];
+	const [state, setState] = useState(1);
 
-	useEffect(() => {
-		fetch("http://localhost:8080/user/rentlist", {
-			method: "get",
-			headers: {
-				'Content-Type': "application/json; charset=utf-8",
-				'Authorization': localStorage.getItem("Authorization")
-			}
-		}).then((res) => res.json())
-			.then((res) => {
-				setBooklist(res);
-			});
-
-	}, []);
-
-	var idx = 0;
-
-	// 반납 일자 지났을 때 글자에 빨간색으로 경고 표시
-	const checkReturn = (reDate) =>{
-		var arr = reDate.split('-');
-		
-		var reYear = arr[0];
-		var reMonth = arr[1];
-		var reDay = arr[2];
-
-		var dateReturn = new Date(reYear+'-'+reMonth+'-'+reDay);
-	
-		if(new Date < dateReturn){
-			return true;
-		}
+	const getPage = (e) => {
+		setState(e.target.id);
 	}
-	
-	
+
 	return (
 		<div>
 			<Container>
-				<br />
-				<h3>대여중인 책</h3>
-				<br/>
-				<Table striped bordered hover>
-					<thead>
-						<tr>
-							{tableTitle.map((tableName, index) => <th scope="col" key={index}>{tableName}</th>)}
-						</tr>
-					</thead>
-					<tbody>
-						{booklist.map(function(res, index){
-						return <tr key={index}>
-							<td>{++idx}</td>
-							<td>{res.title}</td>
-							<td>{res.writer}</td>
-							<td>{res.rent_date}</td>
-							<td>{checkReturn(res.return_date) ? res.return_date : <b style={{color:'red'}}>{res.return_date}</b>}</td>
-							<td><ModalReturn bookNo={res.book_no} bookTitle={res.title}></ModalReturn></td>
-						</tr>
-						})}
-					</tbody>
-				</Table>
+				<Row>
+					<Col xl='2'></Col>
+					<Col>
+						<br />
+						{state == 1 ? <h3>대여중인 도서</h3> : <h3>내가 쓴 댓글</h3>}
+						<br />
+					</Col>
+				</Row>
+				<Row>
+					<Col xl='2'>
+						<ListGroup >
+							<ListGroup.Item variant="secondary">마이페이지</ListGroup.Item>
+							<ListGroup.Item id='1' style={{ cursor: 'pointer' }} onClick={getPage}>- 대여중인 도서</ListGroup.Item>
+							<ListGroup.Item id='2' style={{ cursor: 'pointer' }} onClick={getPage}>- 내가 쓴 댓글</ListGroup.Item>
+						</ListGroup>
+					</Col>
+					<Col>{state == 1 ?
+						<RentBookList /> :
+						<MyReplyList />
+					}
+					</Col>
+					<Col xl='1'></Col>
+				</Row>
 			</Container>
 		</div>
-	); 
+	);
 };
 
 export default Mypage;

@@ -4,22 +4,18 @@ import { Container } from 'react-bootstrap';
 import { useState } from 'react';
 import Main from './component/Main';
 import Signup from './component/user/Signup';
-import PublisherList from './component/category/PublisherList';
-import BookCategory from './component/category/BookCategory';
+import PublisherList from './component/book/PublisherList';
 import Mypage from './component/user/Mypage';
 import AdminPage from './component/admin/AdminPage';
 import AdminBookadd from './component/admin/AdminBookadd';
 import AdminBookdel from './component/admin/AdminBookdel';
 import AdminBookupdate from './component/admin/AdminBookupdate';
-import UserUpdate from './component/UserUpdate';
-import BookDetail from './component/BookDetail';
+import UserUpdate from './component/user/UserUpdate';
+import BookDetail from './component/book/BookDetail';
 import Login from './component/user/Login';
 import Header from './component/Header';
-import SearchList from './component/SearchList';
-
-
-
-
+import SearchList from './component/book/SearchList';
+import BookListAll from './component/book/BookListAll';
 
 function App() {
   const [user, setUser] = useState({});
@@ -36,11 +32,11 @@ function App() {
         <Route path="/adminbookadd" element={<AdminBookadd />} />
         <Route path="/adminbookdel" element={<AdminBookdel />} />
         <Route path="/adminbookupdate/:no" element={<AdminBookupdate />} />
-        <Route path="/bookdetail/:no" element={<BookDetail />} />
+        <Route path="/bookdetail/:no" element={<BookDetail user={user}/>} />
         <Route path="/updateuser" element={<UserUpdate />} />
-        <Route path="/category/:category" element={<BookCategory />} />
         <Route path="/publisher/:publisher" element={<PublisherList />} />
         <Route path="/seachlist/:title" element={<SearchList />} />
+        <Route path="/booklistall/:category" element={<BookListAll />} />
       </Routes>
     </Container>
   </>

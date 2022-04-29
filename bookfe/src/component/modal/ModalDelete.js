@@ -14,20 +14,20 @@ const ModalDelete = (props) => {
 
 	// 회원삭제
 	var deleteUser = () => {
-    fetch(`http://localhost:8080/adminpage/deleteuser/${user.no}`, {
-      method: "get",
-      // res에 결과가 들어옴
-    }).then((res) => res.text())
-      .then((res) => {
-        setShow(false);
-        if (res == "success") {
-          alert("삭제되었습니다.");
-		  window.location.replace("/adminpage");
-        } else {
-          alert("삭제실패하였습니다.");
-        }
-      });
-  }
+		fetch(`http://localhost:8080/adminpage/deleteuser/${user.no}`, {
+			method: "get",
+			// res에 결과가 들어옴
+		}).then((res) => res.text())
+			.then((res) => {
+				setShow(false);
+				if (res == "success") {
+					alert("삭제되었습니다.");
+					window.location.replace("/adminpage");
+				} else {
+					alert("삭제실패하였습니다.");
+				}
+			});
+	}
 
 
 	return (

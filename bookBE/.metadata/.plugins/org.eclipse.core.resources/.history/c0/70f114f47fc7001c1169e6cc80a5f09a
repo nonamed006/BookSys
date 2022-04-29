@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reply">
+<!-- 책 댓글 -->
+	<insert id="insert" parameterType ="reply">
+		<![CDATA[
+			insert into reply values(null, #{comment}, now(), #{book_no}, #{user_no})
+		]]>
+	</insert>
+<!-- 책 no로 댓글 불러오기 -->
+	<select id="findByNo" parameterType = "int" resultType="replyDto">
+		<![CDATA[
+			select a.no, a.comment, a.reg_date, a.book_no, a.user_no, b.name, b.team
+			from reply as a
+			inner join user as b
+			on a.user_no = b.no
+			where book_no = #{book_no}
+		]]>
+	</select>
+	<!-- 유저 no로 댓글 불러오기 -->
+	<select id="findByUserNo" parameterType = "int" resultType="replyDto">
+		<![CDATA[
+			select a.no, c.title, c.writer, a.comment, a.reg_date, a.book_no, a.user_no, b.name, b.team
+			from reply as a
+			inner join user as b
+			on a.user_no = b.no
+			inner join book as c
+			on a.book_no = c.no
+			where user_no = #{user_no}
+		]]>
+	</select>
+	<!-- 관리자가 도서 삭제 -->
+	<delete id="deletReply" parameterType ="int">
+		<![CDATA[
+			delete from reply where no = #{no} 
+			]]>
+	</delete>
+</mapper>

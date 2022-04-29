@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="rent">
+<!-- 책 대여하기 -->
+	<insert id="insert" parameterType ="rent">
+		<![CDATA[
+			insert into rent values(#{book_no}, #{user_no}, #{user_id}, now(), date_add(now(), interval 14 day))
+		]]>
+	</insert>
+	<!-- 대여 권수 최대 3권 위해 대여 책 개수 받기 -->
+	<select id="findByNo" parameterType="int" resultType="int">
+	<![CDATA[
+		select count(*) from rent where user_no = #{user_no}
+	]]>
+	</select>
+	<!-- 사용자가 대여중인 책 user_no로 조회 // 반납 날짜 빠른순 정렬-->
+	<select id="findByUserNo" parameterType ="int" resultType="rentDto">
+		<![CDATA[
+			select * from book as a
+			inner join rent as b
+			on a.no = b.book_no
+			where b.user_no = #{user_no}
+			order by b.return_date asc  
+		]]>
+	</select>
+	<!-- 대여 도서 반납(삭제) -->
+	<delete id="delete" parameterType ="int">
+		<![CDATA[
+				 delete from rent where book_no = #{book_no} 
+			]]>
+	</delete>
+	<!-- 사용자가 대여중인 책 조회 book_no로 조회 // 반납 날짜 빠른순 정렬-->
+	<select id="findByBookNo" parameterType ="int" resultType="rentDto">
+		<![CDATA[
+			select * from book as a
+			inner join rent as b
+			on a.no = b.book_no
+			where b.book_no = #{book_no}
+		]]>
+	</select>
+	<!-- 해당 책을 대여중인 사용자 조회-->
+	<select id="findByRentUser" parameterType ="int" resultType="rentUserDto">
+		<![CDATA[
+			select a.book_no, a.user_no, b.name, b.team
+			from rent as a
+			inner join user as b
+			on a.user_no = b.no
+			where book_no = ${book_no}
+		]]>
+	</select>
+</mapper>
