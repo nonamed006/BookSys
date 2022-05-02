@@ -33,7 +33,7 @@ const RentBookList = () => {
 
 		var dateReturn = new Date(reYear + '-' + reMonth + '-' + reDay);
 
-		if (new Date < dateReturn) {
+		if(new Date() < dateReturn) {
 			return true;
 		}
 	}
@@ -52,7 +52,7 @@ const RentBookList = () => {
 						<td><Link to={`/bookdetail/${res.no}`} style={{ textDecoration: 'none', color: 'black', fontWeight: 'bold', cursor: 'pointer' }}>{res.title}</Link></td>
 						<td>{res.writer}</td>
 						<td>{res.rent_date}</td>
-						<td>{checkReturn(res.return_date) ? res.return_date : <b style={{ color: 'red' }}>{res.return_date}</b>}</td>
+						<td>{res.return_date == '9999-12-31' ? '무기한 대여' : checkReturn(res.return_date) ? res.return_date : <b style={{ color: 'red' }}>{res.return_date}</b>}</td>
 						<td><ModalReturn bookNo={res.no} bookTitle={res.title}></ModalReturn></td>
 					</tr>
 				})}

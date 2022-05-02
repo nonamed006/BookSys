@@ -6,6 +6,7 @@ const ModalReplyDel = ({ getReload, ...props }) => {
 
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
+	console.log(props.reload);
 	// 회원삭제
 	var deleteUser = () => {
 		fetch(`http://localhost:8080/user/reply/del/${props.no}`, {
@@ -45,7 +46,7 @@ const ModalReplyDel = ({ getReload, ...props }) => {
 					</Button>
 				</Modal.Footer>
 			</Modal>
-		</>
+		</> 
 	);
 };
 

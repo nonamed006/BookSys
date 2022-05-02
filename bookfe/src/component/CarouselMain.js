@@ -8,12 +8,11 @@ import ModalRent from './modal/ModalRent';
 
 const CarouselMain = () => {
 	const [booklist, setBooklist] = useState([]);
-	const [search, setSearch] = useState("");
 	const [reload, setReload] = useState(false);
 
-	// 책 목록 불러오기
+	// 신간도서 목록 불러오기
 	const getBook = () => {
-		fetch(`http://localhost:8080/main/${search == '' ? 'notSearch' : search}`, {
+		fetch(`http://localhost:8080/main/newBook`, {
 			method: "get",
 			// res에 결과가 들어옴
 		}).then((res) => res.json())

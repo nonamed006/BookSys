@@ -29,7 +29,6 @@ const BookDetail = (props) => {
 		book_no: ""
 	});
 	const [reload, setReload] = useState(false);
-
 	// 책 목록 불러오기
 	const getBook = () => {
 		fetch(`http://localhost:8080/bookdetail/${no}`, {
@@ -144,10 +143,11 @@ const BookDetail = (props) => {
 					<Row>
 						<Col xl='8'>
 							{checkUse(book.usebook) == 'y' ?
-								<ModalRent booktitle={book.title} no={book.no}></ModalRent> :
+								<ModalRent booktitle={book.title} no={book.no}></ModalRent> 
+								:
 								<>
 									<Button size='sm' variant="secondary" disabled="disabled">대여불가능</Button>
-									<div>대여중: {rentInfo.name || ''}({rentInfo.team || ''})</div>
+									<div><b>대여중: {rentInfo.name || ''}({rentInfo.team || ''})</b></div>
 								</>
 							}
 						</Col>
@@ -176,7 +176,7 @@ const BookDetail = (props) => {
 								return <tr key={index}>
 									<td style={{ height: '100px' }}>
 										<div style={{ fontSize: '13px', margin: "5px" }}>{res.name}({res.team}) | {res.reg_date}
-											{props.user.no == res.user_no ? <ModalReplyDel no={res.no} getReload={getReload} /> : null}
+											{props.user.no == res.user_no || props.user.role == 'A' ? <ModalReplyDel no={res.no} getReload={getReload} reload={reload}/> : null}
 										</div>
 										<div>{res.comment}</div>
 									</td>

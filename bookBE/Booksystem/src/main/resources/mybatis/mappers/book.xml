@@ -7,6 +7,15 @@
 			select * from book;
 		]]>
 	</select>
+	<!-- 신간도서 -->
+	<select id="findNewBook" resultType="book">
+		<![CDATA[
+			select * from book
+			order by reg_date desc
+			limit 10
+			;
+		]]>
+	</select>
 	
 	<!-- 책 제목으로 책 리스트 불러오기 + 검색포함 -->
 	<select id="findByTitle" parameterType = "String" resultType="book">
@@ -59,16 +68,20 @@
 		]]>
 	</select>
 	<!-- 책 리스트 카테고리로 찾기 -->
-	<select id="findBookByCat" parameterType = "String" resultType="rentDto">
+	<select id="findBookByCat" parameterType = "map" resultType="rentDto">
 		<![CDATA[
-			select a.no, a.title, a.writer, a.img, a.publisher, a.category, a.reg_date, a.usebook, c.name, c.team
-			from book as a
-			left join rent as b
-			on a.no = b.book_no
-			left join user as c
-			on b.user_no = c.no
-			where category like #{category}
-			order by a.reg_date desc
+			select * from(
+				select @rownum := @rownum +1  AS row_no, a.* from( 
+					select a.no, a.title, a.writer, a.img, a.publisher, a.category, a.reg_date, a.usebook, c.name, c.team
+					from book as a
+					left join rent as b
+					on a.no = b.book_no
+					left join user as c
+					on b.user_no = c.no
+					where category like #{category}
+					order by reg_date desc
+				) as a, (select @rownum:=0) b
+			)as c limit #{pageNum},15
 
 		]]>
 	</select>
@@ -78,6 +91,15 @@
 			select * from book 
 			where publisher = #{publisher}
 		]]>
-	</select>		
+	</select>	
+	
+	<!-- 페이징 위한 쿼리 -->
+	<!-- 총 개수 -->
+		<select id="pageBookCount" parameterType = "String" resultType="int">
+		<![CDATA[
+			select count(*) from book
+			where category like #{category}
+		]]>
+	</select>
 	
 </mapper>

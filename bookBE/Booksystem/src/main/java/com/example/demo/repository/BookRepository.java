@@ -1,13 +1,14 @@
 package com.example.demo.repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.dto.RentDto;
 import com.example.demo.vo.Book;
-import com.example.demo.vo.Rent;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,6 +21,10 @@ public class BookRepository {
 	//책 목록 불러오기 
 	public List<Book> findAll() {
 		return sqlSession.selectList("book.findAll");
+	}
+	//신간도서 
+	public List<Book> findNewBook() {
+		return sqlSession.selectList("book.findNewBook");
 	}
 	
 	// 책 제목으로 책 목록 불러오기 + 검색
@@ -38,8 +43,15 @@ public class BookRepository {
 	}
 	
 	// 책 대여하기
-	public boolean insert(Rent rent) {
-		return sqlSession.insert("rent.insert", rent) == 1;
+	public boolean insert(int bookno, int user_no, String user_id, String return_date) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("book_no", bookno);
+		map.put("user_no", user_no);
+		map.put("user_id", user_id);
+		map.put("return_date", return_date);
+		
+		return sqlSession.insert("rent.insert", map) == 1;
 	}
 	// 책 대여시 카운트 +1
 	public boolean update(int no) {
@@ -62,8 +74,12 @@ public class BookRepository {
 		}
 		
 	// 카테고리로 책 목록 불러오기  
-		public List<RentDto> findBookByCat(String category) {
-			return sqlSession.selectList("book.findBookByCat", category);
+		public List<RentDto> findBookByCat(String category, int pageNum) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			
+			map.put("category", category);
+			map.put("pageNum", pageNum);
+			return sqlSession.selectList("book.findBookByCat", map);
 		}
 	// 출판사로 책 목록 불러오기  
 		public List<Book> findBookByPub(String publisher) {
@@ -85,4 +101,11 @@ public class BookRepository {
 		public boolean updatebook(Book book) {
 			return sqlSession.insert("book.updateBook", book) == 1;
 		}
+		
+//	페이징
+		
+	// 페이징 위한 총 데이터 카운트
+	public int getCountRes(String category) {
+		return sqlSession.selectOne("book.pageBookCount", category);
+	}
 }

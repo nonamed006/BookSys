@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.demo.dto.Page;
 import com.example.demo.dto.RentDto;
 import com.example.demo.service.BookService;
 import com.example.demo.service.UserService;
 import com.example.demo.vo.Book;
-import com.example.demo.vo.Rent;
 import com.example.demo.vo.User;
 
 import lombok.RequiredArgsConstructor;
@@ -46,6 +46,13 @@ public class MainController {
 	@GetMapping("/main")
 	public List<Book> findBookList2() {
 		List<Book> book = bookService.getBookList();
+		return book;
+	}
+	
+	// 신간도서 리스트 -----------------------------------------------
+	@GetMapping("/main/newBook")
+	public List<Book> findNewBook() {
+		List<Book> book = bookService.findNewBook();
 		return book;
 	}
 
@@ -80,33 +87,41 @@ public class MainController {
 	}
 
 	// 책 카테고리로 책 리스트 불러옴 + 검색 -----------------------------------------------
-	@GetMapping("/category/{category}")
-	public List<RentDto> findBookCategory(@PathVariable String category) {
+	@GetMapping("/category/{category}/{nowPage}")
+	public List<RentDto> findBookCategory(@PathVariable String category, @PathVariable int nowPage) {
 		if (category.equals("notSearch"))
 			category = "";
 
 		category = "%" + category + "%";
-		List<RentDto> book = bookService.getBookCategory(category);
+		Page page = new Page(nowPage, bookService.getCountRes(category), 15);
+		System.out.println(nowPage);
+		System.out.println(page.getNum());
+		System.out.println(bookService.getCountRes(category));
+		if(bookService.getBookCategory(category, page.getNum()) == null) {
+			System.out.println("ok");
+		}
+		List<RentDto> book = bookService.getBookCategory(category, page.getNum());
 		return book;
 	}
 
 	// 책 대여 -----------------------------------------------
-	@GetMapping("/user/main/{bookno}")
-	public String rentBook(@PathVariable int bookno) {
-
-		Rent rent = new Rent();
+	@GetMapping("/user/main/{bookno}/{return_date}")
+	public String rentBook(@PathVariable int bookno, @PathVariable String return_date) {
 
 		User userinfo = (User) session.getAttribute("userinfo");
 
 		int cnt = bookService.rentCnt(userinfo.getNo());
+		
+		if(userinfo.getRole().equals("A")) {
+			return "admin";
+		}
 
-		rent.setUser_no(userinfo.getNo());
-		rent.setUser_id(userinfo.getId());
-		rent.setBook_no(bookno);
-
-		// 사용자가 대여한 책이 3권 미만일 경우 대여가능
-		if (cnt < 3) {
-			if (bookService.insert(rent)) {
+		
+		if(return_date.equals("noRadio")) {
+			return "noRadio";
+		} else if (cnt < 3) {
+			// 사용자가 대여한 책이 3권 미만일 경우 대여가능
+			if (bookService.insert(bookno, userinfo.getNo(), userinfo.getId(), return_date)) {
 				// 책 대여시 usebook에 카운트 +1
 				bookService.update(bookno);
 				return "success";
@@ -164,6 +179,7 @@ public class MainController {
 			return "notExist";
 		}
 	}
+	
 
 	// 관리자가 도서 등록 -----------------------------------------------
 	@PostMapping("/adminbook/add")

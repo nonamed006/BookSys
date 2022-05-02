@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.service.BookService;
 import com.example.demo.service.ReplyService;
 import com.example.demo.vo.Reply;
 import com.example.demo.vo.User;
@@ -21,6 +22,7 @@ import lombok.RequiredArgsConstructor;
 public class BookController {
 	
 	private final ReplyService replyService;
+	private final BookService bookService;
 	private final HttpSession session;
 	
 	// 댓글 작성
@@ -45,7 +47,6 @@ public class BookController {
 	// no로 댓글 조회
 	@GetMapping("/bookdetail/reply/{book_no}")
 	public List<Reply> findByNo(@PathVariable int book_no){
-		System.out.println(book_no);
 		return replyService.findByNo(book_no);
 	}
 	
@@ -53,7 +54,6 @@ public class BookController {
 	@GetMapping("/user/reply")
 	public List<Reply> findByUserNo(){
 		User userinfo = (User) session.getAttribute("userinfo");
-		System.out.println(userinfo.getNo());
 		return replyService.findByUserNo(userinfo.getNo());
 	}
 	
@@ -66,5 +66,16 @@ public class BookController {
 			return "fail";
 		}
 	}
+	
+	// 페이징위한 도서 총 개수 
+	@GetMapping("/bookcount/{category}")
+	public int bookCount(@PathVariable String category) {
+		if (category.equals("notSearch"))
+			category = "";
+
+		category = "%" + category + "%";
+		return bookService.getCountRes(category);
+	}
+	
 
 }

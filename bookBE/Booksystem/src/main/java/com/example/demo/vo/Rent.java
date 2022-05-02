@@ -4,7 +4,6 @@ import lombok.Data;
 
 @Data
 public class Rent {
-
 	private int book_no;
 	private int user_no;
 	private String user_id;

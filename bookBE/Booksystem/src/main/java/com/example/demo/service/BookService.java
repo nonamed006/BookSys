@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import com.example.demo.dto.RentDto;
 import com.example.demo.repository.BookRepository;
 import com.example.demo.vo.Book;
-import com.example.demo.vo.Rent;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,6 +19,11 @@ public class BookService {
 	// 책 목록 불러오기
 	public List<Book> getBookList(){
 		return bookRepository.findAll();
+	}
+	
+	// 신간도서
+	public List<Book> findNewBook(){
+		return bookRepository.findNewBook();
 	}
 	
 	// 책 제목으로 책 목록 불러오기
@@ -38,8 +42,8 @@ public class BookService {
 	}
 		
 	// 책 대여하기
-	public boolean insert(Rent rent) {
-		return bookRepository.insert(rent);
+	public boolean insert(int bookno, int user_no, String user_id, String return_date) {
+		return bookRepository.insert(bookno, user_no, user_id, return_date);
 	}
 	// 책 대여, 반납시 카운트 +1
 	public boolean update(int no) {
@@ -62,8 +66,8 @@ public class BookService {
 		}
 		
 	// 카테고리로 책 목록 조회
-		public List<RentDto> getBookCategory(String category){
-			return bookRepository.findBookByCat(category);
+		public List<RentDto> getBookCategory(String category, int pageNum){
+			return bookRepository.findBookByCat(category, pageNum);
 		}
 	// 카테고리로 책 목록 조회
 		public List<Book> findBookByPub(String publisher){
@@ -81,5 +85,11 @@ public class BookService {
 	// 관리자가 도서 수정
 	public boolean updatebook(Book book) {
 		return bookRepository.updatebook(book);
+	}
+	
+	// 페이징
+	// 페이징 위한 도서 개수 카운트
+	public int getCountRes(String category) {
+		return bookRepository.getCountRes(category);
 	}
 }

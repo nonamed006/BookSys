@@ -1,10 +1,8 @@
 
 import React, { useEffect, useState } from 'react';
 import { Button, Card, Col, FormControl, InputGroup, Row } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import BookRank from './book/BookRank';
 import CarouselMain from './CarouselMain';
-import ModalRent from './modal/ModalRent';
 
 const Main = () => {
 

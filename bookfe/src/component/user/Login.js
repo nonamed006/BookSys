@@ -27,7 +27,6 @@ const Login = (props) => {
 					let data = header[1];
 					//data = data.substring(7);
 					localStorage.setItem("Authorization", data);
-					console.log(res);
 
 					fetch("http://localhost:8080/user/head", {
 						method: "get",
@@ -38,7 +37,6 @@ const Login = (props) => {
 					}).then((res) => res.json())
 						.then((res) => {
 							setUser(res);
-							console.log(res);
 						});
 					//setToken();
 				}

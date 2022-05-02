@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class RentDto {
 	private int no;
+	private int row_no;
 	private String title;
 	private String writer;
 	private String img;

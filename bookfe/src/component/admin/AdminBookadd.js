@@ -89,7 +89,7 @@ const AdminBookadd = () => {
 		<div>
 			<br />
 			<Row>
-				<Col xl='1'></Col>
+				<Col xl='1'></Col> 
 				<Col >
 					<Button variant="outline-secondary" href="/adminpage">회원관리</Button>
 					<Button variant="secondary" href="/adminbookadd">도서등록</Button>

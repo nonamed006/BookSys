@@ -20,7 +20,6 @@ const SearchList = () => {
 		}).then((res) => res.json())
 			.then((res) => {
 				setBook(res);
-				console.log(res);
 			});
 	};
 
