@@ -54,7 +54,6 @@ const Login = (props) => {
 				}
 			});
 
-		console.log("클릭됨");
 	}
 
 	// input 값 받기 - id

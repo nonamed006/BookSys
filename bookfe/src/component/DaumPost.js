@@ -20,7 +20,6 @@ const DaumPost = ({ getPost }) => {
 			fullAddress += (extraAddress !== '' ? ` (${extraAddress})` : '');
 		}
 		//fullAddress -> 전체 주소반환
-		console.log(fullAddress);
 		getPost(fullAddress);
 	}
 	return (

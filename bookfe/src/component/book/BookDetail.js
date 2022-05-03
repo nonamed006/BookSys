@@ -77,8 +77,10 @@ const BookDetail = (props) => {
 				if (res == 'success') {
 					alert('댓글이 작성되었습니다.');
 					setReload(!reload);
-				} else {
-					alert('댓글 작성이 실패하였습니다.');
+				} else if(res == "noComments"){
+					alert('댓글을 입력해주세요.');
+				}else {
+					alert('로그인해 주세요.');
 				}
 			});
 	};
@@ -147,7 +149,7 @@ const BookDetail = (props) => {
 								:
 								<>
 									<Button size='sm' variant="secondary" disabled="disabled">대여불가능</Button>
-									<div><b>대여중: {rentInfo.name || ''}({rentInfo.team || ''})</b></div>
+									<div><b>대여중: {rentInfo.name || ''}({rentInfo.team || ''})<br/>{rentInfo.return_date == '9999-12-31' ? '무기한 대여중' : '반납일자: '+ rentInfo.return_date}</b> </div>
 								</>
 							}
 						</Col>
@@ -175,7 +177,7 @@ const BookDetail = (props) => {
 							{replyList.map(function (res, index) {
 								return <tr key={index}>
 									<td style={{ height: '100px' }}>
-										<div style={{ fontSize: '13px', margin: "5px" }}>{res.name}({res.team}) | {res.reg_date}
+										<div style={{ fontSize: '13px', margin: "5px" }}>{res.name}({res.team == null ? "관리자" : res.team}👑) | {res.reg_date}
 											{props.user.no == res.user_no || props.user.role == 'A' ? <ModalReplyDel no={res.no} getReload={getReload} reload={reload}/> : null}
 										</div>
 										<div>{res.comment}</div>

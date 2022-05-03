@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Col, FormControl, InputGroup, Row, Table } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import ModalDelete from '../modal/ModalDelete';
 
 const AdminPage = () => {
@@ -59,9 +60,9 @@ const AdminPage = () => {
 			<Row>
 				<Col xl='1'></Col>
 				<Col >
-					<Button variant="secondary" href="/adminpage">회원관리</Button>
-					<Button variant="outline-secondary" href="/adminbookadd">도서등록</Button>
-					<Button variant="outline-secondary" href="/adminbookdel">도서삭제/수정</Button>
+					<Button variant="secondary"as={Link} to="/adminpage">사용자 관리</Button>
+					<Button variant="outline-secondary" as={Link} to="/adminbookadd">도서등록</Button>
+					<Button variant="outline-secondary" as={Link} to="/adminbookdel">도서삭제/수정</Button>
 				</Col>
 			</Row>
 			<br />
@@ -70,7 +71,7 @@ const AdminPage = () => {
 				<Col>
 					<InputGroup>
 						<FormControl
-							placeholder="회원 이름으로 검색"
+							placeholder="사용자 이름으로 검색"
 							aria-label="findByName"
 							aria-describedby="basic-addon2"
 							onChange={onChange}

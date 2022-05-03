@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Col, FloatingLabel, Form, Row } from 'react-bootstrap';
 import { useParams } from 'react-router';
+import { Link } from 'react-router-dom';
 
 const AdminBookupdate = () => {
 
@@ -20,7 +21,6 @@ const AdminBookupdate = () => {
 	// input value값 받기 이벤트 
 	const onChange = (e) => {
 		setBook({ ...book, [e.target.id]: e.target.value });
-		console.log(e.target.value);
 	};
 
 	// 책 목록 불러오기
@@ -31,7 +31,6 @@ const AdminBookupdate = () => {
 		}).then((res) => res.json())
 			.then((res) => {
 				setBook(res);
-				console.log(res);
 			});
 	};
 
@@ -42,7 +41,6 @@ const AdminBookupdate = () => {
 
 	// file 값 받기
 	const handleChangeFile = (e) => {
-		console.log(e.target.files)
 		setImgFile(e.target.files);
 		//fd.append("file", e.target.files)
 		setImgBase64([]);
@@ -54,7 +52,6 @@ const AdminBookupdate = () => {
 				reader.onloadend = () => {
 					// 2. 읽기가 완료되면 아래코드가 실행됩니다.
 					const base64 = reader.result;
-					console.log(base64)
 					if (base64) {
 						//  images.push(base64.toString())
 						var base64Sub = base64.toString()
@@ -95,17 +92,13 @@ const AdminBookupdate = () => {
 			// res에 결과가 들어옴
 		}).then((res) => res.text())
 			.then((res) => {
-				console.log(imgFile);
-				console.log(res);
 				if (res == 'success') {
 					alert("수정 되었습니다.");
 					window.location.replace("/adminbookdel");
-					console.log("ok");
 				} else if (res == 'break') {
 					alert('확장자명이 잘못되었습니다. jpg, png파일을 등록해 주세요');
 				} else {
 					alert("fail");
-					console.log("fail");
 				}
 			});
 	}
@@ -116,9 +109,9 @@ const AdminBookupdate = () => {
 			<Row>
 				<Col xl='1'></Col>
 				<Col >
-					<Button variant="outline-secondary" href="/adminpage">회원관리</Button>
-					<Button variant="outline-secondary" href="/adminbookadd">도서등록</Button>
-					<Button variant="secondary" href="/adminbookdel">도서삭제/수정</Button>
+					<Button variant="outline-secondary" as={Link} to="/adminpage" >사용자 관리</Button>
+					<Button variant="outline-secondary" as={Link} to="/adminbookadd" >도서등록</Button>
+					<Button variant="secondary" as={Link} to="/adminbookdel" >도서삭제/수정</Button>
 				</Col>
 			</Row>
 			<br />
@@ -140,7 +133,7 @@ const AdminBookupdate = () => {
 							<img key={index}
 								className="d-block w-100"
 								src={item}
-								alt="First slide"
+								alt="First slide" 
 								style={{ width: '220px', height: '260px' }}
 							/>
 						)

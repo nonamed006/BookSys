@@ -17,7 +17,6 @@ const RentBookList = () => {
 		}).then((res) => res.json())
 			.then((res) => {
 				setBooklist(res);
-				console.log(res);
 			});
 	}, []);
 

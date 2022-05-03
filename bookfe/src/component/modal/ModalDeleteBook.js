@@ -21,7 +21,6 @@ const ModalDeleteBook = (props) => {
 		}).then((res) => res.text())
 			.then((res) => {
 				setShow(false);
-				console.log(book.no);
 				if (res == "success") {
 					alert("삭제되었습니다.");
 					window.location.replace("/adminbookdel");

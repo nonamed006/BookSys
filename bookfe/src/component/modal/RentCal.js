@@ -8,11 +8,9 @@ const RentCal = (props) => {
 	const [radioState, setRaioState] = useState();
 
 	const handleChange = (e) => {
-		console.log(e.target.id);
 		setRaioState(e.target.id);
 	}
 	const rentBook = () => {
-		console.log('rent');
 	}
 	return (
 		<div>

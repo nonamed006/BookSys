@@ -1,0 +1,45 @@
+package com.example.demo.dto;
+
+import lombok.Data;
+
+@Data
+public class Page {
+	private int nowPage; 	// 현재 선택된 페이지 
+	private int total; 		// 총 행 개수
+	private int amount = 5;	// 페이지 개수 ( < 1 2 3 4 5 > )
+	private int startPage;
+	private int endPage;
+	private int realEnd;
+	private boolean prev, next;	// true면 앞 뒤 선택 가능
+	
+	public Page(int nowPage, int total, int tableCnt) {
+		this.nowPage = nowPage;
+		this.total = total;
+
+		this.endPage = (int) (Math.ceil(nowPage * 0.2)) * 5;
+		// Math.ceil() 함수는 주어진 숫자보다 크거나 같은 숫자 중 가장 작은 숫자를 integer 로 반환
+		// <(현재페이지[1] / 페이지당 개수[10]) = [0.1]> 올림 = [1] * 10 = [10]
+
+		this.startPage = this.endPage - (this.amount - 1);
+		// 10-(10-1)=1
+		// 20-(10-1)=11
+		// 버튼 10개 중 첫 번째 번호를 나타냄
+
+		// 제일 마지막 페이지 번호
+		this.realEnd = (int) (Math.ceil((total * 1.0) / tableCnt));
+		// 올림<(133/10)=[13.3]>=[14]
+
+		this.prev = this.startPage > 1;
+
+		this.next = this.endPage < realEnd;
+		// end페이지가 realeEnd페이지보다 작아야 다음으로 넘길 페이지가 있으니 True를 반환
+		// 그게 아니면 다음으로 넘길 페이지가 없으니까 False
+	}
+	
+	// 쿼리에서 사용할 limit x, 10
+		public int getNum() {
+			// 1 page => 0
+			// 2 page => 10
+			return (this.nowPage - 1) * 5;
+		}
+}

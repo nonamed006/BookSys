@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.RentDto;
 import com.example.demo.dto.RentUserDto;
+import com.example.demo.service.BookService;
 import com.example.demo.service.UserService;
 import com.example.demo.vo.User;
 
@@ -22,12 +23,24 @@ import lombok.RequiredArgsConstructor;
 public class UserController {
 	
 	private final UserService userService;
+	private final BookService bookService;
 	private final HttpSession session;
 	
 	// 회원가입 - 성공시 success 반환 -----------------------------------------------
 	@PostMapping("/signup")
 	public String insertUser(@RequestBody User user) {
-		System.out.println(user);
+		System.out.println(user.getTeam() == "");
+		if(user.getId() == "") {
+			return "noID";
+		} else if(user.getPwd() == "") {
+			return "noPWD";
+		} else if(user.getName() == "") {
+			return "noName";
+		} else if(user.getTeam() == "") {
+			return "noTeam";
+		} else if(user.getAddr() == "") {
+			return "noAddr";
+		}
 		userService.insert(user);
 		return "success";
 	}
@@ -89,6 +102,10 @@ public class UserController {
 	@GetMapping("/adminpage/deleteuser/{no}")
 	public String returnBook(@PathVariable int no) {
 		
+		int cnt = bookService.rentCnt(no);
+		if(cnt>=1) {
+			return "useBook";
+		}
 		if(userService.delete(no)) {
 			return "success";
 		}else {

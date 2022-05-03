@@ -23,7 +23,9 @@ const ModalDelete = (props) => {
 				if (res == "success") {
 					alert("삭제되었습니다.");
 					window.location.replace("/adminpage");
-				} else {
+				} else if(res == "useBook"){
+					alert("도서 대여중인 사용자는 삭제할 수 없습니다.");
+				}else {
 					alert("삭제실패하였습니다.");
 				}
 			});

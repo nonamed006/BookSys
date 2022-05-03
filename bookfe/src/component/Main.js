@@ -1,6 +1,8 @@
 
 import React, { useEffect, useState } from 'react';
 import { Button, Card, Col, FormControl, InputGroup, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import BookNewList from './book/BookNewList';
 import BookRank from './book/BookRank';
 import CarouselMain from './CarouselMain';
 
@@ -36,7 +38,7 @@ const Main = () => {
   // 엔터키 이벤트
   function enterkey() {
     if (window.event.keyCode == 13) {
-      window.location.href = `/seachlist/${search}`;
+      window.location.href = `/seachlist/${search == '' ? 'notSearch' : search}`;
     }
   }
   return (
@@ -55,7 +57,7 @@ const Main = () => {
                 onChange={onChange}
                 onKeyUp={enterkey}
               />
-              <Button variant="secondary" id="button-addon2" href={`/seachlist/${search}`}>
+              <Button variant="secondary" id="button-addon2" as={Link} to={`/seachlist/${search == '' ? 'notSearch' : search}`}>
                 Search
               </Button>
             </InputGroup>
@@ -70,8 +72,15 @@ const Main = () => {
           </Col>
         </Row>
         <br />
-        <b>📕신간도서</b>
-        <CarouselMain />
+        <Row>
+        <Col xl='2'></Col>
+        <Col>
+        <div className="mb-3"><b>📕신간도서</b></div>
+        {/* <CarouselMain /> */}
+        <BookNewList />
+        </Col>
+        <Col xl='2'></Col>
+        </Row>
       </div>
     </div>
   );

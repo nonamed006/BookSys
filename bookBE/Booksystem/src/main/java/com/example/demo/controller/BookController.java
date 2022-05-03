@@ -36,6 +36,10 @@ public class BookController {
 		reply2.setBook_no(reply.getBook_no());
 		reply2.setUser_no(userinfo.getNo());
 		
+		if(reply.getComment() == "") {
+			return "noComments";
+		} 
+		 
 		if(replyService.insert(reply2)) {
 			return "success";
 		}else {

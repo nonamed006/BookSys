@@ -31,6 +31,16 @@ const Signup = () => {
 				if (res == 'success') {
 					alert("회원가입 되었습니다.");
 					window.location.replace("/");
+				} else if(res == 'noID'){
+					alert("아이디를 입력해 주세요");
+				} else if(res == 'noPWD'){
+					alert("비밀번호를 입력해 주세요");
+				} else if(res == 'noName'){
+					alert("이름을 입력해 주세요");
+				} else if(res == 'noTeam'){
+					alert("소속부서를 선택해 주세요");
+				} else if(res == 'noAddr'){
+					alert("주소를 입력해 주세요");
 				} else {
 					alert("회원가입 실패하였습니다.");
 				}

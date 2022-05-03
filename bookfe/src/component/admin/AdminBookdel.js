@@ -68,9 +68,9 @@ const AdminBookdel = () => {
       <Row>
         <Col xl='1'></Col>
         <Col >
-          <Button variant="outline-secondary" href="/adminpage">회원관리</Button>
-          <Button variant="outline-secondary" href="/adminbookadd">도서등록</Button>
-          <Button variant="secondary" href="/adminbookdel">도서삭제/수정</Button>
+          <Button variant="outline-secondary" as={Link} to="/adminpage">사용자 관리</Button>
+          <Button variant="outline-secondary" as={Link} to="/adminbookadd" >도서등록</Button>
+          <Button variant="secondary" as={Link} to="/adminbookdel" >도서삭제/수정</Button>
         </Col>
       </Row>
       <br />

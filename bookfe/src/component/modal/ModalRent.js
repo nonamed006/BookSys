@@ -17,7 +17,6 @@ const ModalRent = (props) => {
   var selDate = startDate.getFullYear() + '-0' + (startDate.getMonth()+1) + '-' + startDate.getDate();
 
 	const handleChange = (e) => {
-		console.log(typeof(e.target.id));
 		setRaioState(e.target.id);
 	}
   const [book, setBook] = useState({
@@ -39,7 +38,7 @@ const ModalRent = (props) => {
         setShow(false);
         if (res == "success") {
           alert("대여되었습니다.");
-          window.location.replace("/");
+          window.location.reload();
         } else if(res == "noRadio"){
           alert("대여 날짜를 선택해 주세요.")
         }else if (res == "failCnt") {
@@ -60,9 +59,10 @@ const ModalRent = (props) => {
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title style={{ fontSize: '18px' }}>{book.title} 대여하시겠습니까?</Modal.Title>
+          <Modal.Title style={{ fontSize: '18px', fontWeight:'bold' }}>{book.title} 대여하시겠습니까?</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <div>대여 날짜를 선택해주세요.</div><br/>
         <Form className="mb-3">
 				<Form.Check
 					type='radio'

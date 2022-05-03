@@ -40,7 +40,7 @@ const SearchList = () => {
 	// 엔터키 이벤트
 	function enterkey() {
 		if (window.event.keyCode == 13) {
-			window.location.href = `/seachlist/${search}`;
+			window.location.href = `/seachlist/${search == '' ? 'notSearch' : search}`;
 		}
 	}
 
@@ -63,7 +63,7 @@ const SearchList = () => {
 					<Col xl='2'>
 					</Col>
 					<Col xl='5'>
-						<h4>| 도서 '{search}' 검색 결과</h4>
+						<h4><b>| 도서 '{search == 'notSearch' ? '전체 도서 목록' : search}' 검색 결과</b></h4>
 					</Col>
 					<Col><InputGroup>
 						<FormControl

@@ -43,7 +43,7 @@ const CarouselMain = () => {
 							<Link to={`/bookdetail/${res.no}`}><img src={img} height='180px' /></Link>
 							<Card.Body>
 								<Link to={`/bookdetail/${res.no}`} style={{ textDecoration: 'none', color: 'darkblue' }}><Card.Title style={{ fontSize: '14px', height: '50px', fontWeight: 'bolder' }}>{res.title}</Card.Title></Link>
-								<Card.Text style={{ fontSize: '13px' }}>
+								<Card.Text style={{ fontSize: '13px', height:'30px' }}>
 									{res.writer} | <Link to={`/publisher/${res.publisher}`} style={{ textDecoration: 'none', color: 'black', fontWeight: 'bolder' }}>{res.publisher}</Link>
 								</Card.Text>
 								{checkUse(res.usebook) == 'y' ?

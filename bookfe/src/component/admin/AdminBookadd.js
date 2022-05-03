@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Col, FloatingLabel, Form, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const AdminBookadd = () => {
 
@@ -7,7 +8,7 @@ const AdminBookadd = () => {
 		title: "",
 		writer: "",
 		contents: "",
-		price: "",
+		price: 0,
 		publisher: "",
 		category: "카테고리 선택"
 	});
@@ -69,6 +70,8 @@ const AdminBookadd = () => {
 				if (res == 'success') {
 					alert("등록되었습니다.");
 					window.location.replace("/adminbookadd");
+				} else if(res == "noTitle"){
+					alert("제목을 입력해주세요.");
 				} else if (res == 'selectCat') {
 					alert('카테고리를 선택해 주세요');
 				} else if (res == 'break') {
@@ -82,18 +85,17 @@ const AdminBookadd = () => {
 	// select box 컨트롤 함수
 	const handleChangeSelect = (e) => {
 		setBook({ ...book, [e.target.id]: e.target.value });
-		console.log(e.target.value);
 	}
 
 	return (
 		<div>
 			<br />
 			<Row>
-				<Col xl='1'></Col> 
+				<Col xl='1'></Col>
 				<Col >
-					<Button variant="outline-secondary" href="/adminpage">회원관리</Button>
-					<Button variant="secondary" href="/adminbookadd">도서등록</Button>
-					<Button variant="outline-secondary" href="/adminbookdel">도서삭제/수정</Button>
+					<Button variant="outline-secondary" as={Link} to="/adminpage">사용자 관리</Button>
+					<Button variant="secondary"as={Link} to="/adminbookadd">도서등록</Button>
+					<Button variant="outline-secondary" as={Link} to="/adminbookdel">도서삭제/수정</Button>
 				</Col>
 			</Row>
 			<br />

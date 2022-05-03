@@ -38,7 +38,7 @@ const UserUpdate = () => {
 			.then((res) => {
 				if (res == 'success') {
 					alert('수정되었습니다.');
-					window.location.replace("/");
+					window.location.reload();
 				} else {
 					alert('실패하였습니다.');
 				}

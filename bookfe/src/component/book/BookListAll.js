@@ -3,7 +3,6 @@ import { Button, Col, Container, FormControl, InputGroup, ListGroup, OverlayTrig
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import ModalRent from '../modal/ModalRent';
-import Ex from '../znoused/Ex';
 
 
 const BookListAll = () => {
@@ -17,6 +16,7 @@ const BookListAll = () => {
 	const [categorys, setCategorys] = useState(category);
 	const [page, setPage] = useState(1);
 	const [cnt, setCnt] = useState();
+	const [pageNum, setPageNum] = useState(0);
 	
 	// 카테고리 리스트 정보 -- 여기 추가하면 자동으로 생성
 	const catList = ['IT서적', '소설', '인문학'];
@@ -57,7 +57,7 @@ const BookListAll = () => {
 	// 엔터키 이벤트
 	function enterkey() {
 		if (window.event.keyCode == 13) {
-			window.location.href = `/seachlist/${search}`;
+			window.location.href = `/seachlist/${search == '' ? 'notSearch' : search}`;
 		}
 	}
 
@@ -82,7 +82,22 @@ const BookListAll = () => {
 	}
 
 	let arr1 = [1, 2, 3, 4, 5];
-	let lastPage = Math.ceil(cnt/15);
+	let lastPage = Math.ceil(cnt/10);
+
+	// 다음 페이지 순서 첫번째로 이동 ex) 1->6, 6->10
+	// 현재 페이지 1~5일때 5로 나누면 0.x -> 올림해서 1이됨
+	// 다음 페이지 버튼 눌렀을 때 
+	// 밑에 페이징 컴포넌트에서 1*5+1 한 값을 페이지 숫자로 넣어서 출력
+	// => 6,7,8,9,10 으로 출력됨
+	const updatePage = () => {
+		var upPg = (Math.ceil(page/5));
+		setPageNum(upPg);
+	}
+	// 이전 페이지 순서 첫번째로 이동 ex) 10->5, 5->1
+	const downPage = () => {
+		var dwPg = (Math.floor(page/5))-1;
+		setPageNum(dwPg);
+	}
 
 	// 페이징 
 	const getPage = (index) => {
@@ -92,18 +107,32 @@ const BookListAll = () => {
 		}
 	}
 
-	// 페이지 앞으로, 뒤로
+	// 이전 페이지 목록으로
 	const prevPage = () => {
-		if(page > 1){
-			setPage(page-1);
+		var prevpg = (((Math.floor((page-1)/5)) - 1) *5) +1;
+		if(page > 5){
+			downPage();
+			setPage(prevpg);
+			setReload(!reload);
+		} else if(1<page<5){
+			setPage(1);
 			setReload(!reload);
 		}
 	}
 
+	// 다음 페이지 목록으로
 	const nextPage = () => {
 		if(page < lastPage){
-			setPage(page+1);
-			setReload(!reload);
+			var nextpg = (Math.ceil(page/5) * 5) +1;
+			if(nextpg>lastPage){
+				setPage(lastPage);
+				setReload(!reload);
+			}else{
+				updatePage();
+				setPage(nextpg);
+				setReload(!reload);
+				
+			}
 		}
 	}
 
@@ -115,7 +144,7 @@ const BookListAll = () => {
 					<Col xl='2'>
 					</Col>
 					<Col xl='5'>
-						<h4>| {categorys == 'notSearch' || categorys == '' ? '전체 도서 목록' : categorys}</h4>
+						<h4><b>| {categorys == 'notSearch' || categorys == '' ? '전체 도서 목록' : categorys}</b></h4>
 					</Col>
 					{/* 검색창 */}
 					<Col><InputGroup className="mb-3">
@@ -126,7 +155,7 @@ const BookListAll = () => {
 							onChange={onChange}
 							onKeyUp={enterkey}
 						/>
-						<Button variant="secondary" id="button-addon2" href={`/seachlist/${search}`}>
+						<Button variant="secondary" id="button-addon2" as={Link} to={`/seachlist/${search == '' ? 'notSearch' : search}`}>
 							Search
 						</Button>
 					</InputGroup></Col>
@@ -159,16 +188,17 @@ const BookListAll = () => {
 							</OverlayTrigger>
 						}
 					</Col>
+					{/* 페이징 */}
 					<Col>
 					<Pagination>
-					<Pagination.First onClick={(e)=>{setPage(1); setReload(!reload)}}/>
+					<Pagination.First onClick={(e)=>{setPage(1); setPageNum(0); setReload(!reload)}}/>
 					<Pagination.Prev onClick={prevPage}/>
 					{arr1.map(function (res, index) {return <div key={index}>
-					<Pagination.Item className={++index == page ? 'active': ''} onClick={(e)=>getPage(index)}>{index}</Pagination.Item>
+					<Pagination.Item className={((pageNum*5)+index)+1 == page ? 'active': ''} onClick={(e)=>getPage((pageNum*5)+index+1)}>{(pageNum*5)+index+1}</Pagination.Item>
 					</div>
 					})}
 					<Pagination.Next onClick={nextPage}/>
-					<Pagination.Last onClick={(e)=>{setPage(lastPage); setReload(!reload)}}/>
+					<Pagination.Last onClick={(e)=>{setPage(lastPage); setPageNum(Math.floor(lastPage/5)); setReload(!reload)}}/>
 				</Pagination>
 					</Col>
 				</Row>
@@ -191,11 +221,11 @@ const BookListAll = () => {
 								{book.map(function (res, index) {
 									return <tr key={index}>
 										<td>{res.row_no}</td>
-										<td>
+										<td width="42%">
 											<Link to={`/bookdetail/${res.no}`} style={{ textDecoration: 'none', color: 'darkblue', fontWeight: 'bolder' }}>{res.title}</Link>
 										</td>
-										<td>{res.writer}(지은이) | <Link to={`/publisher/${res.publisher}`} style={{ textDecoration: 'none', color: 'black', fontWeight: 'bolder' }}>{res.publisher}</Link></td>
-										<td>
+										<td width="30%">{res.writer}(지은이) | <Link to={`/publisher/${res.publisher}`} style={{ textDecoration: 'none', color: 'black', fontWeight: 'bolder' }}>{res.publisher}</Link></td>
+										<td width="11%">
 											{checkUse(res.usebook) == 'y' ?
 												<ModalRent booktitle={res.title} no={res.no} reload={reload}></ModalRent> :
 												<Button size='sm' variant="secondary" disabled="disabled" >대여불가능</Button>}
@@ -215,16 +245,16 @@ const BookListAll = () => {
 								{book.map(function (res, index) {
 									const img = '/img/' + res.img;
 									return <tr key={index}>
-										<td>{res.row_no}</td>
-										<td>
+										<td width="5%">{res.row_no}</td>
+										<td width="15%">
 											<Link to={`/bookdetail/${res.no}`} style={{ textDecoration: 'none' }}><img src={img} width='90px' height='110px' /></Link>
 										</td>
-										<td><span>
+										<td width="42%"><span>
 											<Link to={`/bookdetail/${res.no}`} style={{ textDecoration: 'none', color: 'darkblue', fontWeight: 'bolder' }}>{res.title}</Link>
 										</span>
 											<br /><p>{res.writer}(지은이) | <Link to={`/publisher/${res.publisher}`} style={{ textDecoration: 'none', color: 'black', fontWeight: 'bolder' }}>{res.publisher}</Link></p></td>
 										<td></td>
-										<td>
+										<td width="11%">
 											{checkUse(res.usebook) == 'y' ?
 												<ModalRent booktitle={res.title} no={res.no} reload={reload}></ModalRent> :
 												<Button size='sm' variant="secondary" disabled="disabled" >대여불가능</Button>}

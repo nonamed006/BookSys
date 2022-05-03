@@ -8,5 +8,6 @@ public class RentUserDto {
 	private int user_no;
 	private String name;
 	private String team;
+	private String return_date;
 
 }

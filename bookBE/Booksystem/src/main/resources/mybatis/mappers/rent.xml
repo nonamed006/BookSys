@@ -41,7 +41,7 @@
 	<!-- no로 대여중인 회원 찾기 -->
 	<select id="findByRentUser" parameterType ="int" resultType="rentUserDto">
 		<![CDATA[
-			select a.book_no, a.user_no, b.name, b.team
+			select a.book_no, a.user_no, b.name, b.team, a.return_date
 			from rent as a
 			inner join user as b
 			on a.user_no = b.no
