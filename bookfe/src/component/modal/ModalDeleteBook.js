@@ -33,7 +33,7 @@ const ModalDeleteBook = (props) => {
 
 	return (
 		<div>
-			<Button variant="outline-secondary" onClick={handleShow}>
+			<Button variant="outline-dark" onClick={handleShow}>
 				도서 삭제
 			</Button>
 

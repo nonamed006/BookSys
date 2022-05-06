@@ -13,7 +13,7 @@ const AdminBookadd = () => {
 		category: "카테고리 선택"
 	});
 
-	const teamList = ['소설', '인문학', 'IT서적'];
+	const teamList = ['그래픽, 멀티미디어', '모바일 프로그래밍', '서버, 데이터베이스', '소설', '웹 프로그래밍', '인문학', '프로그래밍 언어'];
 
 	const [imgBase64, setImgBase64] = useState([]); // 파일 base64
 	const [imgFile, setImgFile] = useState(null);	//파일

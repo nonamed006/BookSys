@@ -177,7 +177,7 @@ const BookDetail = (props) => {
 							{replyList.map(function (res, index) {
 								return <tr key={index}>
 									<td style={{ height: '100px' }}>
-										<div style={{ fontSize: '13px', margin: "5px" }}>{res.name}({res.team == null ? "관리자" : res.team}👑) | {res.reg_date}
+										<div style={{ fontSize: '13px', margin: "5px" }}>{res.name}({res.team == null ? "관리자👑" : res.team}) | {res.reg_date}
 											{props.user.no == res.user_no || props.user.role == 'A' ? <ModalReplyDel no={res.no} getReload={getReload} reload={reload}/> : null}
 										</div>
 										<div>{res.comment}</div>

@@ -34,7 +34,7 @@ const SearchList = () => {
 
 	// 검색 버튼 입력 시 reload
 	const handelClick = (e) => {
-		setReload(!reload);
+		window.location.href = `/seachlist/${search == '' ? 'notSearch' : search}`;
 	}
 
 	// 엔터키 이벤트
@@ -63,7 +63,7 @@ const SearchList = () => {
 					<Col xl='2'>
 					</Col>
 					<Col xl='5'>
-						<h4><b>| 도서 '{search == 'notSearch' ? '전체 도서 목록' : search}' 검색 결과</b></h4>
+						<h4><b>| 도서 '{title == 'notSearch' ? '전체 도서 목록' : title}' 검색 결과</b></h4>
 					</Col>
 					<Col><InputGroup>
 						<FormControl

@@ -17,12 +17,12 @@ public class Scheduled {
 	private final UserRepository userRepository;
 	private final MailsendService mailsendService;
 		//0 0 0 * * * => 매일 00시에 실행 0/30 * * * * ? => 30초마다 실행 테스트시
+	// 반납일자 지나면 대여자에게 반납 알림 메일 전송 위한 스케줄러
 	@org.springframework.scheduling.annotation.Scheduled(cron= "0 0 0 * * *")
 	public void sendSchedule() {
 		List<RentMailDto> rentMail = userRepository.sendMail();
 		
 		for(int i=0; i<rentMail.size(); i++) {
-			System.out.println("스케줄러 들어옴");
 			System.out.println("###");
 			mailsendService.setMail(rentMail.get(i).getUser_id()+"@samwooim.com");
 			mailsendService.setTitle("대여하신 도서 반납일입니다.");

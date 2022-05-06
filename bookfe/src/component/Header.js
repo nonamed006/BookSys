@@ -20,7 +20,6 @@ const Header = (props) => {
       .then((res) => {
         setUser(res);
       });
-
   }, [])
 
   // 로그아웃 함수
@@ -39,7 +38,6 @@ const Header = (props) => {
             <NavDropdown title={user.name} id="basic-nav-dropdown">
               <NavDropdown.Item as={Link} to='/mypage'>MyPage</NavDropdown.Item>
               <NavDropdown.Item as={Link} to='/updateuser'>profile</NavDropdown.Item>
-              {/* <NavDropdown.Item href="/cart">Cart</NavDropdown.Item> */}
               <NavDropdown.Divider />
               <NavDropdown.Item onClick={handleLogout}>LogOut</NavDropdown.Item>
             </NavDropdown> :

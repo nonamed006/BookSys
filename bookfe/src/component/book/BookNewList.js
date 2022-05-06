@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import ModalRent from '../modal/ModalRent';
+import { PORT } from '../../set.js';
 
 const BookNewList = () => {
 
@@ -10,12 +11,11 @@ const BookNewList = () => {
 
 	// 신간도서 목록 불러오기
 	const getBook = () => {
-		fetch(`http://localhost:8080/main/newBook`, {
+		fetch(`${PORT}/main/newBook`, {
 			method: "get",
 			// res에 결과가 들어옴
 		}).then((res) => res.json())
 			.then((res) => {
-                console.log(res);
 				setBooklist(res);
 			});
 	};

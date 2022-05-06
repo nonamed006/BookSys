@@ -19,7 +19,7 @@ const BookListAll = () => {
 	const [pageNum, setPageNum] = useState(0);
 	
 	// 카테고리 리스트 정보 -- 여기 추가하면 자동으로 생성
-	const catList = ['IT서적', '소설', '인문학'];
+	const catList = ['그래픽, 멀티미디어', '모바일 프로그래밍', '서버, 데이터베이스', '소설','웹 프로그래밍', '인문학', '프로그래밍 언어'];
 
 	// 책 목록 조회
 	const getBookCategory = () => {
@@ -28,6 +28,7 @@ const BookListAll = () => {
 			// res에 결과가 들어옴
 		}).then((res) => res.json())
 			.then((res) => {
+				console.log(res);
 				setBook(res);
 			});
 	};
@@ -109,8 +110,8 @@ const BookListAll = () => {
 
 	// 이전 페이지 목록으로
 	const prevPage = () => {
-		var prevpg = (((Math.floor((page-1)/5)) - 1) *5) +1;
 		if(page > 5){
+			var prevpg = (((Math.floor((page-1)/5)) - 1) *5) +1;
 			downPage();
 			setPage(prevpg);
 			setReload(!reload);
@@ -206,8 +207,8 @@ const BookListAll = () => {
 					<Col xl='2'>
 						<ListGroup >
 							<ListGroup.Item variant="secondary">카테고리</ListGroup.Item>
-							<ListGroup.Item id='' style={{ cursor: 'pointer' }} onClick={getCat}>- 카테고리 전체</ListGroup.Item>
-							{catList.map((catName, index) => <ListGroup.Item key={index} id={catName} style={{ cursor: 'pointer' }} onClick={getCat}>- {catName}</ListGroup.Item>)}
+							<ListGroup.Item id='' className={categorys == 'notSearch' || categorys == '' ? 'boldText01': ''} style={{ cursor: 'pointer' }} onClick={getCat}>- 카테고리 전체</ListGroup.Item>
+							{catList.map((catName, index) => <ListGroup.Item className={catName == categorys ? 'boldText01': ''} key={index} id={catName} style={{ cursor: 'pointer' }} onClick={getCat}>- {catName}</ListGroup.Item>)}
 						</ListGroup>
 					</Col>
 					{/* 도서 목록 테이블 - 이미지 없이 보기*/}

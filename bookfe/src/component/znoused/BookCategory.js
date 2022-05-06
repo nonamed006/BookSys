@@ -68,7 +68,7 @@ const BookCategory = () => {
               onChange={onChange}
               onKeyUp={enterkey}
             />
-            <Button variant="secondary" id="button-addon2" href={`/seachlist/${search}`}>
+            <Button variant="secondary" id="button-addon2" as={Link} to={`/seachlist/${search}`}>
               Search
             </Button>
           </InputGroup></Col>

@@ -89,8 +89,10 @@ public class MainController {
 	// 책 카테고리로 책 리스트 불러옴 + 검색 -----------------------------------------------
 	@GetMapping("/category/{category}/{nowPage}")
 	public List<RentDto> findBookCategory(@PathVariable String category, @PathVariable int nowPage) {
-		if (category.equals("notSearch"))
+
+		if (category.equals("notSearch")) {
 			category = "";
+			}
 
 		category = "%" + category + "%";
 		Page page = new Page(nowPage, bookService.getCountRes(category), 10);

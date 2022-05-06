@@ -37,6 +37,7 @@ public class Page {
 	}
 	
 	// 쿼리에서 사용할 limit x, 10
+	// * 10 숫자는 한페이지에 데이터 몇개 보여줄건지 결정하는 숫자
 		public int getNum() {
 			// 1 page => 0
 			// 2 page => 10

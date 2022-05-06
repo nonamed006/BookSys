@@ -112,10 +112,10 @@ const AdminBookdel = () => {
                   <td>{checkUse(res.usebook) == 'y' ? <span>대여가능</span> : <span onClick={open_pop}>대여중</span>
                   }</td>
                   <td>{checkUse(res.usebook) == 'y' ? <ModalDeleteBook no={res.no} title={res.title} img={res.img}></ModalDeleteBook> :
-                    <Button variant="outline-secondary" disabled="disabled">도서 삭제</Button>
+                    <Button variant="secondary" disabled="disabled">도서 삭제</Button>
                   }</td>
-                  <td>{checkUse(res.usebook) == 'y' ? <Button variant="outline-secondary" href={`/adminbookupdate/${res.no}`}>도서 수정</Button> :
-                    <Button variant="outline-secondary" disabled="disabled">도서 수정</Button>
+                  <td>{checkUse(res.usebook) == 'y' ? <Button variant="outline-dark" as={Link} to={`/adminbookupdate/${res.no}`}>도서 수정</Button> :
+                    <Button variant="secondary" disabled="disabled">도서 수정</Button>
                   }</td>
                 </tr>
               })}

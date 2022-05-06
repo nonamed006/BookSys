@@ -43,7 +43,7 @@ const PublisherList = () => {
 					<Col xl='2'>
 					</Col>
 					<Col>
-						<h3>| 출판사 '{publisher}' 검색결과</h3>
+						<h4><b>| 출판사 '{publisher}' 검색결과</b></h4>
 					</Col>
 				</Row>
 				<br />
