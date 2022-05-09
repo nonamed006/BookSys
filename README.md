@@ -185,12 +185,3 @@ GIF Images
 
 11.  관리자 계정은 도서 대여 불가
 
-### 기능 4
-
-<br>
-
-
-## 라이센스
-
-MIT &copy; [NoHack](mailto:jjdmst@gmail.com)
-
