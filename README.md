@@ -31,7 +31,7 @@ GIF Images
 <br>
 **Tool**<br>
 <img src="https://img.shields.io/badge/Visual Studio Code-007ACC?style=flat&logo=Visual%20Studio%20Code&logoColor=white"/>
-<img src="https://img.shields.io/badge/Eclipse IDE-2C2255?style=flat&logo=Eclipse%20IDE%20Code&logoColor=white"/>
+<img src="https://img.shields.io/badge/Eclipse IDE-2C2255?style=flat&logo=Eclipse%20IDE&logoColor=white"/>
 
 
 <br>
