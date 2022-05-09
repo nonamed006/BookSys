@@ -21,7 +21,8 @@ GIF Images
 
 ## 기술 스택
 **DB**
-<img src="https://img.shields.io/badge/MariaDB-1F305F?style=flat&logo=MariaDB%20Foundation&logoColor=white"/>
+<br>
+<img src="https://img.shields.io/badge/MariaDB-003545?style=flat&logo=MariaDB&logoColor=white"/>
 
 <br>
 
