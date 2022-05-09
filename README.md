@@ -189,21 +189,8 @@ GIF Images
 
 <br>
 
-## 배운 점 & 아쉬운 점
-
-<p align="justify">
-
-</p>
-
-<br>
 
 ## 라이센스
 
-MIT &copy; [NoHack](mailto:lbjp114@gmail.com)
+MIT &copy; [NoHack](mailto:jjdmst@gmail.com)
 
-<!-- Stack Icon Refernces -->
-
-[js]: <img src="https://user-images.githubusercontent.com/62851841/165425240-df1d1ea1-264f-400e-93c5-55ed12fdcb70.jpg" width="100" height="100"/>
-[ts]: /images/stack/typescript.svg
-[react]: <img src="https://user-images.githubusercontent.com/62851841/165424102-201aec1b-e34c-4cb2-bcdc-9fc8aa1f4e77.jpeg" width="200" height="400"/>
-[node]: /images/stack/node.svg
