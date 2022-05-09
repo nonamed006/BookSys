@@ -2,8 +2,7 @@
 
 <p align="center">
   <br>
-  <img src="./images/common/logo-sample.jpeg">
-  ![image](https://user-images.githubusercontent.com/62851841/167341171-3b430edb-cac2-4314-a83f-e777374c605c.png)
+  <img src="https://user-images.githubusercontent.com/62851841/167341171-3b430edb-cac2-4314-a83f-e777374c605c.png">
   <br>
 </p>
 
