@@ -185,7 +185,7 @@ public class MainController {
 	@PostMapping("/adminbook/add")
 	public String addBook(HttpServletRequest request, @RequestParam(value = "title") String title,
 			@RequestParam(value = "writer") String writer, @RequestParam(value = "contents") String contents,
-			@RequestParam(value = "price") int price, @RequestParam(value = "publisher") String publisher,
+			@RequestParam(value = "publisher") String publisher,
 			@RequestParam(value = "category") String category, @RequestParam(value = "file") MultipartFile file)
 			throws Exception {
 
@@ -226,7 +226,6 @@ public class MainController {
 			Book book = new Book();
 			book.setTitle(title);
 			book.setWriter(writer);
-			book.setPrice(price);
 			book.setContents(contents);
 			book.setPublisher(publisher);
 			book.setImg(tempDate + originalFileExtension);
@@ -255,7 +254,7 @@ public class MainController {
 	@PostMapping("/adminbook/update")
 	public String updateBook(HttpServletRequest request, @RequestParam(value = "title") String title,
 			@RequestParam(value = "no") int no, @RequestParam(value = "writer") String writer,
-			@RequestParam(value = "contents") String contents, @RequestParam(value = "price") int price,
+			@RequestParam(value = "contents") String contents,
 			@RequestParam(value = "img") String img, @RequestParam(value = "file", required = false) MultipartFile file)
 			throws Exception {
 
@@ -265,7 +264,6 @@ public class MainController {
 		book.setNo(no);
 		book.setTitle(title);
 		book.setWriter(writer);
-		book.setPrice(price);
 		book.setContents(contents);
 
 		// 기존 도서 이미지 말고 새 이미지 등록시

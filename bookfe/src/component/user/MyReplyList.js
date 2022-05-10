@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { PORT } from '../../set';
 import ModalReplyDel from '../modal/ModalReplyDel';
 
 const MyReplyList = () => {
@@ -11,7 +12,7 @@ const MyReplyList = () => {
 
 	var idx = 0;
 	useEffect(() => {
-		fetch("http://localhost:8080/user/reply", {
+		fetch(`${PORT}/user/reply`, {
 			method: "get",
 			headers: {
 				'Content-Type': "application/json; charset=utf-8",

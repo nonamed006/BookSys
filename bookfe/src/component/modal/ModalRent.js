@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { PORT } from '../../set';
 
 const ModalRent = (props) => {
   
@@ -26,7 +27,7 @@ const ModalRent = (props) => {
 
   // 책 대여하기
   const rentBook = () => {
-    fetch(`http://localhost:8080/user/main/${book.no}/${radioState == 'noDate' ? '9999-12-31' : radioState == ''? 'noRadio' : selDate}`, {
+    fetch(`${PORT}/user/main/${book.no}/${radioState == 'noDate' ? '9999-12-31' : radioState == ''? 'noRadio' : selDate}`, {
       method: "get",
       headers: {
         'Content-Type': "application/json; charset=utf-8",

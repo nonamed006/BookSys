@@ -37,6 +37,14 @@ public class UserRepository {
 		return sqlSession.selectOne("user.findByIdAndPwd", map);
 	}
 	
+	//복호화된 암호 얻기
+	public User findByDecrypt(int no, String pwd) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("no", no);
+		map.put("pwd", pwd);
+		return sqlSession.selectOne("user.findByDecrypt", map);
+	}
+	
 	// 유저- 회원 정보 수정
 	public boolean udpate(User user) {
 		return sqlSession.update("user.update", user) == 1;

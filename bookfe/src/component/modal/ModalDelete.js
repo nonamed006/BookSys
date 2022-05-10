@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
+import { PORT } from '../../set';
 
 const ModalDelete = (props) => {
 	const [show, setShow] = useState(false);
@@ -14,7 +15,7 @@ const ModalDelete = (props) => {
 
 	// 회원삭제
 	var deleteUser = () => {
-		fetch(`http://localhost:8080/adminpage/deleteuser/${user.no}`, {
+		fetch(`${PORT}/adminpage/deleteuser/${user.no}`, {
 			method: "get",
 			// res에 결과가 들어옴
 		}).then((res) => res.text())

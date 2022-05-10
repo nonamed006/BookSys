@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
+import { PORT } from '../../set';
 import DaumPost from '../DaumPost';
 
 const Signup = () => {
@@ -18,7 +19,7 @@ const Signup = () => {
 		'컨텐츠생산2팀', '하드웨어생산팀', 'R&D개발팀'];
 
 	var getUserinfo = () => {
-		fetch(`http://localhost:8080/signup`, {
+		fetch(`${PORT}/signup`, {
 			method: "post",
 			body: JSON.stringify(user),
 			headers: {

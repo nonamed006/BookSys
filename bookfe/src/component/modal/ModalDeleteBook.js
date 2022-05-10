@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
+import { PORT } from '../../set';
 
 const ModalDeleteBook = (props) => {
 	const [show, setShow] = useState(false);
@@ -15,7 +16,7 @@ const ModalDeleteBook = (props) => {
 
 	// 도서 삭제
 	const deleteUser = () => {
-		fetch(`http://localhost:8080/adminpage/deletebook/${book.no}/${book.img}`, {
+		fetch(`${PORT}/adminpage/deletebook/${book.no}/${book.img}`, {
 			method: "get",
 			// res에 결과가 들어옴
 		}).then((res) => res.text())

@@ -5,6 +5,7 @@ import 'owl.carousel/dist/assets/owl.theme.default.css';
 import { Button, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import ModalRent from './modal/ModalRent';
+import { PORT } from '../set';
 
 const CarouselMain = () => {
 	const [booklist, setBooklist] = useState([]);
@@ -12,7 +13,7 @@ const CarouselMain = () => {
 
 	// 신간도서 목록 불러오기
 	const getBook = () => {
-		fetch(`http://localhost:8080/main/newBook`, {
+		fetch(`${PORT}/main/newBook`, {
 			method: "get",
 			// res에 결과가 들어옴
 		}).then((res) => res.json())

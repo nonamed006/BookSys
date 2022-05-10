@@ -56,6 +56,9 @@ public class UserController {
 		return rentList;
 	}
 	
+	// 복호화 된 암호 얻기
+	
+	
 	// book_no로 대여자 조회
 	@GetMapping("/rentbook/{book_no}")
 	public RentUserDto rentUser(@PathVariable int book_no) {

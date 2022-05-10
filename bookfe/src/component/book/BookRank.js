@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { PORT } from '../../set';
 import ModalRent from '../modal/ModalRent';
 
 const BookRank = () => {
@@ -10,7 +11,7 @@ const BookRank = () => {
 
   // 책 목록 불러오기
   const getBookRank = () => {
-    fetch(`http://localhost:8080/main/rank`, {
+    fetch(`${PORT}/main/rank`, {
       method: "get",
       // res에 결과가 들어옴
     }).then((res) => res.json())

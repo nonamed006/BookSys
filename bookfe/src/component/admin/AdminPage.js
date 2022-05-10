@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Col, FormControl, InputGroup, Row, Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { PORT } from '../../set';
 import ModalDelete from '../modal/ModalDelete';
 
 const AdminPage = () => {
@@ -13,7 +14,7 @@ const AdminPage = () => {
 
 	// 전체 회원 목록 조회
 	var getUser = () => {
-		fetch(`http://localhost:8080/user/selectuser/${search == '' ? 'notSearch' : search}`, {
+		fetch(`${PORT}/user/selectuser/${search == '' ? 'notSearch' : search}`, {
 			method: "get",
 			headers: {
 				'Content-Type': "application/json; charset=utf-8",

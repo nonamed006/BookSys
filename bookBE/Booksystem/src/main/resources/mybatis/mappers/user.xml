@@ -4,13 +4,13 @@
 	<!-- 회원 가입 -->
 	<insert id="insert" parameterType ="user">
 		<![CDATA[
-			insert into user values(null, #{id}, #{pwd}, #{name}, #{team}, #{addr}, 'U')
+			insert into user values(null, #{id}, hex(aes_encrypt(#{pwd}, 'swim')), #{name}, #{team}, #{addr}, 'U')
 		]]>
 	</insert>
 	<!-- jwt 로그인 -->
 	<select id="findByIdAndPwd" parameterType = "map" resultType = "user">
 		<![CDATA[
-			select * from user where id = #{id} and pwd = #{pwd};
+			select * from user where id = #{id} and pwd = hex(aes_encrypt(#{pwd}, 'swim'))
 		]]>
 	</select>
 	<!-- id가 존재하는지 여부 확인 -->
@@ -26,6 +26,14 @@
 			where no = #{no}
 		]]>
 	</update>
+	<!-- 복호화된 비밀번호 얻기 -->
+	<select id="findByDecrypt" parameterType="map" resultType="user">
+		<![CDATA[
+			select no, id, convert(AES_DECRYPT(unhex(#{pwd}), 'swim') USING utf8) as pwd, name, team, addr, role
+			from user
+			where no = #{no}
+		]]>
+	</select>
 	<!-- no로 user 찾기 -->
 	<select id="findById" parameterType="int" resultType="user">
 	<![CDATA[

@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
+import { PORT } from '../../set';
 
 const ModalReturn = (props) => {
   const [show, setShow] = useState(false);
@@ -15,7 +16,7 @@ const ModalReturn = (props) => {
 
   // 책 삭제
   var returnBook = () => {
-    fetch(`http://localhost:8080/mypage/delete/${book.no}`, {
+    fetch(`${PORT}/mypage/delete/${book.no}`, {
       method: "get",
       // res에 결과가 들어옴
     }).then((res) => res.text())

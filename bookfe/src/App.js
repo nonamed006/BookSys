@@ -16,10 +16,11 @@ import Login from './component/user/Login';
 import Header from './component/Header';
 import SearchList from './component/book/SearchList';
 import BookListAll from './component/book/BookListAll';
+import RequireAuth from './component/admin/RequireAuth';
 
 function App() {
   const [user, setUser] = useState({});
-
+  
   return (<>
     <Header user={user} setUser={setUser}></Header>
     <Container>
@@ -27,16 +28,17 @@ function App() {
         <Route path="/" element={<Main />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login user={user} setUser={setUser}/>} />
-        <Route path="/mypage" element={<Mypage />} />
-        <Route path="/adminpage" element={<AdminPage />} />
-        <Route path="/adminbookadd" element={<AdminBookadd />} />
-        <Route path="/adminbookdel" element={<AdminBookdel />} />
-        <Route path="/adminbookupdate/:no" element={<AdminBookupdate />} />
+        <Route path="/mypage" element={<RequireAuth ><Mypage /></RequireAuth>} />
+        <Route path="/adminpage" element={<RequireAuth > <AdminPage /></RequireAuth>} />
+        <Route path="/adminbookadd" element={<RequireAuth ><AdminBookadd /></RequireAuth>} />
+        <Route path="/adminbookdel" element={<RequireAuth ><AdminBookdel /></RequireAuth>} />
+        <Route path="/adminbookupdate/:no" element={<RequireAuth ><AdminBookupdate /></RequireAuth>} />
         <Route path="/bookdetail/:no" element={<BookDetail user={user}/>} />
-        <Route path="/updateuser" element={<UserUpdate />} />
+        <Route path="/updateuser" element={<RequireAuth ><UserUpdate /></RequireAuth>} />
         <Route path="/publisher/:publisher" element={<PublisherList />} />
         <Route path="/seachlist/:title" element={<SearchList />} />
         <Route path="/booklistall/:category" element={<BookListAll />} />
+        <Route path='/*' element={<h2><br/>잘못된 접근입니다.</h2>} />
       </Routes>
     </Container>
   </>

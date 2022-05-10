@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, FormControl, InputGroup, Row, Table } from 'react-bootstrap';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
+import { PORT } from '../../set';
 import ModalRent from '../modal/ModalRent';
 
 const SearchList = () => {
@@ -14,7 +15,7 @@ const SearchList = () => {
 
 	// 책 목록 불러오기
 	const getBook = () => {
-		fetch(`http://localhost:8080/main/${search == '' ? 'notSearch' : search}`, {
+		fetch(`${PORT}/main/${search == '' ? 'notSearch' : search}`, {
 			method: "get",
 			// res에 결과가 들어옴
 		}).then((res) => res.json())

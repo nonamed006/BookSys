@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { PORT } from '../../set';
 import ModalReturn from '../modal/ModalReturn';
 
 const RentBookList = () => {
@@ -8,7 +9,7 @@ const RentBookList = () => {
 	const tableTitle = ['no', '제목', '글쓴이', '대여일자', '반납일자', '반납'];
 
 	useEffect(() => {
-		fetch("http://localhost:8080/user/rentlist", {
+		fetch(`${PORT}/user/rentlist`, {
 			method: "get",
 			headers: {
 				'Content-Type': "application/json; charset=utf-8",

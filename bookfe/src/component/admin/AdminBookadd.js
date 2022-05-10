@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Col, FloatingLabel, Form, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { PORT } from '../../set';
 
 const AdminBookadd = () => {
 
@@ -8,7 +9,6 @@ const AdminBookadd = () => {
 		title: "",
 		writer: "",
 		contents: "",
-		price: 0,
 		publisher: "",
 		category: "카테고리 선택"
 	});
@@ -55,11 +55,10 @@ const AdminBookadd = () => {
 		fd.append("title", book.title);
 		fd.append("writer", book.writer);
 		fd.append("contents", book.contents);
-		fd.append("price", book.price);
 		fd.append("publisher", book.publisher);
 		fd.append("category", book.category);
 
-		fetch(`http://localhost:8080/adminbook/add`, {
+		fetch(`${PORT}/adminbook/add`, {
 			method: "post",
 			body: fd,
 			headers: {
@@ -70,7 +69,7 @@ const AdminBookadd = () => {
 				if (res == 'success') {
 					alert("등록되었습니다.");
 					window.location.replace("/adminbookadd");
-				} else if(res == "noTitle"){
+				} else if(res == 'noTitle'){
 					alert("제목을 입력해주세요.");
 				} else if (res == 'selectCat') {
 					alert('카테고리를 선택해 주세요');
@@ -114,7 +113,7 @@ const AdminBookadd = () => {
 					)
 				})}</div></Col>
 				<Col xl='1'></Col>
-
+					
 				<Col xl="4">
 					{/* 입력 Form */}
 					{/* title */}
@@ -152,16 +151,6 @@ const AdminBookadd = () => {
 						<option>카테고리 선택</option>
 						{teamList.map((teamName, index) => <option key={index}>{teamName}</option>)}
 					</Form.Select>
-					{/* price */}
-					<Form.Floating className="mb-3">
-						<Form.Control
-							id="price"
-							type="text"
-							placeholder="price"
-							onChange={onChange}
-						/>
-						<label htmlFor="floatingInputCustom">가격</label>
-					</Form.Floating>
 					{/* contents */}
 					<FloatingLabel label="도서 설명">
 						<Form.Control

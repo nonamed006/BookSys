@@ -1,5 +1,6 @@
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import React, { useState } from 'react';
+import { PORT } from '../../set';
 
 const Login = (props) => {
 
@@ -15,7 +16,7 @@ const Login = (props) => {
 			id: id,
 			pwd: pwd,
 		}
-		fetch("http://localhost:8080/login", {
+		fetch(`${PORT}/login`, {
 			method: "POST",
 			body: JSON.stringify(person),
 			headers: {
@@ -28,7 +29,7 @@ const Login = (props) => {
 					//data = data.substring(7);
 					localStorage.setItem("Authorization", data);
 
-					fetch("http://localhost:8080/user/head", {
+					fetch(`${PORT}/user/head`, {
 						method: "get",
 						headers: {
 							'Content-Type': "application/json; charset=utf-8",

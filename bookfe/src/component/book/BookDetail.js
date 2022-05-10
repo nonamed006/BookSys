@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Alert, Badge, Button, Col, Form, ListGroup, Row, Table } from 'react-bootstrap';
 import { useParams } from 'react-router';
 import styled from 'styled-components';
+import { PORT } from '../../set';
 import ModalRent from '../modal/ModalRent';
 import ModalReplyDel from '../modal/ModalReplyDel';
 
@@ -31,7 +32,7 @@ const BookDetail = (props) => {
 	const [reload, setReload] = useState(false);
 	// 책 목록 불러오기
 	const getBook = () => {
-		fetch(`http://localhost:8080/bookdetail/${no}`, {
+		fetch(`${PORT}/bookdetail/${no}`, {
 			method: "get",
 			// res에 결과가 들어옴
 		}).then((res) => res.json())
@@ -42,7 +43,7 @@ const BookDetail = (props) => {
 
 	// 대여중인 회원 조회
 	const rentuser = () => {
-		fetch(`http://localhost:8080/rentbook/${no}`, {
+		fetch(`${PORT}/rentbook/${no}`, {
 			method: "get",
 			// res에 결과가 들어옴
 		}).then((res) => res.json())
@@ -53,7 +54,7 @@ const BookDetail = (props) => {
 
 	// 해당 도서의 댓글 리스트 조회
 	const getReply = () => {
-		fetch(`http://localhost:8080/bookdetail/reply/${no}`, {
+		fetch(`${PORT}/bookdetail/reply/${no}`, {
 			method: "get",
 			// res에 결과가 들어옴
 		}).then((res) => res.json())
@@ -64,7 +65,7 @@ const BookDetail = (props) => {
 
 	//댓글 달기
 	const postReply = () => {
-		fetch(`http://localhost:8080/user/reply`, {
+		fetch(`${PORT}/user/reply`, {
 			method: "post",
 			body: JSON.stringify(reply),
 			headers: {
@@ -136,9 +137,9 @@ const BookDetail = (props) => {
 						<ListGroup variant="flush" >
 							<ListGroup.Item><b>제목: </b>{book.title}</ListGroup.Item><br />
 							<ListGroup.Item><b>글쓴이: </b>{book.writer}</ListGroup.Item><br />
-							<ListGroup.Item><b>가격: </b>{book.price} 원</ListGroup.Item><br />
+							{/* <ListGroup.Item><b>가격: </b>{book.price} 원</ListGroup.Item><br /> */}
 							<ListGroup.Item><b>출판사: </b> {book.publisher || ''}</ListGroup.Item><br />
-							<ListGroup.Item><b>설명: </b>{book.contents}</ListGroup.Item>
+							<ListGroup.Item><b>설명: </b><br/>{book.contents}</ListGroup.Item>
 						</ListGroup>
 					</DivStyle>
 					{/* 대여 버튼 */}

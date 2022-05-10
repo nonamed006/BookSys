@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Col, FormControl, InputGroup, Row, Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { PORT } from '../../set';
 import ModalDeleteBook from '../modal/ModalDeleteBook';
 
 
@@ -14,7 +15,7 @@ const AdminBookdel = () => {
 
   // 책 목록 불러오기
   const getBook = () => {
-    fetch(`http://localhost:8080/main/${search == '' ? 'notSearch' : search}`, {
+    fetch(`${PORT}/main/${search == '' ? 'notSearch' : search}`, {
       method: "get",
       // res에 결과가 들어옴
     }).then((res) => res.json())

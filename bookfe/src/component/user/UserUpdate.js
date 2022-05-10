@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
+import { PORT } from '../../set';
 import DaumPost from '../DaumPost';
 
 const UserUpdate = () => {
@@ -13,7 +14,7 @@ const UserUpdate = () => {
 
 	// 사용자 정보 불러오기 ================================
 	useEffect(() => {
-		fetch("http://localhost:8080/user/head", {
+		fetch(`${PORT}/user/head`, {
 			method: "get",
 			headers: {
 				'Content-Type': 'application/json; charset=utf-8',
@@ -28,7 +29,7 @@ const UserUpdate = () => {
 
 	// 수정 보내기
 	const updateUser = () => {
-		fetch(`http://localhost:8080/user/updateuser/${user.pwd}/${user.addr}`, {
+		fetch(`${PORT}/user/updateuser/${user.pwd}/${user.addr}`, {
 			method: "get",
 			headers: {
 				'Content-Type': 'application/json; charset=utf-8',
@@ -90,7 +91,6 @@ const UserUpdate = () => {
 						type="password"
 						placeholder="Password"
 						onChange={onChange}
-						value={user.pwd || ''}
 					/>
 					<label htmlFor="floatingPasswordCustom">Password</label>
 				</Form.Floating>

@@ -27,6 +27,11 @@ public class UserService {
 		return userRepository.findById(personId);
 	}
 	
+	// no로 유저 찾기
+		public User findByDecrypt(int no, String pwd) {
+			return userRepository.findByDecrypt(no, pwd);
+		}
+	
 	// mypage에 사용자가 대여한 책 목록 조회
 	public List<RentDto> findByUserNo(int user_no){
 		return userRepository.findByUserNo(user_no);

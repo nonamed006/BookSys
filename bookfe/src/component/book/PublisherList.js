@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Row, Table } from 'react-bootstrap';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
+import { PORT } from '../../set';
 import ModalRent from '../modal/ModalRent';
 
 const PublisherList = () => {
@@ -12,7 +13,7 @@ const PublisherList = () => {
 
 	// 책 목록 조회
 	const getBookCategory = () => {
-		fetch(`http://localhost:8080/publisher/${publisher}`, {
+		fetch(`${PORT}/publisher/${publisher}`, {
 			method: "get",
 			// res에 결과가 들어옴
 		}).then((res) => res.json())

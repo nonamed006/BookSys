@@ -6,6 +6,5 @@ import lombok.Data;
 public class BookFileDto {
 	private String title;
 	private String writer;
-	private int price;
 	private String bookimg;
 }

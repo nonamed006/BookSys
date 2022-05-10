@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Col, FloatingLabel, Form, Row } from 'react-bootstrap';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
+import { PORT } from '../../set';
 
 const AdminBookupdate = () => {
 
@@ -11,7 +12,6 @@ const AdminBookupdate = () => {
 		title: "",
 		writer: "",
 		contents: "",
-		price: "",
 		img: ""
 	});
 
@@ -25,7 +25,7 @@ const AdminBookupdate = () => {
 
 	// 책 목록 불러오기
 	const getBook = () => {
-		fetch(`http://localhost:8080/bookdetail/${no}`, {
+		fetch(`${PORT}/bookdetail/${no}`, {
 			method: "get",
 			// res에 결과가 들어옴
 		}).then((res) => res.json())
@@ -81,10 +81,9 @@ const AdminBookupdate = () => {
 		fd.append("title", book.title);
 		fd.append("writer", book.writer);
 		fd.append("contents", book.contents);
-		fd.append("price", book.price);
 		fd.append("img", book.img);
 
-		fetch(`http://localhost:8080/adminbook/update`, {
+		fetch(`${PORT}/adminbook/update`, {
 			method: "post",
 			body: fd,
 			headers: {
@@ -164,17 +163,6 @@ const AdminBookupdate = () => {
 							value={book.writer || ''}
 						/>
 						<label htmlFor="floatingPasswordCustom">글쓴이</label>
-					</Form.Floating>
-					{/* price */}
-					<Form.Floating className="mb-3">
-						<Form.Control
-							id="price"
-							type="text"
-							placeholder="price"
-							onChange={onChange}
-							value={book.price || ''}
-						/>
-						<label htmlFor="floatingInputCustom">가격</label>
 					</Form.Floating>
 					{/* contents */}
 					<FloatingLabel controlId="floatingTextarea2" label="도서 설명">

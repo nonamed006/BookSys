@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, FormControl, InputGroup, ListGroup, OverlayTrigger, Pagination, Row, Table, Tooltip } from 'react-bootstrap';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
+import { PORT } from '../../set';
 import ModalRent from '../modal/ModalRent';
 
 
@@ -23,7 +24,7 @@ const BookListAll = () => {
 
 	// 책 목록 조회
 	const getBookCategory = () => {
-		fetch(`http://localhost:8080/category/${categorys == '' ? 'notSearch' : categorys}/${page}`, {
+		fetch(`${PORT}/category/${categorys == '' ? 'notSearch' : categorys}/${page}`, {
 			method: "get",
 			// res에 결과가 들어옴
 		}).then((res) => res.json())
@@ -35,7 +36,7 @@ const BookListAll = () => {
 
 	// 도서 전체 개수 조회
 	const getBookCount = () => {
-		fetch(`http://localhost:8080/bookcount/${categorys == '' ? 'notSearch' : categorys}`, {
+		fetch(`${PORT}/bookcount/${categorys == '' ? 'notSearch' : categorys}`, {
 			method: "get",
 			// res에 결과가 들어옴
 		}).then((res) => res.text())

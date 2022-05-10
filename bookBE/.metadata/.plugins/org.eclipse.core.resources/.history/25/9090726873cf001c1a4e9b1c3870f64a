@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="user">
+	<!-- 회원 가입 -->
+	<insert id="insert" parameterType ="user">
+		<![CDATA[
+			insert into user values(null, #{id}, hex(aes_encrypt(#{pwd}, 'swim')), #{name}, #{team}, #{addr}, 'U')
+		]]>
+	</insert>
+	<!-- jwt 로그인 -->
+	<select id="findByIdAndPwd" parameterType = "map" resultType = "user">
+		<![CDATA[
+			select * from user where id = #{id} and pwd = hex(aes_encrypt(#{pwd}, 'swim'))
+		]]>
+	</select>
+	<!-- id가 존재하는지 여부 확인 -->
+	<select id="countById" parameterType = "String" resultType = "int">
+		<![CDATA[
+			select count(*) from user where id = #{id};
+		]]>
+	</select>
+	<!-- 회원정보수정 -->
+	<update id="update" parameterType="user">
+	<![CDATA[
+			update user set pwd = #{pwd}, addr = #{addr}
+			where no = #{no}
+		]]>
+	</update>
+	<!-- 복호화된 비밀번호 얻기 -->
+	<select id="findById" parameterType="int" resultType="user">
+		<![CDATA[
+			select no, id, convert(AES_DECRYPT(unhex(#{pwd}), 'swim') USING utf8) as pwd, name, team, addr, role
+			from user
+			where no = #{no}
+		]]>
+	</select>
+	<!-- no로 user 찾기 -->
+	<select id="findById" parameterType="int" resultType="user">
+	<![CDATA[
+		select * from user where no = #{no}
+	]]>
+	</select>
+	<!-- 전체회원 조회 + 검색 -->
+	<select id="findAll" parameterType="String" resultType="user">
+	<![CDATA[
+		select * from user where name like #{name}
+	]]>
+	</select>
+	<!-- 관리자가 회원 삭제 -->
+	<delete id="delete" parameterType ="int">
+		<![CDATA[
+			delete from user where no = #{no} 
+			]]>
+	</delete>
+	<!-- 회원 가입 -->
+	<insert id="replyCreate" parameterType ="reply">
+		<![CDATA[
+			insert into user values(null, #{coment}, now(), #{book_no}, #{user_no})
+		]]>
+	</insert>
+</mapper>

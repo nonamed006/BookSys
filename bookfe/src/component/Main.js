@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Card, Col, FormControl, InputGroup, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { PORT } from '../set';
 import BookNewList from './book/BookNewList';
 import BookRank from './book/BookRank';
 import CarouselMain from './CarouselMain';
@@ -16,7 +17,7 @@ const Main = () => {
 
   // 책 목록 불러오기
   const getBook = () => {
-    fetch(`http://localhost:8080/main/${search == '' ? 'notSearch' : search}`, {
+    fetch(`${PORT}/main/${search == '' ? 'notSearch' : search}`, {
       method: "get",
       // res에 결과가 들어옴
     }).then((res) => res.json())

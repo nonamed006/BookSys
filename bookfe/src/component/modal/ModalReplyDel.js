@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
+import { PORT } from '../../set';
 
 const ModalReplyDel = ({ getReload, ...props }) => {
 	const [show, setShow] = useState(false);
@@ -8,7 +9,7 @@ const ModalReplyDel = ({ getReload, ...props }) => {
 	const handleShow = () => setShow(true);
 	// 회원삭제
 	var deleteUser = () => {
-		fetch(`http://localhost:8080/user/reply/del/${props.no}`, {
+		fetch(`${PORT}/user/reply/del/${props.no}`, {
 			method: "get",
 			headers: {
 				'Content-Type': "application/json; charset=utf-8",

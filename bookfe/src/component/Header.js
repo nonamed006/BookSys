@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { PORT } from '../set';
 
 const Header = (props) => {
 
@@ -10,7 +11,7 @@ const Header = (props) => {
   // 사용자 정보 불러오기 ================================
   useEffect(() => {
     localStorage.getItem('Authorization') &&
-    fetch("http://localhost:8080/user/head", {
+    fetch(`${PORT}/user/head`, {
       method: "get",
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
